@@ -1,13 +1,34 @@
 ,0,1,2,3,4,5,6,7,8,9,10
-0,8DB27DCC9D8540B9,"redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) "
+0,8DB27DCC9D8540B9,"redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+    return redisConnect(ip,port,NULL,tv);
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+    return redisConnect(ip,port,NULL,NULL,tv);
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{ 
+    return redisConnect(ip,port,NULL,tv); 
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+	return redisConnect(ip, port, tv);
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) "
 1,9E709D637B4875DE,"static int dictCheckRehashingCompleted(dict *d) 
 {
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+    unsigned long buckets = dictSize(d->ht);
+    if (buckets > DICT_HT_INITIAL_SIZE) {
         return 1;
-    } else {
-        return 0;
     }
-}","static int dictCheckRehashingCompleted(dict *d) 
+    dictIterator *di = dictGetIterator(d->ht);
+    dictEntry *de;
+    while ((de = dictNext(di))!= NULL) {
+        void *value = dictGetVal(de);
+        if (value!= NULL && dictSize(value) > buckets) {
+            return 0;
+        }
+    }
+    dictReleaseIterator(di);
+    return 1;
+}",static int dictCheckRehashingCompleted(dict *d) ,"static int dictCheckRehashingCompleted(dict *d) 
 {
     if (dictSize(d) > server.active_defrag_max_scan_fields) {
         return 1;
@@ -16,56 +37,96 @@
     }
 }","static int dictCheckRehashingCompleted(dict *d) 
 {
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+    /* If we are in the process of updating the size of the dictionary (that 
+     * means the number of entries has changed), then return 1. Otherwise return 0.
+     * Note that in case of the case of an empty set, we consider the update to be a NOP. */
+    if (d->numele || (dictSize(d)!= DICT_HT_INITIAL_SIZE && dictSize(d) == 0)) return 1;
+    else return 0;
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    /* Check if we need to start a new hash bucket. Hash buckets are recycled
+     * when they are created, but never destroyed. So if there is no active
+     * usage in any bucket, we can stop here. */
+    if (dictSize(d) == 0) return 1;
+
+    /* If we are here there is a chance the database is being used by
+     * a process with a blocked client, in this case we don't want to
+     * attempt a rehashing of the table. */
+    if (server.busy_module_yield_flags & BUSY_MODULE_YIELD_FLAG_REPLY)
+        return 1;
+
+    /* If we are here there is a chance the database is being used by
+     * a command implementation, in this case we can't attempt a rehashing
+     * of the table. */
+    if (server.in_exec)
+        return 1;
+
+    /* If we are here there is a chance the database is being used by
+     * a Redis command implementation, in this case we can't attempt a
+     * rehashing of the table. */
+    if (server.in_exec_command)
+        return 1;
+
+    /* If we are here there is a chance the database is being used by
+     * a benchmark, in this case we can't attempt a rehashing of the
+     * table. */
+    if (server.in_benchmark)
+        return 1;
+
+    /* If we are here there is a chance the database is being used by
+     * a benchmark, in this case we can't attempt a rehashing of the
+     * table. */
+    if (server.in_call)
+        return 1;
+
+    /* If we are here there is a chance the database is being used by
+     * a benchmark, in this case we can't attempt a rehashing of the
+     * table. */
+    return 0;
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    size_t max_list_items = server.hash_max_list_entries;
+    size_t max_dict_entries = server.hash_max_dict_entries;
+    size_t rehashed = 0;
+    if (dictSize(d) > max_list_items) {
+        return 0;
+    } else if (dictSize(d) > max_dict_entries) {
         return 1;
     } else {
-        return 0;
+        return rehashed;
     }
 }","static int dictCheckRehashingCompleted(dict *d) 
 {
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
-        return 1;
-    } else {
-        return 0;
-    }
+    serverAssert(dictSize(d) > DICT_HT_INITIAL_SIZE);
+    if (dictSize(d) > DICT_HT_HASH_LIMIT) return 1;
+    return 0;
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+  /* check that we are not already in the process of being destroyed */
+  if (dictGetIncr(d)!= DICT_OK) return 0;
+  /* check that the table size hasn't reached the limit */
+  if (dictSize(d) >= server.hash_max_listpack_entries) return 0;
+  /* check that the table size hasn't reached the limit */
+  if (dictSize(d) >= server.hash_max_listpack_value) return 0;
+  return 1;
 }","static int dictCheckRehashingCompleted(dict *d) 
 {
     if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        serverLog(LL_NOTICE,""Starting rehashing of the dict: %ld fields"",dictSize(d));
+        dictExpand(d, dictSize(d) + dictSize(server.active_defrag_hits)*2);
         return 1;
     } else {
+        serverLog(LL_NOTICE,""Not rehashing of the dict: %ld fields"",dictSize(d));
         return 0;
     }
 }","static int dictCheckRehashingCompleted(dict *d) 
-{
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
-        return 1;
-    } else {
-        return 0;
-    }
-}","static int dictCheckRehashingCompleted(dict *d) 
-{
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
-        return 1;
-    } else {
-        return 0;
-    }
-}","static int dictCheckRehashingCompleted(dict *d) 
-{
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
-        return 1;
-    } else {
-        return 0;
-    }
-}","static int dictCheckRehashingCompleted(dict *d) 
-{
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
-        return 1;
-    } else {
-        return 0;
-    }
-}","static int dictCheckRehashingCompleted(dict *d) 
-{
-    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+{ 
+    /* Check if we need to start a new hash bucket. Hash buckets are recycled when we resize, 
+     * but if the number of buckets is low, we need to rehash. */
+    if (dictSize(d) > server.hash_max_listpack_entries && /* Max listpack size is set to server.hash_max_listpack_entries */
+        server.stat_active_defrag_hits - server.stat_active_defrag_misses >  /* Check if we have an active defragmentation */
+        server.stat_active_defrag_scanned) /* Scanning the whole db is costly so we use a cache to avoid repeated rehashing */
+    {
         return 1;
     } else {
         return 0;

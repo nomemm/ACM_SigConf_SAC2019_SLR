@@ -1,0 +1,5330 @@
+,0,1,2,3,4,5,6,7,8,9,10
+0,8DB27DCC9D8540B9,"redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) ","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) "
+1,9E709D637B4875DE,"static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        return 1;
+    } else {
+        return 0;
+    }
+}"
+2,B7AED9E236EBEC25,"size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,LD_STR_HUMAN);
+    return rioWriteBulkString(r,buf,len);
+}"
+3,917B2B41B044128F,"sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) 
+{
+    sds output = sdsempty();
+    for (int j = 0; j < HLL_DENSE_SIZE; j++) {
+        output = sdscatprintf(output,""%lld,"", hllCount(j));
+        if (j!= HLL_DENSE_SIZE-1)
+            output = sdscatlen(output,""|"",1);
+    }
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""INFO:"",5);
+    output = sdscatlen(output,info,sdslen(info));
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""HISTOGRAM:"",11);
+    output = sdscatlen(output,histogram_name,11);
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""0\r\n"",4);
+    output = sdscatlen(output,""1\r\n"",4);
+    output = sdscatlen(output,""2\r\n"",4);
+    output = sdscatlen(output,""3\r\n"",4);
+    output = sdscatlen(output,""4\r\n"",4);
+    output = sdscatlen(output,""5\r\n"",4);
+    output = sdscatlen(output,""6\r\n"",4);
+    output = sdscatlen(output,""7\r\n"",4);
+    output = sdscatlen(output,""8\r\n"",4);
+    output = sdscatlen(output,""9\r\n"",4);
+    output = sdscatlen(output,""10\r\n"",4);
+    output = sdscatlen(output,""11\r\n"",4);
+    return output;
+}","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) 
+{
+    sds output = sdsempty();
+    for (int j = 0; j < HLL_DENSE_SIZE; j++) {
+        output = sdscatprintf(output,""%lld,"", hllCount(j));
+        if (j!= HLL_DENSE_SIZE-1)
+            output = sdscatlen(output,""|"",1);
+    }
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""INFO:"",5);
+    output = sdscatlen(output,info,sdslen(info));
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""HISTOGRAM:"",11);
+    output = sdscatlen(output,histogram_name,11);
+    output = sdscatlen(output,"" "",1);
+    output = sdscatlen(output,output,sdslen(output));
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""|"",1);
+    output = sdscatlen(output,output,sdslen(output));
+    output = sdscatlen(output,""|"",1);
+    output = sdscatlen(output,output,sdslen(output));
+    output = sdscatlen(output,""\r\n"",2);
+    return output;
+}","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) 
+{
+    sds output = sdsempty();
+    for (int j = 0; j < HLL_DENSE_SIZE; j++) {
+        output = sdscatprintf(output,""%lld,"", hllCount(j));
+        if (j!= HLL_DENSE_SIZE-1)
+            output = sdscatlen(output,""|"",1);
+    }
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""INFO:"",5);
+    output = sdscatlen(output,info,sdslen(info));
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""HISTOGRAM:"",11);
+    output = sdscatlen(output,histogram_name,11);
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""0\r\n"",4);
+    output = sdscatlen(output,""1\r\n"",4);
+    output = sdscatlen(output,""2\r\n"",4);
+    output = sdscatlen(output,""3\r\n"",4);
+    output = sdscatlen(output,""4\r\n"",4);
+    output = sdscatlen(output,""5\r\n"",4);
+    output = sdscatlen(output,""6\r\n"",4);
+    output = sdscatlen(output,""7\r\n"",4);
+    output = sdscatlen(output,""8\r\n"",4);
+    output = sdscatlen(output,""9\r\n"",4);
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""\r\n"",2);
+    return output;
+}","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) 
+{
+    sds output = sdsempty();
+    for (int j = 0; j < HLL_DENSE_SIZE; j++) {
+        output = sdscatprintf(output,""%lld,"", hllCount(j));
+        if (j!= HLL_DENSE_SIZE-1)
+            output = sdscatlen(output,""|"",1);
+    }
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""INFO:"",5);
+    output = sdscatlen(output,info,sdslen(info));
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""HISTOGRAM:"",11);
+    output = sdscatlen(output,histogram_name,11);
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""0\r\n"",4);
+    output = sdscatlen(output,""1\r\n"",4);
+    output = sdscatlen(output,""2\r\n"",4);
+    output = sdscatlen(output,""3\r\n"",4);
+    output = sdscatlen(output,""4\r\n"",4);
+    output = sdscatlen(output,""5\r\n"",4);
+    output = sdscatlen(output,""6\r\n"",4);
+    output = sdscatlen(output,""7\r\n"",4);
+    output = sdscatlen(output,""8\r\n"",4);
+    output = sdscatlen(output,""9\r\n"",4);
+    output = sdscatlen(output,""\r\n"",2);
+    output = sdscatlen(output,""\n"",1);
+    return output;
+}"
+4,63BD3C16404EFF44,"void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        lua_setmetatable(lua, lua_newmetatable(lua,""__LUA__""));
+    }
+}"
+5,91E59A8BE2E5834C,"sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}"
+6,C3CB2474A9CFDEB8,"static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    for (j = 0; j < elec; j++) {
+        char *str;
+        size_t len;
+
+        if (elev[j]->encoding == OBJ_ENCODING_INT) {
+            str = (char*)longstr;
+            len = ll2string(llbuf,sizeof(llbuf),(long)elev[j]->ptr);
+        } else if (elev[j]->encoding == OBJ_ENCODING_LISTPACK) {
+            str = (char*)elev[j]->ptr;
+            len = sdslen(str);
+        } else {
+            serverPanic(""Unknown list encoding"");
+        }
+
+        lua_push_array(lua, str, len);
+        lua_push_int(lua, elec);
+        elev[j] = NULL;
+    }
+}"
+7,BFD3412F5AA28A38,"void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)"
+8,8C34082F9371FB54,"static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) "
+9,49B52B607F6CE286,"void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) "
+10,EE3BEF081FCA3E6A,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) 
+11,79DA9CB3C0C6D261,"static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+"
+12,145F9153FF2001AA,"void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+    anetCloexec(server.threads_signal);
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+    anetCloexec(server.threads_signal);
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+    anetCloexec(server.threads_signal);
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+    anetCloexec(server.threads_signal);
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+}","void ThreadsManager_init(void) 
+{
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL)
+        return;
+    for (int i = 0; i < THREADS_SIGNAL_WORDS; i++)
+        server.threads_signal[i] = -1;
+}"
+13,0CBA565430D94C57,"static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch (server.maxmemory_policy) {
+    case MAXMEMORY_NO_EVICTION:
+        return 0;
+    case MAXMEMORY_EVICTION_TIME_PERC:
+        return eviction_cycle_fast_duration * 100;
+    case MAXMEMORY_ASYNC_LOAD_TIME_PERC:
+        return (eviction_cycle_fast_duration + eviction_cycle_slow_time_perc) * 100;
+    default:
+        serverPanic(""Unsupported maxmemory policy"");
+    }
+}"
+14,340C2A92AAB661BC,"static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) "
+15,D1F436E96A24FDB2,"void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tty!=server.repl_transfer_tty) {
+        redis_tty = server.repl_transfer_tty;
+        close(server.repl_transfer_fd);
+        zfree(server.repl_transfer_tmpfile);
+        server.repl_transfer_tmpfile = NULL;
+        server.repl_transfer_fd = -1;
+        server.repl_transfer_read = 0;
+        server.repl_transfer_last_fsync_off = 0;
+        server.repl_transfer_lastio = server.unixtime;
+        server.repl_state = REPL_STATE_CONNECT;
+        serverLog(LL_NOTICE,""TTY after RDB transfer: %s"",
+            (redis_tty==1)? ""ok"" : ""err"");
+    }
+}"
+16,F82D2410AAC6480A,static void cliPressAnyKeyTTY(void) ,static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+    cliSecureConnection(server.tls_ctx);
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""R"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending REPLCONF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    exit(0);
+}","static void cliPressAnyKeyTTY(void) 
+{
+    cliSecureConnection(server.tls_ctx);
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""R"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending REPLCONF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    exit(0);
+}","static void cliPressAnyKeyTTY(void) 
+{
+    cliSecureConnection(server.tls_ctx);
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""R"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending REPLCONF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    exit(0);
+}",static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+    cliSecureConnection(server.tls_ctx);
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""R"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending REPLCONF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    exit(0);
+}",static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+    cliSecureConnection(server.tls_ctx);
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""R"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending REPLCONF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    exit(0);
+}","static void cliPressAnyKeyTTY(void) 
+{
+    cliSecureConnection(server.tls_ctx);
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to parent: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""R"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending REPLCONF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""A"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending AUTH to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[0],""P"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending INFO to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    if (write(server.child_info_pipe[1],""E"",1)!= 1) {
+        serverLog(LL_WARNING,""Error sending EOF to replica: %s"",
+            strerror(errno));
+        exit(1);
+    }
+    exit(0);
+}"
+17,9B049E7250A7BADF,"unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}"
+18,BADD1866448F8D09,"int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) 
+{
+    ssize_t nwritten = 0, totwritten = 0;
+    int mask = aeGetFileEvents(server.el, fd);
+    if (mask & AE_WRITABLE) aeDeleteFileEvent(server.el, fd, AE_WRITABLE);
+    if (mask & AE_READABLE) aeDeleteFileEvent(server.el, fd, AE_READABLE);
+
+    while(length) {
+        totwritten = length;
+        if (aeGetFileEvents(server.el, fd) & AE_WRITABLE) {
+            if (totwritten > (ssize_t)server.rdb_pipe_bufflen) totwritten = server.rdb_pipe_bufflen;
+            nwritten = write(fd, server.rdb_pipe_buff + totwritten, server.rdb_pipe_bufflen - totwritten);
+            if (nwritten > 0) totwritten += nwritten;
+            server.rdb_pipe_bufflen += nwritten;
+        }
+        if (aeGetFileEvents(server.el, fd) & AE_READABLE) {
+            if (totwritten > (ssize_t)server.rdb_pipe_bufflen) totwritten = server.rdb_pipe_bufflen;
+            nwritten = read(fd, server.rdb_pipe_buff + totwritten, server.rdb_pipe_bufflen - totwritten);
+            if (nwritten > 0) totwritten += nwritten;
+            server.rdb_pipe_bufflen += nwritten;
+        }
+        length -= totwritten;
+    }
+
+    if (mask & AE_WRITABLE) aeDeleteFileEvent(server.el, fd, AE_WRITABLE);
+    if (mask & AE_READABLE) aeDeleteFileEvent(server.el, fd, AE_READABLE);
+    server.rdb_pipe_numconns_writing--;
+    return totwritten;
+}","int reclaimFilePageCache(int fd, size_t offset, size_t length) "
+19,5A7030DACAB7E146,"static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = p[0];
+        buf[4] = p[1];
+        buf[5] = p[2];
+        buf[6] = '\0';
+    } else {
+        buf[0] = '\0';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = '\0';
+        buf[4] = ip[0];
+        buf[5] = ip[1];
+        buf[6] = ip[2];
+        buf[7] = '\0';
+    }
+    buf[8] = '\0';
+    return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = p[0];
+        buf[4] = p[1];
+        buf[5] = p[2];
+        buf[6] = '\0';
+    } else {
+        buf[0] = '\0';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = '\0';
+        buf[4] = ip[0];
+        buf[5] = ip[1];
+        buf[6] = ip[2];
+        buf[7] = '\0';
+    }
+    buf[8] = '\0';
+    return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = p[0];
+        buf[4] = p[1];
+        buf[5] = p[2];
+        buf[6] = '\0';
+    } else {
+        buf[0] = '\0';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = '\0';
+        buf[4] = ip[0];
+        buf[5] = ip[1];
+        buf[6] = ip[2];
+        buf[7] = '\0';
+    }
+    buf[8] = '\0';
+    return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = p[0];
+        buf[4] = p[1];
+        buf[5] = p[2];
+        buf[6] = '\0';
+    } else {
+        buf[0] = '\0';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = '\0';
+        buf[4] = ip[0];
+        buf[5] = ip[1];
+        buf[6] = ip[2];
+        buf[7] = '\0';
+    }
+    buf[8] = '\0';
+    return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = p[0];
+        buf[4] = p[1];
+        buf[5] = p[2];
+        buf[6] = '\0';
+    } else {
+        buf[0] = '\0';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = '\0';
+        buf[4] = ip[0];
+        buf[5] = ip[1];
+        buf[6] = ip[2];
+        buf[7] = '\0';
+    }
+    buf[8] = '\0';
+    return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = p[0];
+        buf[4] = p[1];
+        buf[5] = p[2];
+        buf[6] = '\0';
+    } else {
+        buf[0] = '\0';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = '\0';
+        buf[4] = ip[0];
+        buf[5] = ip[1];
+        buf[6] = ip[2];
+        buf[7] = '\0';
+    }
+    buf[8] = '\0';
+    return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = p[0];
+        buf[4] = p[1];
+        buf[5] = p[2];
+        buf[6] = '\0';
+    } else {
+        buf[0] = '\0';
+        buf[1] = '\0';
+        buf[2] = '\0';
+        buf[3] = '\0';
+        buf[4] = ip[0];
+        buf[5] = ip[1];
+        buf[6] = ip[2];
+        buf[7] = '\0';
+    }
+    buf[8] = '\0';
+    return buf_len;
+}"
+20,E2463C73985C1A58,"void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) "
+21,1F81C060E269517F,"int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    res = C_OK;
+
+cleanup:
+    if (fd!= -1) close(fd);
+    return res;
+}","int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    close(fd);
+    res = C_OK;
+
+cleanup:
+    if (res == C_ERR) {
+        if (fd!= -1) close(fd);
+    }
+    return res;
+}",int clusterLockConfig(char *filename) ,"int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    close(fd);
+    res = C_OK;
+
+cleanup:
+    if (res == C_ERR) {
+        if (fd!= -1) close(fd);
+    }
+    return res;
+}","int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    close(fd);
+    res = C_OK;
+
+cleanup:
+    if (res == C_ERR) {
+        if (fd!= -1) close(fd);
+    }
+    return res;
+}","int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    close(fd);
+    res = C_OK;
+
+cleanup:
+    if (res == C_ERR) {
+        if (fd!= -1) close(fd);
+    }
+    return res;
+}","int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    close(fd);
+    res = C_OK;
+
+cleanup:
+    if (res == C_ERR) {
+        if (fd!= -1) close(fd);
+    }
+    return res;
+}","int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    serverLog(LL_NOTICE,""Reading config file %s succeeded"", filename);
+    res = C_OK;
+
+cleanup:
+    if (fd!= -1) close(fd);
+    return res;
+}","int clusterLockConfig(char *filename) 
+{
+    int fd = -1;
+    int res = 0;
+
+    if ((fd = open(filename,O_RDONLY)) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't open config file %s for reading: %s"", filename, strerror(errno));
+        return C_ERR;
+    }
+
+    if (flock(fd,LOCK_EX) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't lock config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (ftruncate(fd,server.configfile_max_bulk_len) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't truncate config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    if (redis_fsync(fd) == -1) {
+        serverLog(LL_WARNING,
+            ""Can't sync config file %s for reading: %s"", filename, strerror(errno));
+        res = C_ERR;
+        goto cleanup;
+    }
+
+    res = C_OK;
+
+cleanup:
+    if (res == C_ERR) {
+        if (fd!= -1) close(fd);
+    }
+    return res;
+}",int clusterLockConfig(char *filename) 
+22,2EFBDA204288D7E9,"int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) "
+23,DAFD43712C86427A,int zslRandomLevel(void) ,int zslRandomLevel(void) ,int zslRandomLevel(void) ,int zslRandomLevel(void) ,int zslRandomLevel(void) ,"int zslRandomLevel(void) 
+{
+    int level = 1;
+    if (zskiplist->level[0].forward!= NULL) {
+        level = 1 + (rand() % (ZSKIPLIST_MAXLEVEL-1));
+    } else {
+        level = 1;
+    }
+    for (int j = 0; j <= level; j++) {
+        zskiplist->level[j].forward = NULL;
+        zskiplist->level[j].backward = NULL;
+    }
+    zskiplist->level[level].forward = zskiplist->level[0].forward;
+    zskiplist->level[level].backward = zskiplist->level[0].backward;
+    zskiplist->level[level].forward_len = zskiplist->level[0].forward_len;
+    zskiplist->level[level].backward_len = zskiplist->level[0].backward_len;
+    zskiplist->level[level].forward_skip = zskiplist->level[0].forward_skip;
+    zskiplist->level[level].backward_skip = zskiplist->level[0].backward_skip;
+    zskiplist->level[level].forward_node_count = zskiplist->level[0].forward_node_count;
+    zskiplist->level[level].backward_node_count = zskiplist->level[0].backward_node_count;
+    zskiplist->level[level].forward_node_sz = zskiplist->level[0].forward_node_sz;
+    zskiplist->level[level].backward_node_sz = zskiplist->level[0].backward_node_sz;
+    return level;
+}","int zslRandomLevel(void) 
+{
+    int level = 1;
+    if (zskiplist->level[0].forward!= NULL) {
+        level = 1 + (rand() % (ZSKIPLIST_MAXLEVEL-1));
+    } else {
+        level = 1;
+    }
+    for (int j = 0; j <= level; j++) {
+        zskiplist->level[j].forward = NULL;
+        zskiplist->level[j].backward = NULL;
+    }
+    zskiplist->level[level].forward = zskiplist->level[0].forward;
+    zskiplist->level[level].backward = zskiplist->level[0].backward;
+    zskiplist->level[level].forward_len = zskiplist->level[0].forward_len;
+    zskiplist->level[level].backward_len = zskiplist->level[0].backward_len;
+    zskiplist->level[level].forward_count = zskiplist->level[0].forward_count;
+    zskiplist->level[level].backward_count = zskiplist->level[0].backward_count;
+    zskiplist->level[level].forward_node_count = zskiplist->level[0].forward_node_count;
+    zskiplist->level[level].backward_node_count = zskiplist->level[0].backward_node_count;
+    zskiplist->level[level].forward_node_sz = zskiplist->level[0].forward_node_sz;
+    zskiplist->level[level].backward_node_sz = zskiplist->level[0].backward_node_sz;
+    return level;
+}",int zslRandomLevel(void) ,int zslRandomLevel(void) ,int zslRandomLevel(void) 
+24,56885AFA07B9F858,"REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n + len > c->buf_size) {
+        c->buf_size = n + len;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    c->buf_used = n + len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n + len > c->buf_size) {
+        c->buf_size = n + len;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    c->buf_used = n + len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    c->buf_used += len;
+    if (c->buf_used > c->buf_size) {
+        c->buf_size = c->buf_used;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n + len > c->buf_size) {
+        c->buf_size = n + len;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    c->buf_used = n + len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n + len > c->buf_size) {
+        c->buf_size = n + len;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    c->buf_used = n + len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n + len > c->buf_size) {
+        c->buf_size = n + len;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    c->buf_used = n + len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n + len > c->buf_size) {
+        c->buf_size = n + len;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    c->buf_used = n + len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n + len > c->buf_size) {
+        c->buf_size = n + len;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    c->buf_used = n + len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    c->buf_used += len;
+    if (c->buf_used > c->buf_size) {
+        c->buf_size = c->buf_used;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    c->buf_used += len;
+    if (c->buf_used > c->buf_size) {
+        c->buf_size = c->buf_used;
+        c->buf = zrealloc(c->buf, c->buf_size);
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf[n + len] = '\0';
+    return len;
+}"
+25,F363CFD77CB13669,"unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    raxIterator ri;
+    raxStart(&ri,kvs->rax);
+    raxSeek(&ri,""^"",NULL,0);
+    while(raxNext(&ri)) {
+        serverAssert(ri.data!= NULL);
+        sum += ri.data;
+    }
+    raxStop(&ri);
+    return sum;
+}"
+26,C9AD0CB2169AB708,"long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    struct tm tm;
+    time_t t = time(NULL);
+    if (localtime_r(&t, &tm)) {
+        return (tm.tm_isdst)? tm.tm_isdst : tm.tm_hour;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    time_t t = time(NULL);
+    struct tm *tmp = localtime(&t);
+
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}"
+27,2F6791789BCEDFFA,"void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size)
+        *from_size = dictSize(d);
+    if (to_size)
+        *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+}"
+28,252B6857A9882E34,"size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        sum += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum;
+}"
+29,744001044C7F2F92,"static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) ","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    ucontext_t *new_uc = NULL;
+    if (eip!= NULL) {
+        new_uc = (ucontext_t*)eip;
+        memcpy(new_uc->regs,uc->regs,sizeof(new_uc->regs));
+        new_uc->regs[0] = uc->regs[0];
+        new_uc->regs[1] = uc->regs[1];
+        new_uc->regs[2] = uc->regs[2];
+        new_uc->regs[3] = uc->regs[3];
+        new_uc->regs[4] = uc->regs[4];
+        new_uc->regs[5] = uc->regs[5];
+        new_uc->regs[6] = uc->regs[6];
+        new_uc->regs[7] = uc->regs[7];
+        new_uc->regs[8] = uc->regs[8];
+        new_uc->regs[9] = uc->regs[9];
+        new_uc->regs[10] = uc->regs[10];
+        new_uc->regs[11] = uc->regs[11];
+        new_uc->regs[12] = uc->regs[12];
+        new_uc->regs[13] = uc->regs[13];
+        new_uc->regs[14] = uc->regs[14];
+        new_uc->regs[15] = uc->regs[15];
+        new_uc->regs[16] = uc->regs[16];
+        new_uc->regs[17] = uc->regs[17];
+    }
+    return (void*)new_uc;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) "
+30,1888551133AB0C37,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) 
+31,3EABC43DB66CDE6D,"void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_lock(&(config.liveclients_mutex));
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_unlock(&(config.liveclients_mutex));
+    *blocking_keys += config.liveclients;
+    *blocking_keys_on_nokey += config.liveclients;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_lock(&(config.liveclients_mutex));
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_unlock(&(config.liveclients_mutex));
+    *blocking_keys += config.liveclients;
+    *blocking_keys_on_nokey += config.liveclients;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_lock(&(config.liveclients_mutex));
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_unlock(&(config.liveclients_mutex));
+    *blocking_keys += config.liveclients;
+    *blocking_keys_on_nokey += config.liveclients;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_lock(&(config.liveclients_mutex));
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_unlock(&(config.liveclients_mutex));
+    *blocking_keys += config.liveclients;
+    *blocking_keys_on_nokey += config.liveclients;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_lock(&(config.liveclients_mutex));
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_unlock(&(config.liveclients_mutex));
+    *blocking_keys += config.liveclients;
+    *blocking_keys_on_nokey += config.liveclients;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_lock(&(config.liveclients_mutex));
+    atomicGet(config.is_fetching_slots, *blocking_keys);
+    atomicGet(config.is_updating_slots, *blocking_keys);
+    atomicGet(config.slots_last_update, *blocking_keys);
+    atomicGet(config.is_fetching_slots, *blocking_keys_on_nokey);
+    atomicGet(config.is_updating_slots, *blocking_keys_on_nokey);
+    atomicGet(config.slots_last_update, *blocking_keys_on_nokey);
+    if (config.num_threads) pthread_mutex_unlock(&(config.liveclients_mutex));
+    *blocking_keys += config.liveclients;
+    *blocking_keys_on_nokey += config.liveclients;
+}"
+32,53226269E2E8F8F7,"int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->flags & CMD_PUSH_AS_REPLY) ||
+           (cmd->arity > 0 && cmd->arity % 2);
+}"
+33,83A7FD4CE5361D05,"static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}","static connection *connCreateSocket(void) 
+{
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+
+    return conn;
+}"
+34,C09BE7C7570CD694,"void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) "
+35,F586455FB012D15B,"monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeDictSize(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeRandomElement(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeDictSize(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeRandomElement(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeDictSize(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeRandomElement(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeDictSize(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeDictSize(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeRandomElement(&dtype);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static dictType dtype = {
+        dictSdsHash,               /* hash function */
+        NULL,                      /* key dup */
+        NULL,                      /* val dup */
+        dictSdsKeyCompare,         /* key compare */
+        dictSdsDestructor,         /* key destructor */
+        dictSdsDestructor,         /* val destructor */
+        NULL                       /* allow to expand */
+    };
+
+    return (monotonic_clock_type)dictTypeDictSize(&dtype);
+}"
+36,FA12006B2296E11D,"unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx!= NULL) {
+        return functions_lib_ctx->malloc_size + functions_lib_ctx->malloc_count*sizeof(functionsLibCtx);
+    } else {
+        return zmalloc_size(NULL) + zmalloc_count(NULL) * sizeof(functionsLibCtx);
+    }
+}"
+37,C15524E7A8A6A858,"static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable) *usable = size;
+    return ztrycalloc(size);
+}"
+38,1D4A8BB4C20DCE3F,"static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)!= NULL) 
+            sum += kvstoreDictSize(kvstoreDictAtIdx(kvs, i, didx));
+    }
+    return sum;
+}"
+39,53097E4BA66791C4,"int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    if (kvs->num_dicts > 0) {
+        dictidx = (rand() % kvs->num_dicts) * kvs->dict_size;
+        if (dictidx >= kvs->num_dicts) dictidx = kvs->num_dicts-1;
+    } else {
+        dictidx = 0;
+    }
+    return dictidx;
+}"
+40,4301A1FCF0E2E43E,"int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return -1;
+    if (didx == -1) didx = kvs->len-1;
+    if (kvs->used == kvs->len) {
+        kvs->len = kvs->len*2;
+        kvs = realloc(kvs,sizeof(kvstore)*kvs->len);
+        if (!kvs) return -1;
+        kvs->used = kvs->len;
+        memmove(kvs->entries, kvs->entries+kvs->len-1,
+                sizeof(kvstore)*(kvs->len-1));
+        kvs->entries[kvs->len-1].prevrawlen = kvstorePrevLen(kvs,didx);
+        kvs->entries[kvs->len-1].sz = kvstorePrevSz(kvs,didx);
+        kvs->len--;
+    }
+    return didx;
+}"
+41,BB017E58605FED92,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) ,dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+42,8AF415B62FB4C87E,"int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict.expand;
+    unsigned char *newd = zrealloc(d->ptr, newsize);
+    if (newd == NULL) {
+        return DICT_ERR;
+    }
+    d->ptr = newd;
+    d->dict.expand = newsize;
+    return DICT_OK;
+}"
+43,8146BBD51D425734,"int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    const char *typename = (interval == 1)? ""tcp"" : ""tls"";
+    int is_tls = 0;
+
+    if (interval == 1) {
+        is_tls = 1;
+        if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+            return -1;
+    }
+
+    if (anetFdToString(fd, typename, sizeof(typename), &server.redis_auth_clients) == -1)
+        return -1;
+
+    char buf[1024];
+    int buflen;
+    if (is_tls) {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 2;
+    } else {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 3;
+    }
+    if (anetWrite(fd, buf, buflen)!= buflen) {
+        if (is_tls) {
+            buf[0] = '\0';
+            if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+                return -1;
+            buf[0] = '$';
+            buf[1] = '\0';
+            buflen = 2;
+        } else {
+            buf[0] = '\0';
+            buf[1] = '\0';
+            buflen = 3;
+        }
+        if (anetWrite(fd, buf, buflen)!= buflen) {
+            return -1;
+        }
+    }
+    return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    const char *typename = (interval == 1)? ""tcp"" : ""tls"";
+    int is_tls = 0;
+
+    if (interval == 1) {
+        is_tls = 1;
+        if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+            return -1;
+    }
+
+    if (anetFdToString(fd, typename, sizeof(typename), &server.redis_auth_clients) == -1)
+        return -1;
+
+    char buf[1024];
+    int buflen;
+    if (is_tls) {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 2;
+    } else {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 3;
+    }
+    if (anetWrite(fd, buf, buflen)!= buflen) {
+        if (is_tls) {
+            buf[0] = '\0';
+            if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+                return -1;
+            buf[0] = '$';
+            buf[1] = '\0';
+            buflen = 2;
+        } else {
+            buf[0] = '\0';
+            buf[1] = '\0';
+            buflen = 3;
+        }
+
+        if (anetWrite(fd, buf, buflen)!= buflen)
+            return -1;
+    }
+    return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    const char *typename = (interval == 1)? ""tcp"" : ""tls"";
+    int is_tls = 0;
+
+    if (interval == 1) {
+        is_tls = 1;
+        if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+            return -1;
+    }
+
+    if (anetFdToString(fd, typename, sizeof(typename), &server.redis_auth_clients) == -1)
+        return -1;
+
+    char buf[1024];
+    int buflen;
+    if (is_tls) {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 2;
+    } else {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 3;
+    }
+    if (anetWrite(fd, buf, buflen)!= buflen) {
+        if (is_tls) {
+            buf[0] = '\0';
+            if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+                return -1;
+            buf[0] = '$';
+            buf[1] = '\0';
+            buflen = 2;
+        } else {
+            buf[0] = '\0';
+            buf[1] = '\0';
+            buflen = 3;
+        }
+        if (anetWrite(fd, buf, buflen)!= buflen)
+            return -1;
+    }
+    return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    const char *typename = (interval == 1)? ""tcp"" : ""tls"";
+    int is_tls = 0;
+
+    if (interval == 1) {
+        is_tls = 1;
+        if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+            return -1;
+    }
+
+    if (anetFdToString(fd, typename, sizeof(typename), &server.redis_auth_clients) == -1)
+        return -1;
+
+    char buf[1024];
+    int buflen;
+    if (is_tls) {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 2;
+    } else {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 3;
+    }
+    if (anetWrite(fd, buf, buflen)!= buflen) {
+        if (is_tls) {
+            buf[0] = '\0';
+            if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+                return -1;
+            buf[0] = '$';
+            buf[1] = '\0';
+            buflen = 2;
+        } else {
+            buf[0] = '\0';
+            buf[1] = '\0';
+            buflen = 3;
+        }
+
+        if (anetWrite(fd, buf, buflen)!= buflen)
+            return -1;
+    }
+    return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    const char *typename = (interval == 1)? ""tcp"" : ""tls"";
+    int is_tls = 0;
+
+    if (interval == 1) {
+        is_tls = 1;
+        if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+            return -1;
+    }
+
+    if (anetFdToString(fd, typename, sizeof(typename), &server.redis_auth_clients) == -1)
+        return -1;
+
+    char buf[1024];
+    int buflen;
+    if (is_tls) {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 2;
+    } else {
+        buf[0] = '$';
+        buf[1] = '\0';
+        buflen = 3;
+    }
+    if (anetWrite(fd, buf, buflen)!= buflen) {
+        if (is_tls) {
+            buf[0] = '\0';
+            if (anetFdToString(fd, typename, sizeof(typename), &server.tls_auth_clients) == -1)
+                return -1;
+            buf[0] = '$';
+            buf[1] = '\0';
+            buflen = 2;
+        } else {
+            buf[0] = '\0';
+            buf[1] = '\0';
+            buflen = 3;
+        }
+        if (anetWrite(fd, buf, buflen)!= buflen)
+            return -1;
+    }
+    return 0;
+}"
+44,0662CB892CF59881,"int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = (unsigned char*)p;
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = raxGetValue(p,NULL);
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = raxGetValue(p,NULL);
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = raxGetValue(p,NULL);
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = (unsigned char*)p;
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = raxGetValue(p,NULL);
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = raxGetValue(p,NULL);
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = (unsigned char*)p;
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = raxGetValue(p,NULL);
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = (unsigned char*)p;
+    return 1;
+}"
+45,8BE29A91E9BFE43F,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) 
+46,4E9473BD7ADA756A,"void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->acl_categories = ACL_DEFAULT_COMMAND_CATEGORIES;
+    acl_categories->num_acl_categories = 0;
+    server.commands = acl_categories;
+}"
+47,8A932B490A6BCD6E,"int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    if (cmd->proc == sortCommand) {
+        return getKeysFromCommand(cmd, argv, argc, result);
+    } else if (cmd->proc == sortCommandExtended) {
+        return sortCommandExtendedGetKeys(cmd, argv, argc, result);
+    } else {
+        serverPanic(""Unknown SORT command"");
+    }
+}"
+48,BA9F49D506CE32B7,"void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}"
+49,D96D35EDDAADBECC,"robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    serverAssert(value >= 0);
+    return createStringObjectFromLongLongWithSds(value);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    serverAssert(value >= 0);
+    return createStringObjectFromLongLongWithSds(value);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    serverAssert(value >= 0);
+    return createStringObjectFromLongLongWithSds(value);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    unsigned char buf[2];
+    buf[0] = (value >> 8) & 0xff;
+    buf[1] = value & 0xff;
+    return createStringObject((char*)buf,2);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    unsigned char buf[2];
+    buf[0] = (value >> 8) & 0xff;
+    buf[1] = value & 0xff;
+    return createStringObject((char*)buf,2);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    serverAssert(value >= 0);
+    return createStringObjectFromLongLongWithSds(value);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    unsigned char buf[2];
+    buf[0] = (value >> 8) & 0xff;
+    buf[1] = value & 0xff;
+    return createStringObject((char*)buf,2);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    serverAssert(value >= 0);
+    return createStringObjectFromLongLongWithSds(value);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    unsigned char buf[2];
+    buf[0] = (value >> 8) & 0xff;
+    buf[1] = value & 0xff;
+    return createStringObject((char*)buf,2);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    unsigned char buf[2];
+    buf[0] = (value >> 8) & 0xff;
+    buf[1] = value & 0xff;
+    return createStringObject((char*)buf,2);
+}"
+50,8B7D3882CF9CBFEC,"unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    static unsigned int lru_clock = -1;
+    if (lru_clock == -1) {
+        lru_clock = sysconf(_SC_CLK_TCK);
+        if (lru_clock < 1) lru_clock = 1;
+    }
+    return lru_clock;
+}"
+51,CA200194ACEB9F7D,"void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) "
+52,60BC84F411EBEAB3,"int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    uint64_t old_size = kvstore->length;
+    uint64_t old_dsize = kvstore->datalen;
+    uint64_t old_expand = kvstore->expand;
+    uint64_t new_size = newsize;
+    uint64_t new_dsize = kvstore->datalen;
+    uint64_t new_expand = kvstore->expand;
+
+    kvstore->length = newsize;
+    kvstore->datalen = newsize > old_dsize? newsize : old_dsize;
+    kvstore->expand = new_expand;
+    if (new_size > old_size) {
+        kvstoreDictExpand(kvs, newsize, skip_cb);
+    } else if (new_size < old_size) {
+        kvstoreDictShrink(kvs, newsize, skip_cb);
+    } else {
+        return DICT_OK;
+    }
+    return DICT_ERR;
+}"
+53,6B610D8B9F68DAE1,"int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) "
+54,8A27BFF462650406,"static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    signalModifiedKey(c,db,key);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}"
+55,051CCB38BF73BF65,"int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval,NULL);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval? 1 : 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval,NULL);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval? 1 : 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval,NULL);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval? 1: 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval,NULL);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModuleValue(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval? 1 : 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval? 1 : 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval? 1 : 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval? 1 : 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (val->type == OBJ_STRING) {
+        sds sdsval = val->ptr;
+        retval = dbAdd(db,key,sdsval);
+    } else if (val->type == OBJ_LIST) {
+        retval = dbAddList(db,key,val);
+    } else if (val->type == OBJ_SET) {
+        retval = dbAddSet(db,key,val);
+    } else if (val->type == OBJ_ZSET) {
+        retval = dbAddZset(db,key,val);
+    } else if (val->type == OBJ_HASH) {
+        retval = dbAddHash(db,key,val);
+    } else if (val->type == OBJ_STREAM) {
+        retval = dbAddStream(db,key,val);
+    } else if (val->type == OBJ_MODULE) {
+        retval = dbAddModule(db,key,val);
+    } else {
+        serverPanic(""Unknown value type"");
+    }
+    return retval;
+}"
+56,3676B55A0684B8C4,static void kvstoreDictRehashingStarted(dict *d) ,static void kvstoreDictRehashingStarted(dict *d) ,static void kvstoreDictRehashingStarted(dict *d) ,static void kvstoreDictRehashingStarted(dict *d) ,static void kvstoreDictRehashingStarted(dict *d) ,static void kvstoreDictRehashingStarted(dict *d) ,"static void kvstoreDictRehashingStarted(dict *d) 
+{
+    if (server.stat_active_defrag_hits!= server.stat_active_defrag_scanned)
+        server.stat_active_defrag_key_hits++;
+    else if (server.stat_active_defrag_key_misses)
+        server.stat_active_defrag_key_misses++;
+    else
+        server.stat_active_defrag_scanned++;
+
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        kvstore *kvs = activeDefragAlloc(server.db->keys);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->keys);
+            server.db->keys = kvs;
+        }
+    }
+
+    if (dictSize(d) > server.active_defrag_max_listpack_entries) {
+        kvstore *kvs = activeDefragAlloc(server.db->expires);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->expires);
+            server.db->expires = kvs;
+        }
+    }
+
+    if (dictSize(d) > server.active_defrag_max_listpack_value) {
+        kvstore *kvs = activeDefragAlloc(server.db->defrag_later);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->defrag_later);
+            server.db->defrag_later = kvs;
+        }
+    }
+}",static void kvstoreDictRehashingStarted(dict *d) ,"static void kvstoreDictRehashingStarted(dict *d) 
+{
+    if (server.stat_active_defrag_hits!= server.stat_active_defrag_scanned)
+        server.stat_active_defrag_key_hits++;
+    else if (server.stat_active_defrag_key_misses)
+        server.stat_active_defrag_key_misses++;
+    else
+        server.stat_active_defrag_scanned++;
+
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        kvstore *kvs = activeDefragAlloc(server.db->keys);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->keys);
+            server.db->keys = kvs;
+        }
+    }
+
+    if (dictSize(d) > server.active_defrag_max_listpack_entries) {
+        kvstore *kvs = activeDefragAlloc(server.db->expires);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->expires);
+            server.db->expires = kvs;
+        }
+    }
+
+    if (dictSize(d) > server.active_defrag_max_listpack_value) {
+        kvstore *kvs = activeDefragAlloc(server.db->defrag_later);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->defrag_later);
+            server.db->defrag_later = kvs;
+        }
+    }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+    if (server.stat_active_defrag_hits!= server.stat_active_defrag_scanned)
+        server.stat_active_defrag_key_hits++;
+    else if (server.stat_active_defrag_key_misses)
+        server.stat_active_defrag_key_misses++;
+    else
+        server.stat_active_defrag_scanned++;
+
+    if (dictSize(d) > server.active_defrag_max_scan_fields) {
+        kvstore *kvs = activeDefragAlloc(server.db->keys);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->keys, kvs);
+            server.db->keys = kvs;
+        }
+    }
+
+    if (dictSize(d) > server.active_defrag_max_listpack_entries) {
+        kvstore *kvs = activeDefragAlloc(server.db->expires);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->expires, kvs);
+            server.db->expires = kvs;
+        }
+    }
+
+    if (dictSize(d) > server.active_defrag_max_listpack_value) {
+        kvstore *kvs = activeDefragAlloc(server.db->defrag_later);
+        if (kvs!= NULL) {
+            kvstoreRelease(server.db->defrag_later, kvs);
+            server.db->defrag_later = kvs;
+        }
+    }
+}"
+57,235340703317EEF1,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+58,B9770C032ED2D79F,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,"void scanDatabaseForReadyKeys(redisDb *db) 
+{
+    dictIterator *di;
+    dictEntry *de;
+
+    di = dictGetSafeIterator(db->keys);
+    while((de = dictNext(di))!= NULL) {
+        robj *key = dictGetKey(de);
+        if (key->type == OBJ_MODULE) continue; /* ignore user modules */
+        if (key->type == OBJ_STRING || key->type == OBJ_LIST ||
+            key->type == OBJ_SET || key->type == OBJ_ZSET)
+        {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_HASH || key->type == OBJ_STREAM) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_ZSET) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_HASH) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_LIST) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_SET) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_ZSET) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_HASH) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_STREAM) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_MODULE) {
+            scanKey(db, key, de);
+        }
+    }
+    dictReleaseIterator(di);
+}",void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,"void scanDatabaseForReadyKeys(redisDb *db) 
+{
+    dictIterator *di;
+    dictEntry *de;
+
+    di = dictGetSafeIterator(db->keys);
+    while((de = dictNext(di))!= NULL) {
+        robj *key = dictGetKey(de);
+        if (key->type == OBJ_MODULE) continue; /* ignore user modules */
+        if (key->type == OBJ_STRING || key->type == OBJ_LIST ||
+            key->type == OBJ_SET || key->type == OBJ_ZSET)
+        {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_HASH || key->type == OBJ_STREAM) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_ZSET) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_HASH) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_LIST) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_SET) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_ZSET) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_HASH) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_STREAM) {
+            scanKey(db, key, de);
+        } else if (key->type == OBJ_MODULE) {
+            scanKey(db, key, de);
+        }
+    }
+    dictReleaseIterator(di);
+}",void scanDatabaseForReadyKeys(redisDb *db) 
+59,D7B3A40224F9F596,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) ,void unblockClientOnTimeout(client *c) 
+60,1D2EBFAEB02EB387,"void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) "
+61,34E0B83C2E59A0E6,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) 
+62,6F0C31DFFEC181FB,"streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (s->cgroups) {
+        raxIterator ri;
+        raxStart(&ri,s->cgroups);
+        raxSeek(&ri,""^"",NULL,0);
+        while(raxNext(&ri)) {
+            cg = ri.data;
+            if (cg->name && strcasecmp(cg->name,groupname) == 0) {
+                sdsfree(groupname);
+                raxStop(&ri);
+                return cg;
+            }
+        }
+        raxStop(&ri);
+    }
+    sdsfree(groupname);
+    return NULL;
+}"
+63,561120EE41B27B2E,"int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}"
+64,1E86D002109F35F0,"streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxSize(cg->consumers) == 0) {
+        raxFree(cg->consumers);
+        cg->consumers = raxNew();
+    }
+    raxInsert(cg->consumers, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    raxAdd(s->cgroups, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    if (raxSize(cg->pel) == 0) {
+        raxFree(cg->pel);
+        cg->pel = raxNew();
+    }
+    raxInsert(cg->pel, (unsigned char*)name, namelen,
+        (void*)(unsigned long)cg->id.ms, (void*)(unsigned long)cg->id.seq);
+    return cg;
+}"

@@ -132,3 +132,5373 @@
         return 0;
     }
 }"
+2,B7AED9E236EBEC25,"size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[MAX_LONG_DOUBLE_CHARS];
+    size_t len = ld2string(buf,sizeof(buf),d,0);
+    return rioWriteRaw(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[LONG_STR_SIZE];
+    size_t len = lpStringToInt64((const char*)buf,sizeof(buf),d);
+    return rioWriteBulkCount(r,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+	unsigned char buf[32];
+	size_t len = lpStringOutput(buf,(unsigned char*)&d,1,0);
+	return rioWriteRaw(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    char buf[128];
+    size_t len = ld2string(buf,sizeof(buf),d,0);
+    return rioWriteRaw(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) ","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+    size_t len = ll2string(llstr,sizeof(llstr),d);
+    return rioWriteRaw(r,llstr,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+  int retval;
+  char buf[LONG_STR_SIZE];
+  size_t len = lpStringToInt64((const char*)buf,sizeof(buf),d);
+  return rioWriteBulkCount(r,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) ","size_t rioWriteBulkDouble(rio *r, double d) 
+{ 
+    char buf[LONG_STR_SIZE];
+    size_t len = lpStringToInt64((const char*)buf,sizeof(buf),d);
+    return rioWriteBulkString(r,buf,len);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+	unsigned char buf[128];
+	size_t len = ll2string(buf,sizeof(buf),d);
+	return rioWriteRaw(r,buf,len);
+}"
+3,917B2B41B044128F,"sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) 
+{    
+    /* Fill in the reply for the INFO command. */
+    struct hdr_iter iter;
+    sds reply = sdsempty();
+    hdr_iter_percentile_init(&iter,histogram,100);
+    while (hdr_iter_next(&iter)) {
+        struct hdr_value *hdr = iter.current.value;
+        if (hdr->value!= NULL) {
+            sds val = createStringObjectFromLongLong((long)hdr->value);
+            hdr_iter_percentile_add(&iter,val,NULL);
+            decrRefCount(val);
+            sdsfree(val);
+        }
+    }
+    hdr_iter_close(&iter);
+    if (info) {
+        sdsfree(info);
+    }
+    return reply;
+}"
+4,63BD3C16404EFF44,"void luaSetErrorMetatable(lua_State *lua) 
+{
+    lua_setmetatable(lua, luaError);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua->mt == NULL) {
+        lua->mt = &_lua_lib_metatable[1];
+        lua->up = 2;
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    int i;
+    for (i=0; i<2; i++) {
+        if (lua->metatable[i].ptr) {
+            decrRefCount(lua->metatable[i].ptr);
+            lua->metatable[i].ptr = NULL;
+        }
+    }
+    /* Push a fake metatable for the error case, to make sure
+     * that the error is propagated to the client. */
+    lua->metatable[0] = luaCreateString(""__LUA__"",9);
+    lua->metatable[1] = luaCreateString(""ERR"",5);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{ 
+    int i;
+    for (i=0; i<2; i++) {
+        if (lua->metatable[i].ptr) {
+            decrRefCount(lua->metatable[i].ptr);
+            lua->metatable[i].ptr = NULL;
+        }
+    }
+    /* Push a fake metatable for the top of the stack. */
+    lua->metatable[0] = createStringObject(""__LUA__"",9);
+    lua->metatable[1] = createStringObject(""__CORE__"",9);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+	/* Push a fake metatable for errors to be handled correctly.
+	 * We just need to make sure the error is put on the correct
+	 * Lua stack position.
+	 */
+	pushGenericMetatable(lua, &shared.err);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    if (lua_getmetatable(lua,1) == NULL) {
+        /* We need a metatable, create it. */
+        lua_setmetatable(lua,1);
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+	/* Push 2 elements to make sure that the error returned
+	 * by luaSet*() is pushed to the right of the metatable. */
+	lua_push(lua,shared.err);
+	lua_push(lua,shared.curr_location);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+	unsigned char *mt = lua_metatable(lua);
+	mt[0] = MT_Error;
+	mt[1] = '\0';
+	lua_setmetatable(lua, mt);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{ 
+    if (lua_getmetatable(lua,1) == NULL) {
+        /* We need a metatable, create it. */
+        lua_setmetatable(lua,1,&shared.metatable);
+    }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    int i;
+    if (!lua->mt) return;
+    for (i=0;i<2;i++) {
+        if (lua->m[i]!=NULL) break;
+    }
+    if (i==2) {
+        /* We have a metatable, raise an error. */
+        lua_set_metatable(lua,lua->m);
+    } else {
+        /* We don't have a metatable, just return. */
+        lua_set_metatable(lua,NULL);
+    }
+}"
+5,91E59A8BE2E5834C,"sds luaGetStringSds(lua_State *lua, int index) 
+{
+    sds value = lua_tostring(lua, index);
+    if (value == NULL) return NULL;
+    return value;
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    unsigned char *vstr;
+    size_t vlen;
+    int64_t vll;
+
+    vstr = luaGetStringObject(lua, &vlen, &vll);
+    if (vstr) {
+        return sdsnewlen(vstr, vlen);
+    } else {
+        return sdsfromlonglong(vll);
+    }
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    if (index < 0 || index >= LuaScript_String_Len(lua)) return NULL;
+    return LuaScript_String_Get(lua, index);
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    if (index < 0 || index >= LUA_MAX_STRING) return NULL;
+    return lua_str_ptr(lua, index);
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    sds value = lua_tolstring(lua, index, ""sds"");
+    if (value == NULL) return NULL;
+    return value;
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{ 
+    if (index < 0 || index >= LuaScript_String_Len(lua)) return NULL;
+    return LuaScript_String_Get(lua, index); 
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{ 
+    sds value = lua_tostring(lua, index);
+    if (value == NULL) return NULL;
+    return value;
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{ 
+    if (index < 0 || index >= LUA_MAX_STRING) return NULL;
+    return lua_str_ptr(lua, index); 
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    size_t len = lua_strlen(lua, index);
+    sds value = lua_tolstring(lua, index + len, &len);
+    return value;
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+	if (index < 0 || index >= LUA_STRING_LEN) return NULL;
+	return luaStringGetSds(lua->lstrings+index);
+}"
+6,C3CB2474A9CFDEB8,"static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    lua_createtable(lua,elev,elec);
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    for (int i = 0; i < elec; i++) {
+        lua_push(lua, createObject(OBJ_STRING, sdsempty()));
+        lua_set_array_element(lua, i, -1, (unsigned char*)sdslen(
+            server.lazyfree_lazy_expire_disabled_keys[i]->ptr));
+    }
+    /* Push the final array */
+    lua_push(lua, createStringObject(""]"",2));
+    lua_set_array_length(lua, -1, 1);
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    /* Create the array if it does not already exist. */
+    if (!elev[0]->ptr) {
+        elev[0] = createStringObject("""",0);
+        for (int i=1; i<elemc; i++) {
+            char *sub = (char*)elev[i]->ptr;
+            size_t len = sdslen(sub);
+            elev[i] = createStringObject(sub,len);
+        }
+    }
+    /* Push the elements. */
+    int j;
+    for (j = 0; j < elec; j++) {
+        pushStringObject(lua,elev[j]);
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+	lua_array *lua_am = lua_am_init(elev, elec, 1);
+	lua_set_hook(lua, lua_am, NULL, NULL, NULL);
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+	int j;
+	robj **array = zmalloc(sizeof(robj*)*elevlen);
+	for (j = 0; j < elec; j++) {
+		array[j] = createStringObject(elev[j],sdslen(elev[j]));
+		incrRefCount(array[j]);
+	}
+	luaSetArray(lua, array, elec);
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+
+    lua_settop(lua, elec);
+    for (j = 0; j < elec; j++) {
+        if (elev[j].sval) {
+            lua_push(lua,lev[j].sval);
+        } else {
+            lua_pushbulk(lua,lev[j].ptr);
+        }
+        if (j!= elec-1)
+            lua_pop(lua,1);
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    int j;
+    for (j = 0; j < elec; j++) {
+        luaPush(lua, createStringObject("""",0));
+    }
+    luaSetTotalBytes(lua, elec*2);
+    luaSetNumElements(lua, elec);
+    for (j = 0; j < elec; j++) {
+        int i;
+        luaPush(lua, createStringObject(elev[j]->ptr, sdslen(elev[j]->ptr)));
+        for (i = 0; i < j; i++) {
+            luaPush(lua, createStringObject("","",0));
+        }
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{ 
+    for (int i = 0; i < elec; i++) {
+        lua_push(lua, createStringObject("""",0));
+        lua_set_array(lua, i+1, 2);
+    }
+    /* Push the final array (table) as a string object. */
+    lua_push(lua, createStringObject("""",0));
+    lua_set_array(lua, elec, 2);
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    for (int j = 0; j < elec; j++) {
+        elev[j] = createStringObject(NULL,sdslen(elev[j]->ptr));
+        luaSetArrayElement(lua, j,lev[j]);
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{ 
+    int j;
+
+    lua_settop(lua, elec);
+    for (j = 0; j < elec; j++) {
+        if (elev[j].sval) {
+            lua_push(lua,lev[j].sval);
+        } else {
+            lua_pushbulk(lua,lev[j].ptr);
+        }
+        if (j!= elec-1)
+            lua_pop(lua,1);
+    }
+}"
+7,BFD3412F5AA28A38,"void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)
+{
+	int i;
+	int max_idx = 0;
+	int min_idx = latency_histogram->length-1;
+	int avg_idx = latency_histogram->length-1;
+	int delta = (int64_t)duration_hist-(int64_t)min_idx;
+	for (i = 0; i <= latency_histogram->length-1; i++) {
+		if (delta > 0) {
+			if (latency_histogram[i] > latency_histogram[i+1]) {
+				max_idx = i;
+			} else if (latency_histogram[i] < latency_histogram[i+1]) {
+				min_idx = i;
+			}
+		} else {
+			if (latency_histogram[i] < latency_histogram[i+1]) {
+				max_idx = i;
+			} else if (latency_histogram[i] > latency_histogram[i+1]) {
+				min_idx = i;
+			}
+		}
+	}
+	hdr_histogram_update_value(latency_histogram, max_idx, avg_idx, delta);
+}","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)
+{
+        /* We need to account for the different command implementations returning different latency
+         * spikes. To do that we increment the number of samples we have in the histogram, and
+         * subtract one from the previous value if the value was not already ""above"" the limit. */
+        int64_t samples = duration_hist - (*latency_histogram)[0].samples;
+        if (samples > 0) {
+                (*latency_histogram)[0].samples += samples;
+                (*latency_histogram)[0].highest_equivalent_value = max(samples, (*latency_histogram)[0].highest_equivalent_value);
+        }
+}","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)
+{
+    if (latency_histogram == NULL) return;
+    int command_count = 0;
+    for (int j = 0; j < latency_histogram->length; j++) {
+        if (latency_histogram[j] > command_count) {
+            command_count = latency_histogram[j];
+        }
+        command_count += latency_histogram[j] / 1000;
+    }
+    hdr_histogram_update_value(latency_histogram, command_count, duration_hist);
+}","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)"
+8,8C34082F9371FB54,"static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+    serverAssert(libname!= NULL);
+    void *handle = loaded_libs_queue + libname_to_lib_map[libname];
+    serverAssert(handle!= NULL);
+    lua_set_lib_func(lua, handle, luafunc);
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+    /* Initialize libc, and set it as the standard C library function 
+     * to call the Lua engine. */
+    if (libc_init(NULL,0) == -1) {
+        serverLog(LL_WARNING, ""Failed to initialize libc: %s"", strerror(errno));
+        exit(1);
+    }
+
+    /* Load the library, setup the function pointer, and register the 
+     * library name in the table. */
+    void *handle = dlopen(libname,RTLD_NOW|RTLD_LOCAL);
+    if (handle == NULL) {
+        serverLog(LL_WARNING, ""Failed to load the Lua library: %s"", libname);
+        exit(1);
+    }
+    void *func = luaL_getfunc(lua, NULL, 0, NULL);
+    if (func == NULL) {
+        dlclose(handle);
+        serverLog(LL_WARNING, ""Failed to fetch the Lua script handler: %s"", libname);
+        exit(1);
+    }
+    luaScript *script = zmalloc(sizeof(luaScript));
+    script->handle = handle;
+    script->func = func;
+    script->name = sdsnew(libname);
+    listAddNodeTail(server.lua_scripts, script);
+    lua_set_hook(lua, func, NULL, NULL);
+    if (luafunc) {
+        /* Register the Lua API in the callback table. */
+        int ret = dictAdd(server.lua_scripts_queue, (char*)libname, script);
+        serverAssert(ret);
+    }
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+	struct RedisModule *module = dictFetchValue(modules,libname);
+	if (module == NULL) {
+		serverLog(LL_WARNING, ""The library '%s' was not found in the server libpath"", libname);
+		return;
+	}
+	RedisModule *myself = module->module;
+	if (myself->init_fn == NULL) {
+		serverLog(LL_WARNING, ""The library '%s' was not initialized"", libname);
+		return;
+	}
+	void *handle;
+	RedisModuleIO io;
+	moduleInitIOContext(io,myself,&handle,libname);
+	myself->init_fn(&io,handle);
+	if (luafunc) {
+		/* Call the user function. */
+		void *result;
+		RedisModuleCtx ctx;
+		moduleCreateContext(&ctx,myself,REDISMODULE_CTX_TEMP_CLIENT);
+		ctx.client = myself->client;
+		result = luafunc(&io,(unsigned char*)libname,strlen(libname),&ctx,NULL);
+		moduleFreeContext(&ctx);
+		if (result) {
+			serverLog(LL_VERBOSE, ""Module %s returned result from ""
+								""function %s"", libname, result);
+			/* We stored the result in the private data, now free it. */
+			sdsfree(result);
+		} else {
+			serverLog(LL_WARNING, ""Module %s failed to load"", libname);
+		}
+	} else {
+		/* Just log the event. */
+		serverLog(LL_VERBOSE, ""Module %s loaded"", libname);
+	}
+	module->module->in_call++;
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+	void *handle;
+	sds name = sdsnew(libname);
+
+	handle = dlopen(name,RTLD_NOW|RTLD_LOCAL);
+	if (handle == NULL) {
+		char msg[1024];
+		snprintf(msg,sizeof(msg),""Can't load module %s: %s"",libname, dlerror());
+		panic(msg);
+	}
+
+	/* We set up a fake client for module APIs that just need to attach a
+	 * fake client to the main thread. This fake client will be used to
+	 * accumulate all the commands emitted by the Lua script. */
+	moduleAttachToServer(lua, handle, NULL);
+
+	/* Now that we have a valid handle, we can create the library event
+	 * subscribers list, and attach them to the Lua script client. */
+	listAddNodeTail(lua->subscribers, createSubscriber(NULL,SUBEVENT_MODULE,libname,NULL));
+	listAddNodeTail(lua->subscribers, createSubscriber(NULL,SUBEVENT_MODULE_EVENTLOOP,NULL,NULL));
+
+	/* Now that we have a valid Lua state, we can create the module event
+	 * callbacks. */
+	lua->callbacks = zcalloc(sizeof(luaCallbacks));
+	lua->pending_calls = zcalloc(sizeof(pendingCall));
+	listAddNodeTail(lua->events, createEventLoopJob(luafunc,0));
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) "
+9,49B52B607F6CE286,"void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+    /* Save the 'lua' value */
+    if (luaSaveValue(lua,name,ptr,LUA_SAVE_NONE,NULL,NULL) == C_ERR)
+        return;
+
+    /* Add the 'lua' value to the Lua global state */
+    luaAddPostNotification(lua,name,ptr);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+    RedisModuleIO io;
+    moduleCreateIOContext(io,lua,name,ptr,REGISTER_IO_TYPE_LUA);
+    moduleRegisterIO(io);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+    if (lua == NULL) return;
+    int len = strlen(name) + 1;
+    char *data = zmalloc(len);
+    memcpy(data, name, len);
+    data[len] = '\0';
+    lua_push_string(lua, data);
+    lua_set_private_data(lua, (unsigned char*)data, len);
+    if (ptr) {
+        lua_push_function(lua, (unsigned char*)ptr);
+        lua_set_private_data(lua, (unsigned char*)ptr, len);
+    }
+    zfree(data);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{ 
+    RedisModuleIO io;
+    moduleCreateIOContext(io,lua->io,name,ptr,REGISTER_IO_TYPE_LUA);
+    lua->io->fn = lua_save;
+    lua->io->userdata = lua;
+    if (redis_rioWrite(&io, ""\r\n"", 2) == 0) goto werr;
+    if (redis_rioWrite(&io, ""*3\r\n"", 5) == 0) goto werr;
+    if (redis_rioWrite(&io, ""REGISTER\r\n"", 10) == 0) goto werr;
+    if (redis_rioWriteBulkString(&io,""NAME"",4) == 0) goto werr;
+    if (redis_rioWriteBulkString(&io,name,strlen(name)) == 0) goto werr;
+    if (redis_rioWriteBulkString(&io,(char*)ptr,sdslen(ptr)) == 0) goto werr;
+    if (redis_rioWriteBulkString(&io,""\r\n"",2) == 0) goto werr;
+    io.bytes += (long long)sdslen(io.buffer) + 2;
+    return;
+
+werr:
+    io.error = 1;
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{ 
+    if (lua!= NULL) {
+        lua_SaveValue(lua, name, ptr, LUA_SLOT_UNKNOWN, NULL);
+    } else {
+        serverPanic(""Unknown lua save implementation"");
+    }
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+    if (lua!= NULL) {
+        lua_SaveValue(lua, name, ptr, LUA_REGISTRY_SAVE);
+    } else {
+        serverLog(LL_WARNING, ""Lua was not called with a valid Lua context!"");
+    }
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) ","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) "
+10,EE3BEF081FCA3E6A,void scriptingRelease(int async) ,"void scriptingRelease(int async) 
+{
+    int j;
+    if (async == 1)
+        lua_async_rm = lua_script_async_rm_base;
+    else
+        lua_async_rm = lua_script_sync_rm_base;
+    for (j = 0; j < server.thread_id; j++) {
+        int i;
+        pthread_mutex_lock(&(server.liveclients_mutex[j]));
+        for (i = 0; i < server.liveclients; i++) {
+            client *c = server.liveclients[i].client;
+            if (c == NULL)
+                continue;
+            if (c->thread_id == j) {
+                server.liveclients[i].client = NULL;
+                server.liveclients--;
+                break;
+            }
+        }
+        pthread_mutex_unlock(&(server.liveclients_mutex[j]));
+    }
+    server.async_rm_cnt = 0;
+}",void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,"void scriptingRelease(int async) 
+{
+    if (lua_state) {
+        int i;
+        for (i=0; i<server.migrate_cached_slaves; i++)
+            decrRefCount(server.migrate_cached_slaves[i].slave);
+        zfree(server.migrate_cached_slaves);
+        server.migrate_cached_slaves = NULL;
+        server.migrate_cached_master = NULL;
+        server.migrate_cached_replid = NULL;
+        server.migrate_cached_offset = 0;
+    }
+    if (server.current_client) {
+        client *slave = server.current_client->slave;
+        if (slave) {
+            listNode *ln;
+            listIter li;
+
+            listRewind(server.slaves,&li);
+            while((ln = listNext(&li))) {
+                client *slave = ln->value;
+                if (slave == server.current_client) {
+                    serverLog(LL_NOTICE,""Migrating the current client to replica %s:%d"",
+                        replicationGetSlaveName(slave), replicationGetSlavePort(slave));
+                }
+            }
+        }
+    }
+    if (server.repl_state == REPL_STATE_CONNECTED) {
+        /* Disconnecting all the slaves is required: the replica must be
+         * disconnected only from the master, otherwise it will remain a
+         * frozen state forever. */
+        disconnectAllBlockedClients();
+    }
+    /* Reset the client so that it is ready to accept new commands. */
+    resetClient(server.current_client);
+}","void scriptingRelease(int async) 
+{ 
+    int j;
+    if (async == 1)
+        fflush(stdout);
+    fclose(stdout);
+    redisFree(server.commands);
+    server.commands = NULL;
+    server.migrate_commands = NULL;
+    server.pubsub_patterns = NULL;
+    server.pubsubshard_patterns = NULL;
+    for (j = 0; j < server.pubsub_patterns_count; j++) {
+        zfree(server.pubsub_patterns[j].name);
+    }
+    zfree(server.pubsub_patterns);
+    server.pubsub_patterns = NULL;
+    server.pubsubshard_patterns = NULL;
+    for (j = 0; j < server.pubsubshard_patterns_count; j++) {
+        zfree(server.pubsubshard_patterns[j].name);
+    }
+    zfree(server.pubsubshard_patterns);
+    server.pubsubshard_patterns = NULL;
+}"
+11,79DA9CB3C0C6D261,"static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+"
+12,145F9153FF2001AA,"void ThreadsManager_init(void) 
+{
+    server.thread_id = pthread_self();
+}","void ThreadsManager_init(void) 
+{
+    int i;
+    for (i = 0; i < config.num_threads; i++) 
+        pthread_create(&(config.threads[i]->thread), NULL, execv, config.threads+i);
+}","void ThreadsManager_init(void) 
+{
+#ifdef USE_JEMALLOC
+    jemalloc_init();
+#endif
+    /* Register signal handler for threads creation, fork, fork save, etc. */
+    if (anetCloexec() == -1) {
+        serverLog(LL_WARNING, ""Can't create/execve: %s"", strerror(errno));
+        exit(1);
+    }
+}","void ThreadsManager_init(void) 
+{ 
+    /* Register the signal handler for SIGUSR1.
+     * This will allow to kill the threads created by this module.
+     * Notice that we do not register the cleanup function as it is not
+     * called when the server is killed. */
+    struct sigaction act;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = SA_NODEFER | SA_RESETHAND | SA_SIGINFO;
+    act.sa_sigaction = ThreadsSignalHandler;
+    sigaction(SIGUSR1, &act, NULL);
+}",void ThreadsManager_init(void) ,"void ThreadsManager_init(void) 
+{ 
+    server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+    if (server.threads_signal == NULL) {
+        serverLog(LL_WARNING, ""Can't allocate %d bytes of thread signal"",
+            THREADS_SIGNAL_WORDS);
+        exit(1);
+    }
+    memset(server.threads_signal, 0, THREADS_SIGNAL_WORDS);
+}","void ThreadsManager_init(void) 
+{
+    /* Register the signal handler for SIGUSR1, SIGSEGV, and so forth. 
+     * We need to do this before creating the threads, since the signal 
+     * will be propagated to the child process. */
+    struct sigaction act;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = SA_NODEFER | SA_RESETHAND | SA_SIGINFO;
+    act.sa_sigaction = ThreadsSignalHandler;
+    sigaction(SIGUSR1, &act, NULL);
+    sigaction(SIGSEGV, &act, NULL);
+}","void ThreadsManager_init(void) 
+{
+	server.threads_signal = zmalloc(THREADS_SIGNAL_WORDS * sizeof(int));
+	if (server.threads_signal == NULL) {
+		serverLog(LL_WARNING, ""Can't allocate %d bytes of thread signal ""
+			""memory"", THREADS_SIGNAL_WORDS);
+		exit(1);
+	}
+	memset(server.threads_signal, 0, THREADS_SIGNAL_WORDS);
+}",void ThreadsManager_init(void) ,"void ThreadsManager_init(void) 
+{ 
+    /* Register the signal handler for SIGUSR1, SIGSEGV, and so forth. 
+     * We need to do that in order to signal the threads correctly. 
+     * Notice: We do not register the signal handler for SIGBUS, since 
+     * Redis will just ignore it, and will not be able to kill the 
+     * threads. */
+    struct sigaction act;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = SA_NODEFER | SA_RESETHAND | SA_SIGINFO;
+    act.sa_sigaction = ThreadsSignalHandler;
+    sigaction(SIGUSR1, &act, NULL);
+    sigaction(SIGSEGV, &act, NULL);
+    sigaction(SIGBUS, &act, NULL);
+}"
+13,0CBA565430D94C57,"static unsigned long evictionTimeLimitUs(void) 
+{
+    const unsigned long max_us = 1000000;
+    const unsigned long min_us = 0;
+    const unsigned long default_us = 1000000;
+    unsigned long tenacity = server.client_default_eviction_tenacity;
+    if (tenacity > max_us) return max_us;
+    if (tenacity < min_us) return min_us;
+    return default_us;
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    switch(config.eviction_policy) {
+    case REDIS_EVICTION_NONE: return 0;
+    case REDIS_EVICTION_ANTI_FAT: return 1000000;
+    case REDIS_EVICTION_BOUNDARY: return 100000000;
+    case REDIS_EVICTION_FAST: return 100;
+    }
+    return 0; /* Never reached. */
+}",static unsigned long evictionTimeLimitUs(void) ,static unsigned long evictionTimeLimitUs(void) ,"static unsigned long evictionTimeLimitUs(void) 
+{ 
+    const unsigned long max_sleep = 30000;
+    const unsigned long base = 100;
+    const unsigned long one_fifth = 3600*24;
+    const unsigned long two_fifths = 3600*20;
+    const unsigned long three_quarters = 3600*12;
+    const unsigned long one_quarter = 3600*6;
+    const unsigned long two_quarters = 3600*12;
+    const unsigned long total = max_sleep+base+one_fifth+two_fifths+three_quarters+
+                                 one_quarter+two_quarters;
+    return total*24/100;  /* 24 seconds = 1 hour */
+}",static unsigned long evictionTimeLimitUs(void) ,"static unsigned long evictionTimeLimitUs(void) 
+{ 
+    if (server.maxmemory_policy & MAXMEMORY_FLAG_ALLOW_TEMP_EViction) {
+        return 1;
+    } else if (server.maxmemory_policy & MAXMEMORY_FLAG_NO_EVICTION) {
+        return 0;
+    } else {
+        return 1000000 / server.hz;
+    }
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    if (server.maxmemory > MEMTEST_THRESHOLD)
+        return 1000000; /* 1 sec max. */
+    else if (server.maxmemory > MEMTEST_DECACHE_SIZE)
+        return 60000; /* 60 sec max. */
+    else
+        return 300000; /* 3 sec max. */
+}","static unsigned long evictionTimeLimitUs(void) 
+{   
+    /* We want to block the oldest consumer for at least
+     * EVICTION_TIME_LIMIT_US microseconds if there is one.  */
+    return ustime() + EVICTION_TIME_LIMIT_US;
+}",static unsigned long evictionTimeLimitUs(void) 
+14,340C2A92AAB661BC,"static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) 
+{
+	static char *token[] = {""A"", ""an"", ""0"", ""off"", ""1"", ""on"", ""2"", ""2"", ""..."", ""3"", ""..."", ""0"", ""on"", ""1"", ""..."", ""2"", ""..."", ""...""};
+	static char *token_len[] = {""A"", ""an"", ""0"", ""off"", ""1"", ""on"", ""2"", ""2"", ""..."", ""3"", ""..."", ""0"", ""on"", ""1"", ""..."", ""2"", ""..."", ""...""};
+	int j;
+
+	/* If there is no token, we can exit early */
+	if (!arg->token)
+		return 0;
+
+	/* Find the next token */
+	for (j = 0; j < (int)sizeof(token)/sizeof(token[0]); j++) {
+		if (!strcasecmp(arg->token[j], *nextword)) {
+			arg->token[j] = '\0';
+			break;
+		}
+	}
+
+	/* If the token is found, we can exit early */
+	if (j == (int)sizeof(token)/sizeof(token[0]) &&!arg->token_len)
+		return 0;
+
+	/* Find the next token len */
+	for (j = 0; j < (int)sizeof(token_len)/sizeof(token_len[0]); j++) {
+		if (!strcasecmp(arg->token_len[j], token[j])) {
+			arg->token_len[j] = '\0';
+			break;
+		}
+	}
+
+	/* If the len is found, we can exit early */
+	if (j == (int)sizeof(token_len)/sizeof(token_len[0]) &&!arg->token_len)
+		return 0;
+
+	return 1;
+}","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) 
+{
+    char *p = *nextword;
+    size_t plen = strlen(p);
+    if (plen == 0) return 0;
+    unsigned char *vstr = NULL;
+    size_t vlen = 0;
+    int64_t vll = 0;
+    if (!strcasecmp(p,""count"") && (vstr = arg->val.ptr) && (vlen = sdslen(vstr))) {
+        if (!strcasecmp(vstr,""from"") && (vlen == 4)) {
+            if (!memcmp(vstr+2, ""now"", 4)) {
+                *nextword = ""now"";
+                return 1;
+            }
+        } else {
+            return 0;
+        }
+    }
+    return 1;
+}","static int matchToken(char **nextword, cliCommandArg *arg) 
+{
+    int j;
+    int matched = 0;
+    for (j = 0; j < arg->token_len; j++) {
+        if (arg->token[j] == '*') {
+            matched = 1;
+            break;
+        }
+    }
+    if (matched) {
+        *nextword = (char *)arg->token;
+        arg->token = NULL;
+    }
+    return matched;
+}","static int matchToken(char **nextword, cliCommandArg *arg) 
+{
+	char *p = *nextword;
+	char *vstr;
+	int64_t vlen;
+	int res = 1;
+
+	if (arg->type == REDISMODULE_ARG_TYPE_STRING) {
+		vstr = arg->val.str;
+		vlen = arg->val.len;
+	} else if (arg->type == REDISMODULE_ARG_TYPE_INTEGER) {
+		res = (arg->val.ll == 0);
+		vstr = NULL;
+		vlen = ll2string(llstr,sizeof(llstr),arg->val.ll);
+	} else if (arg->type == REDISMODULE_ARG_TYPE_KEY) {
+		res = (strncmp(p+1,arg->key,arg->key_len) == 0);
+		vstr = NULL;
+		vlen = sdslen(arg->key);
+	} else if (arg->type == REDISMODULE_ARG_TYPE_PATTERN) {
+		res = (strstr(p+1,arg->pat)!= NULL);
+		vstr = NULL;
+		vlen = sdslen(arg->pat);
+	} else {
+		serverPanic(""Unknown argument type"");
+	}
+
+	if (res) {
+		if (vstr!= NULL) {
+			if (vlen == 0) return 0;
+			return memcmp(vstr,p+1,vlen) == 0;
+		} else {
+			return (long long)arg->val.ll == arg->val.ll;
+		}
+	} else {
+		return 0;
+	}
+}","static int matchToken(char **nextword, cliCommandArg *arg) 
+{ 
+    if (arg->type == REDISMODULE_ARG_TYPE_STRING) {
+        return strcmp(arg->val.str,*nextword) == 0;
+    } else if (arg->type == REDISMODULE_ARG_TYPE_INTEGER) {
+        return (arg->val.ll == *nextword);
+    } else if (arg->type == REDISMODULE_ARG_TYPE_KEY) {
+        return moduleValidateKeyName(arg->val.str);
+    } else if (arg->type == REDISMODULE_ARG_TYPE_PURE_TOKEN) {
+        return arg->token[0] == *nextword;
+    } else if (arg->type == REDISMODULE_ARG_TYPE_TOKEN) {
+        return strcmp(arg->token,*nextword) == 0;
+    } else if (arg->type == REDISMODULE_ARG_TYPE_PATTERN) {
+        return (strstr(arg->val.str,*nextword)!= NULL);
+    } else if (arg->type == REDISMODULE_ARG_TYPE_UNIX_TIME) {
+        return (time(NULL) == arg->val.ull);
+    } else if (arg->type == REDISMODULE_ARG_TYPE_PURE_TOKEN) {
+        return arg->token[0] == *nextword;
+    } else if (arg->type == REDISMODULE_ARG_TYPE_TOKEN) {
+        return strcmp(arg->token,*nextword);
+    }
+    return 0;
+}","static int matchToken(char **nextword, cliCommandArg *arg) 
+{ 
+    int j;
+    int matched = 0;
+    for (j = 0; j < arg->token_len; j++) {
+        if (arg->token[j] == '*') {
+            matched = 1;
+            break;
+        }
+    }
+    if (matched) *nextword = (char *)arg->token;
+    return matched;
+}","static int matchToken(char **nextword, cliCommandArg *arg) 
+{
+    /* Skip any leading spaces and dashes. */
+    if (arg->token[0] == '-') {
+        return 0;
+    }
+
+    /* Skip any leading dashes. */
+    if (arg->token[0] == 'D') {
+        return 0;
+    }
+
+    /* Skip any spaces and dashes. */
+    if (arg->token[0] =='' && arg->token[1] =='') {
+        return 0;
+    }
+
+    /* Skip any consecutive dashes. */
+    if (arg->token[0] == '-' && arg->token[1] == '-') {
+        return 0;
+    }
+
+    /* Skip any consecutive spaces. */
+    if (arg->token[0] =='' && arg->token[1] =='') {
+        return 0;
+    }
+
+    /* Match any character. */
+    if (arg->token[0] == '*' || arg->token[0] == '?' || arg->token[0] == '[') {
+        return 1;
+    }
+
+    /* If we reached this point, we need to have matched the entire 
+     * argument, so we return 1. */
+    return 1;
+}","static int matchToken(char **nextword, cliCommandArg *arg) 
+{
+	int i;
+	for (i = 0; i < arg->token_len; i++) {
+		if (arg->token[i]!= '\0' &&!memcmp(arg->token,nextword[i],arg->token_len)) {
+			return i;
+		}
+	}
+	return -1;
+}"
+15,D1F436E96A24FDB2,void cliRestoreTTY(void) ,"void cliRestoreTTY(void) 
+{
+    if (server.child_type == CHILD_TYPE_RDB) {
+        /* Restore the terminal. */
+        tcsetpgrp(server.child_info_pipe, -1);
+        close(server.child_info_pipe);
+        server.child_info_pipe = -1;
+    }
+}","void cliRestoreTTY(void) 
+{
+	/* If we're switching to a different terminal, we need to set the
+	 * new one as our current terminal, and reset the old one as our
+	 * parent.
+	 */
+	if ( strcmp(server.current_client_conn_info.hostip, server.repl_transfer_s)!= 0) {
+		server.repl_transfer_sds = sdsnew(server.current_client_conn_info.hostip);
+		server.repl_transfer_port = server.current_client_conn_info.hostport;
+		server.repl_state = REPL_STATE_RECEIVE_IP_REPLY;
+	}
+}",void cliRestoreTTY(void) ,void cliRestoreTTY(void) ,void cliRestoreTTY(void) ,"void cliRestoreTTY(void) 
+{ 
+    if (redis_tty!=server.current_client->resp) {
+        resetClient(server.current_client);
+        server.current_client->resp = redis_tcp_conn;
+        server.current_client->bufpos = 0;
+        server.current_client->buf_pos = 0;
+        server.current_client->resp->set_handler(server.current_client, NULL, 0);
+    }
+}","void cliRestoreTTY(void) 
+{
+#ifdef __linux__
+    /* BSD has a bug that can cause the kernel to enter an infinite loop
+     * if a huge page is used. This code block detects such bug and forces
+     * the kernel to use a smaller heap. */
+    char buf[1024];
+    FILE *fp = fopen(""/proc/self/smaps"",""r"");
+    if (fp == NULL) return;
+    while(fgets(buf,sizeof(buf),fp)!= NULL) {
+        if (strstr(buf,""hugepage-used-by-bgsave-process"")!= NULL) {
+            fclose(fp);
+            return;
+        }
+    }
+    fclose(fp);
+#endif
+    /* Restore the terminal. */
+    tcsetenv(""COLUMNS"", server.columns, 1);
+    tcsetenv(""LINES"", server.lines, 1);
+}","void cliRestoreTTY(void) 
+{
+    if (redis_tcp_conn) {
+        connClose(redis_tcp_conn);
+        redis_tcp_conn = NULL;
+    }
+    if (redis_tls_conn) {
+        connClose(redis_tls_conn);
+        redis_tls_conn = NULL;
+    }
+}","void cliRestoreTTY(void) 
+{
+    /* Save the current settings. */
+    if (server.redis_tls_port!= server.tls_port ||
+        server.redis_tls_auth!= server.tls_auth) {
+        if (redisSetTlsConfig(NULL, server.redis_tls_port, server.redis_tls_auth, 1, NULL, NULL) == REDIS_ERR) {
+            serverLog(LL_WARNING, ""Failed to restore the saved configuration. Check server logs."");
+            return;
+        }
+    }
+}"
+16,F82D2410AAC6480A,"static void cliPressAnyKeyTTY(void) 
+{
+    if (tcgetattr(1, &tcs) == -1) {
+        fprintf(stderr, ""Could not get tty settings: %s\n"", strerror(errno));
+        exit(1);
+    }
+
+    tcs.cwc.flags |= CLOCK_FLAG_RESP_FORCE;
+    if (tcsetattr(1, &tcs) == -1) {
+        fprintf(stderr, ""Could not set tty settings: %s\n"", strerror(errno));
+        exit(1);
+    }
+}",static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{ 
+    cliSecureConnection(server.master);
+    if (write(server.master->fd, ""\n"", 1)!= 1) {
+        serverLog(LL_WARNING, ""Failed to send EOF mark on the TTY: %s"", strerror(errno));
+    }
+}","static void cliPressAnyKeyTTY(void) 
+{
+	cliSecureConnection(server.master);
+}",static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+	/* We use a static buffer in order to avoid repeated key events
+	 * on every read.
+	 */
+	static char buf[1024];
+	static int key_event_keys[4] = { KEY_F1, KEY_F2, KEY_F3, KEY_F4 };
+	static int key_event_mask[4] = { 0, KEY_MODIFY_CMD, KEY_DELETE,
+					   KEY_NO_EVENTS };
+
+	if (tcgetattr(1, &server.original_stdin_fd) == -1) {
+		/* Restore the original flags. */
+		resetCliConnInfo(1);
+		return;
+	}
+
+	/* Press any key event. */
+	if (tcsetattr(1, key_event_mask, server.original_stdin_fd)!= 0) {
+		resetCliConnInfo(1);
+		return;
+	}
+
+	/* Press any key event, but don't send anything to the tty.
+	 * This is needed for the ""CONFIG REWRITE"" command.
+	 */
+	if (tcsetattr(1, &buf[0], sizeof(buf))!= 0) {
+		resetCliConnInfo(1);
+		return;
+	}
+
+	buf[0] = '\0';
+	for (int i = 0; i < 4; i++) {
+		if (key_event_keys[i]!= -1)
+			buf[i] = key_event_keys[i];
+		else
+			buf[i] = '\0';
+	}
+
+	if (redis_strcmp(buf, ""\n"")!= 0) {
+		/* Send ""\n"" to the tty to signal that this is a newline. */
+		if (write(1, ""\n"", 1)!= 1) {
+			resetCliConnInfo(1);
+			return;
+		}
+	}
+}",static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+#ifdef USE_OPENSSL
+    if (cliSecureConnection() == C_ERR) {
+        fprintf(stderr, ""Could not negotiate a TLS connection: %s\n"",
+                strerror(errno));
+        exit(1);
+    }
+#endif
+    fprintf(stderr, "">>> Press any key during a TLS connection handshake\n"");
+    fflush(stderr);
+    getchar(); /* force newline */
+}",static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+    static unsigned char key[2] = {0, SIGUSR1};
+    if (write(pipefd[1], &key, sizeof(key))!= sizeof(key)) {
+        /* Ignore the error, this is best-effort. */
+    }
+}"
+17,9B049E7250A7BADF,"unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    if (type >= MAX_BIO_JOB_TYPE) return 0;
+    bioJob *job = &server.bio_jobs[type];
+    return job->pending;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    if (type >= _bio_job_type_num) return 0;
+    return bioGetPendingJobsOfType(type);
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    size_t count = 0;
+    atomicGet(server.bio_pending_count, type);
+    return count;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    unsigned long count = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(bioQ,&li);
+    while((ln = listNext(&li))) {
+        bioJob *bj = ln->value;
+        if (bj->type == type) count++;
+    }
+    return count;
+}","unsigned long bioPendingJobsOfType(int type) 
+{ 
+    unsigned long jobs = 0;
+    listNode *ln;
+    listIter li;
+
+    listRewind(server.bgsave_pending,&li);
+    while((ln = listNext(&li))) {
+        bioSaveInfo *bsi = ln->value;
+        if (bsi->type == type) jobs++;
+    }
+    return jobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+	return type == BIO_JOB_TYPE_READ? kvstoreSize(server.bio_pending_read) :
+										kvstoreSize(server.bio_pending_write);
+}","unsigned long bioPendingJobsOfType(int type) 
+{ 
+    return type == BIO_JOB_TYPE_READ? kvstoreSize(server.bio_pending_read) :
+                                        kvstoreSize(server.bio_pending_write);
+}","unsigned long bioPendingJobsOfType(int type) 
+{ 
+    if (type >= MAX_BIO_JOB_TYPE) return 0;
+    bioJob *job = &server.bio_jobs[type];
+    return job->pending;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    switch(type) {
+    case REDISMODULE_BIO_QUEUE_REPLY: return bioQueueGetPendingCount(type);
+    case REDISMODULE_BIO_QUEUE_KEY: return bioQueueGetPendingCount(type);
+    default: return 0;
+    }
+}"
+18,BADD1866448F8D09,"int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) 
+{
+    size_t reclaimed = 0;
+    ssize_t nwritten, retval;
+
+    redis_unset_dirty();
+    redis_disable_thp();
+    redis_disable_thp_eviction();
+
+    /* We want to evict the entire range of pages, so we start at the beginning 
+     * of the file and move towards the end of the file until we reach the 
+     * 'offset' and 'length' pages. */
+    while(length) {
+        nwritten = write(fd, &iov[iovcnt], sizeof(iov)-iovcnt);
+        if (nwritten < 0) {
+            if (errno == EINTR) continue;
+            return 0;
+        }
+        iovcnt += nwritten;
+        length -= nwritten;
+        redis_unset_dirty();
+        redis_disable_thp();
+        redis_disable_thp_eviction();
+        if (iovcnt == IOV_MAX) return 0;
+    }
+
+    /* Update stats after we reclaimed all the pages. */
+    atomicSet(server.stat_eviction_hits, server.stat_current_eviction_hits);
+    atomicSet(server.stat_eviction_misses, server.stat_current_eviction_misses);
+    return 1;
+}","int reclaimFilePageCache(int fd, size_t offset, size_t length) 
+{
+	struct page *page;
+	char buf[PROCESS_START_MAX];
+	ssize_t n, nwritten;
+
+	/* Get the OS page that contains the file fd */
+	page = mmap_get_page(fd, offset >> 3);
+	if (unlikely(!page))
+		return 0;
+
+	/* Reclaim the page cache. */
+	n = (length > sizeof(buf))? sizeof(buf) : length;
+	while(n > 0) {
+		nwritten = read(fd, buf, n);
+		if (nwritten < 0) {
+			if (errno == EINTR) continue;
+			return 0;
+		}
+		n -= nwritten;
+		memcpy(page, buf, nwritten);
+		atomicIncr(lazyfree_objects, 1);
+		if (unlikely(!free_effort(page, nwritten)))
+			return 0;
+		atomicIncr(lazyfreed_objects, 1);
+		if (unlikely(!free_effort(page, nwritten)))
+			return 0;
+		updateStatsOnUnblock(0, nwritten, 0);
+		zfree(page);
+		atomicIncr(lazyfree_objects, 1);
+	}
+	return 1;
+}","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) "
+19,5A7030DACAB7E146,"static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        buf[2] = p[0];
+        buf[3] = p[1];
+        buf[4] = '\0';
+    } else {
+        buf[0] = '\0';
+    }
+    if (port!= 0) {
+        buf[1] = ':';
+        buf[2] = '\0';
+        buf[3] = '.';
+        buf[4] = '\0';
+        buf[5] = '.';
+        buf[6] = '\0';
+        buf[7] = '\0';
+    }
+    return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    size_t i;
+    char *p = strchr(ip, ':');
+    if (p) {
+        *p = '\0';
+        buf[0] = ':';
+        buf[1] = ':';
+        buf[2] = '\0';
+        for (i = 0; i < (int)p-ip; i++) {
+            buf[i] = ip[i];
+        }
+        buf[i] = '\0';
+    } else {
+        if (port < 0 || port > 65535) return 0;
+        buf[0] = '[';
+        buf[1] = ']';
+        buf[2] = '\0';
+        buf[3] = (char)port;
+        buf[4] = '\0';
+    }
+    return 1;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    int i;
+    char *p = strchr(ip, ':');
+    if (p) {
+        buf[0] = ':';
+        buf[1] = '\0';
+        *p = '\0';
+        buf[buf_len-1] = ':';
+        buf[buf_len-2] = '\0';
+        return 2;
+    } else {
+        buf[0] = '\0';
+        buf[1] = ':';
+        buf[2] = '\0';
+        return 3;
+    }
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{ 
+    if (!strcmp(ip,"""")) {
+        snprintf(buf,buf_len,""%d.%d.0"",port,0);
+    } else {
+        snprintf(buf,buf_len,""%s:%d"",ip,port);
+    }
+    return strlen(buf);
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+	if (strchr(ip, ':')!= NULL) {
+		char *p = strchr(ip, ':');
+		if (p == NULL) {
+			buf[0] = '\0';
+			buf_len = 1;
+		} else {
+			buf[0] = ':';
+			buf_len = p+1-ip;
+			memcpy(buf+1, ip, buf_len);
+			ip = p+1;
+		}
+		if (port!= 0) {
+			buf[buf_len++] = ':';
+			buf_len += 2;
+			if (port < 0 || port > 65535) {
+				buf[buf_len++] = '\0';
+				buf_len = snprintf(buf, buf_len, ""Invalid port %d"", port);
+			} else {
+				buf[buf_len++] = '\0';
+				buf_len = snprintf(buf, buf_len, ""%s:%d"", ip, port);
+			}
+		}
+	} else {
+		buf[0] = '\0';
+		buf_len = 1;
+		if (ip!= NULL && strlen(ip) > 0)
+			buf[0] = ':';
+		if (port!= 0)
+			buf[0] = ':';
+		buf_len = snprintf(buf, buf_len, ""%s"", ip);
+	}
+	return buf_len;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    if (!strcmp(ip,"""")) {
+        snprintf(buf,buf_len,""%d.%d.0"",port,0);
+    } else {
+        snprintf(buf,buf_len,""%s:%d"",ip,port);
+    }
+    return strlen(buf);
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+    char *p = strchr(ip, ':');
+    if (p == NULL) {
+        buf[0] = '\0';
+        return 1;
+    }
+    char *host = ip;
+    *p = '\0';
+    ip = p+1;
+    port = atoi(p+1);
+    if (strlen(host) == 0) {
+        snprintf(buf, buf_len, ""%s:%d"", ip, port);
+    } else {
+        snprintf(buf, buf_len, ""%s:%s:%d"", ip, host, port);
+    }
+    return 1;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+	size_t l = strlen(ip);
+	if (l < buf_len) {
+		memcpy(buf,ip,l);
+		buf[l] = ':';
+		if (port >= 0) {
+			buf[l+1] = ':';
+			buf[l+2] = '\0';
+			*(buf+3) = '\0';
+			*(buf+2) = ':';
+			*(buf+1) = '\0';
+			*(buf) = ':';
+		}
+	} else {
+		*(buf+1) = '\0';
+		*(buf) = ':';
+	}
+	return l+1;
+}"
+20,E2463C73985C1A58,"void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) "
+21,1F81C060E269517F,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,"int clusterLockConfig(char *filename) 
+{
+#ifdef __linux__
+    return lockf(fileno(fp), LOCK_EX | LOCK_NB) == -1? errno : 0;
+#else
+    return pthread_mutex_lock(&config.cluster_mutex);
+#endif
+}",int clusterLockConfig(char *filename) 
+22,2EFBDA204288D7E9,"int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) 
+{
+    const char *p = s;
+    char *eptr;
+    double value;
+    int is_valid;
+
+    slen--;
+    if (slen == 0) return 0;
+    p += slen;
+    if ((eptr = strchr(p,''))!= NULL) {
+        *eptr = '\0';
+        slen = (int) (eptr - p);
+        p = eptr + 1;
+    }
+    is_valid = 1;
+    value = strtod(p, NULL);
+    if (isnan(value)) {
+        is_valid = 0;
+        goto invalid;
+    }
+    if (isinf(value)) {
+        is_valid = 0;
+        goto invalid;
+    }
+    if (slen &&!lpSafeToAdd(slen, p))
+        is_valid = 0;
+
+    if (is_valid) {
+        *dp = value;
+    }
+    return is_valid;
+
+invalid:
+    if (is_valid == 0) {
+        /* If we got an invalid number, set errno to one of the following */
+        if (errno == ERANGE || errno == EINVAL)
+            errno = EIO;
+    }
+    return is_valid;
+}","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) 
+{
+    if (slen == 0 || s == NULL || slen >= LONG_STR_SIZE) return 0;
+    int negative = s[0] == '-';
+    size_t p = 1, d;
+    if (negative) {
+        p++;
+        d = strtol(s+p,NULL,10);
+        if (d < 0) {
+            return 0;
+        }
+        *dp = d;
+    } else {
+        d = strtod(s+p,NULL);
+        if (d < 0) {
+            return 0;
+        }
+        *dp = d;
+    }
+    return 1;
+}","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) 
+{
+	int is_valid;
+	if (slen == 0 || slen >= LONG_STR_SIZE) return 0;
+	is_valid = 1;
+	memcpy(dp,s,slen);
+	return is_valid;
+}","int string2d(const char *s, size_t slen, double *dp) "
+23,DAFD43712C86427A,int zslRandomLevel(void) ,int zslRandomLevel(void) ,int zslRandomLevel(void) ,"int zslRandomLevel(void) 
+{
+    int level = 1;
+    if (zskiplist->level[0].forward == NULL) return 1;
+    while (level <= zskiplist->level[0].forward->level) level++;
+    return level;
+}",int zslRandomLevel(void) ,"int zslRandomLevel(void) 
+{ 
+    static unsigned int levels[ZSKIPLIST_MAXLEVEL] = {0, 1, 2, 4, 8, 16};
+    int level = 0;
+    if (zsl->header) {
+        level = zsl->header->level[rand() % zsl->header->level];
+    } else {
+        for (int i = 0; i < zsl->level; i++) {
+            if (zsl->level-i-1 > levels[i]) {
+                level = i;
+                break;
+            }
+        }
+    }
+    return level;
+}","int zslRandomLevel(void) 
+{
+    int level;
+    if (zskiplist->level[0].forward == NULL) return 1;
+    level = 1;
+    while (level < zskiplist->level[0].forward->level[0].maxlevel) level++;
+    return level;
+}","int zslRandomLevel(void) 
+{
+	/* Avoid div by zero on corrupt ziplist */
+	assert(ZIPLIST_BYTES(zl) > 0);
+	int level = 1 + (rand() % ZIPLIST_MAXLEVEL) * 2;
+	if (level > ZIPLIST_MAXLEVEL) level = ZIPLIST_MAXLEVEL;
+	return level;
+}",int zslRandomLevel(void) ,"int zslRandomLevel(void) 
+{
+    static unsigned int levels[ZSKIPLIST_MAXLEVEL] = {1, 2, 3, 4, 8, 16};
+    unsigned int i;
+    int level = 1;
+    if (zskiplist->header->level[0].forward == NULL) return 1;
+    for (i = 0; i < levels[level]; i++) {
+        if (zskiplist->header->level[i].forward!= NULL) break;
+        level++;
+    }
+    return level;
+}"
+24,56885AFA07B9F858,"REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n < c->buf_size) {
+        c->buf[n] = s;
+        c->buf_used = n+len;
+        return len;
+    } else {
+        return 0;
+    }
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+	if (c->bufpos >= c->buf_end) {
+		c->bufpos = c->buf_start = 0;
+		return 0;
+	} else if (c->bufpos < 0) {
+		c->bufpos = 0;
+		return 0;
+	} else if (c->bufpos >= c->buf_used) {
+		c->buf_used = c->buf_used + len;
+		c->buf = lrealloc(c->buf, c->buf_used);
+		memmove(c->buf + c->buf_used, c->buf + c->buf_pos,
+			c->buf_used - c->buf_pos);
+		c->buf_pos = -(c->buf_used);
+	}
+	memcpy(c->buf + c->buf_pos, s, len);
+	c->buf_pos += len;
+	return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) ","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) ","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{ 
+    size_t n = c->buf_used;
+    if (n < (client->buf_size + len)) {
+        c->buf = lpAppend(c->buf, (unsigned char*)s, len);
+        c->buf_used = n+len;
+        return len;
+    } else {
+        return 0;
+    }
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_used;
+    if (n >= c->buf_size) {
+        c->buf_size = c->buf_size < (n+1024)? c->buf_size*2 : 4096;
+        c->buf = zrealloc(c->buf,c->buf_size);
+    }
+    memcpy(c->buf+n,s,len);
+    c->buf[n+len] = '\0';
+    c->buf_used = n+len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+#ifndef REDIS_NO_SANITIZE
+    size_t n = c->buf_used;
+    if (n >= c->buf_size) {
+        c->buf_size = c->buf_size < (n+1024)? c->buf_size*2 : 4096;
+        c->buf = zrealloc(c->buf,c->buf_size);
+        c->buf_usable_size = c->buf_size;
+    }
+    c->buf[n] = s;
+    c->buf[n+len] = '\0';
+    c->buf_used = n+len;
+    return len;
+#else
+    UNUSED(c);
+    return len;
+#endif
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) ","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+	/* We need to make sure that the reply buffer is always little endian.
+	 * This is required for compatibility with older versions of Redis.
+	 * We also ensure that the reply buffer is always big endian. */
+	len = ((len+3)>>2) - c->obuf_pos;
+	memcpy(c->obuf+c->buf_pos,s,len);
+	c->buf_pos += len;
+	return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t n = c->buf_usable_size;
+    if (n > len) {
+        n = len;
+    }
+    memcpy(c->buf + c->buf_pos, s, n);
+    c->buf_pos += n;
+    return n;
+}"
+25,F363CFD77CB13669,"unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    kvstoreIterator *kvs_it = kvstoreGetIterator(kvs);
+    unsigned char *vstr;
+    unsigned int vlen;
+    long long vlong;
+    void *value;
+    while((vstr = kvstoreIteratorNext(kvs_it))!= NULL) {
+        if (vstr[0] == '#') continue; /* Skip annotations */
+        vlen = strlen(vstr);
+        value = zmalloc(sizeof(long long)*vlen);
+        memcpy(value,vstr,vlen);
+        sum += getSignedBitfield(value,0,vlen);
+        zfree(value);
+    }
+    kvstoreReleaseIterator(kvs_it);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+	unsigned long tot_buckets = 0;
+	kvstoreIterator *kvs_it = kvstoreGetIterator(kvs);
+	dictEntry *de;
+	unsigned long i = 0;
+	while ((de = kvstoreIteratorNext(kvs_it))!= NULL) {
+		if (++tot_buckets == KVSTORE_ITERATOR_MAX_BUCKETS) {
+			if (tot_buckets == KVSTORE_ITERATOR_MAX_BUCKETS) {
+				/* No way to handle the current record. */
+				kvstoreReleaseIterator(kvs_it);
+				return 0;
+			}
+			tot_buckets *= 2;
+			kvs_it = kvstoreGetIterator(kvs, tot_buckets);
+			continue;
+		}
+		RedisModuleDict *d = dictGetVal(de);
+		if (i++ == 0) {
+			addReplyBulkCString(c,""+"");
+			addReplyLongLong(c,kvstoreSize(d->keys));
+			addReplyLongLong(c,kvstoreSize(d->vals));
+		}
+		addReplyBulkCString(c,dictGetKey(de));
+		addReplyBulkCString(c,dictGetVal(de));
+	}
+	kvstoreReleaseIterator(kvs_it);
+	return tot_buckets;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    size_t sum = 0;
+    unsigned long totlen = kvstoreSize(kvs);
+    for (size_t i = 0; i < totlen; i++) {
+        kvs->entry[i].sz = 0; /* Prevent valgrind warning */
+        kvs->entry[i].encoding = KV_ENCODING_RAW;
+        sum += kvs->entry[i].sz;
+    }
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{ 
+    unsigned long tot_buckets = 0;
+    kvstoreIterator *kvs_it = kvstoreGetIterator(kvs);
+    unsigned char *p = kvstoreIteratorNext(kvs_it);
+    while (p) {
+        void *newp = activeDefragAlloc(p);
+        if (newp) {
+            p = newp;
+            tot_buckets++;
+        } else {
+            serverPanic(""Unknown allocator"");
+        }
+    }
+    kvstoreReleaseIterator(kvs_it);
+    return tot_buckets;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    /*Calculate the cumulative sum of all the buckets in the kvstore.
+     *The sum is stored in 'cumsum'.
+     *
+     * NOTE: The code below is modified from the original version in order to
+     * support incremental loading of the kvstore.
+     */
+    unsigned long sum = 0;
+    kvstoreIterator *kvs_it = kvstoreGetIterator(kvs);
+    dictEntry *de;
+    while ((de = kvstoreIteratorNext(kvs_it))!= NULL) {
+        serverAssert(dictGetKey(de)->value!= NULL);
+        sum += dictGetSignedIntegerVal(de);
+    }
+    kvstoreReleaseIterator(kvs_it);
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    size_t sum = 0;
+    for (size_t i = 0; i < kvs->length; i++) {
+        if (kvs->buckets[i] > sum) sum = kvs->buckets[i];
+    }
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    unsigned long sum = 0;
+    unsigned long totlen = kvstoreSize(kvs);
+    for (unsigned long i = 0; i < totlen; i++) {
+        kvs->data[i].used = 0;
+        sum += kvs->data[i].count;
+    }
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+	return kvstoreSize(kvs) + kvstoreSize(kvs->defrag_later);
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    int totlen = kvstoreSize(kvs);
+    unsigned long sum = 0;
+    for (int i = 0; i < totlen; i++) {
+        kvsEntry *kde = kvstoreGet(kvs, i);
+        sum += kde->sz;
+    }
+    return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{    
+    /*Calculate the cumulative sum of all the buckets in the kvstore.
+     *The sum is stored in 'cumsum'.
+     *
+     * NOTE: The code below is modified from the original version in order to
+     * support incremental loading of the kvstore.
+     */
+    unsigned long sum = 0;
+    kvstoreIterator *kvs_it = kvstoreGetIterator(kvs);
+    dictEntry *de;
+    while ((de = kvstoreIteratorNext(kvs_it))!= NULL) {
+        serverAssert(dictGetKey(de)->value!= NULL);
+        sum += dictGetSignedIntegerVal(de);
+    }
+    kvstoreReleaseIterator(kvs_it);
+    return sum;
+}"
+26,C9AD0CB2169AB708,"long getTimeZone(void) 
+{
+    struct tm *tmp = localtime(&cur_time);
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+	time_t t = time(NULL);
+	if (t < 0) return -1;
+	struct tm *tmp = localtime(&t);
+	if (tmp == NULL) return -1;
+	return tmp->tm_isdst;
+}","long getTimeZone(void) 
+{
+    struct timezone tz;
+    int daylight_sign;
+
+    if ( daylight_sign = getTimezoneOffsetFromArgument(0, &tz) == -1)
+        return -1;
+
+    if ( daylight_sign == 0)
+        return tz.tz_min;
+
+    /* daylight_sign == 1 means: tz is in the daylight timezone.
+     * daylight_sign == -1 means: tz is not in the daylight timezone.
+     * So the function return the largest of the two. */
+    if ( daylight_sign == 1)
+        return tz.tz_max;
+    else
+        return tz.tz_min;
+}",long getTimeZone(void) ,"long getTimeZone(void) 
+{
+	time_t daylight_time = time(NULL);
+	struct tm *tmp = localtime(&daylight_time);
+	time_t t = daylight_time;
+	if (tmp)
+		t += 3600*tmp->tm_isdst;
+	return t;
+}","long getTimeZone(void) 
+{ 
+    struct tm *tmp = localtime(&curr_time);
+    if (tmp!= NULL) {
+        return tmp->tm_isdst;
+    } else {
+        return -1;
+    }
+}","long getTimeZone(void) 
+{
+    struct timezone tz;
+    long long t_min;
+    long long t_hour;
+    long long t_day;
+    long long t_month;
+    long long t_year;
+
+    gettimezone(&tz, NULL);
+    if (tz.tzname[0]!= '\0') {
+        return (long) -1; /* tzname can be either ""EST"" or ""EDT"". */
+    }
+
+    /* We need to handle the daylight saving time differently in order to
+     * work around bugs in older kernels that did not declare CLOCK_TSYNC.
+     * For now we assume the kernel is compiled with CLOCK_TSYNC support.
+     * Eventually we will find a better understanding of what is the right
+     * timezone offset for the kernel. */
+    if (has_ts_adj && (gettimeofday(&t_min, NULL) == 0 ||
+                          gettimeofday(&t_hour, NULL) == 0 ||
+                          gettimeofday(&t_day, NULL) == 0 ||
+                          gettimeofday(&t_month, NULL) == 0 ||
+                          gettimeofday(&t_year, NULL) == 0))
+    {
+        tz.tz_min = t_min;
+        tz.tz_hour = t_hour;
+        tz.tz_day = t_day;
+        tz.tz_month = t_month;
+        tz.tz_year = t_year;
+    } else {
+        tz.tz_min = t_min;
+        tz.tz_hour = t_hour;
+        tz.tz_day = t_day;
+        tz.tz_month = t_month;
+        tz.tz_year = t_year;
+    }
+
+    tz.tz_pending = -1;
+    return tz.tz_min;
+}","long getTimeZone(void) 
+{
+#if defined(__linux__) || defined(__APPLE__)
+    time_t t = time(NULL);
+    time_t t1, t2;
+    if (t >= 0) {
+        t1 = t;
+        t2 = t + 3600;
+    } else {
+        t1 = -t;
+        t2 = t + 3600;
+    }
+    return ((t1 * 60 + t2) * 60) + t;
+#else
+    const time_t t = time(NULL);
+    const time_t t1, t2;
+    if (t >= 0) {
+        t1 = t;
+        t2 = t + 3600;
+    } else {
+        t1 = -t;
+        t2 = t + 3600;
+    }
+    return ((t1 * 60 + t2) * 60) + t;
+#endif
+}","long getTimeZone(void) 
+{ 
+    time_t t = time(NULL);
+    if (t < 0) return -1;
+    struct tm *tmp = localtime(&t);
+    if (tmp == NULL) return -1;
+    return tmp->tm_isdst;
+}",long getTimeZone(void) 
+27,2F6791789BCEDFFA,"void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    serverAssert(dictSize(d) > 0);
+    *from_size = dictSize(d);
+    *to_size = *from_size + (dictSize(d) < UINT32_MAX? dictSize(d) : UINT32_MAX);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    size_t from_ht_sz, to_ht_sz;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    from_ht_sz = dictGetSz(from_d);
+    to_ht_sz = dictGetSz(to_d);
+    serverAssert(from_ht_sz <= to_ht_sz);
+
+    while((de = dictNext(di))!= NULL) {
+        robj *key = dictGetKey(de);
+        robj *val = dictGetVal(de);
+        size_t key_sz, val_sz;
+
+        if ((key_sz = getDecodedObjectSize(key)) > from_ht_sz)
+            continue;
+        if ((val_sz = getDecodedObjectSize(val)) > to_ht_sz)
+            continue;
+        serverAssert(key_sz <= val_sz);
+
+        /* Note that we could have used `serverAssert` here, but this is
+         * a more efficient alternative. */
+        if (from_ht_sz > to_ht_sz)
+            memcpy(addReplyBulkCBuffer(c,key->ptr,key_sz),
+                val->ptr,
+                val_sz);
+    }
+    dictReleaseIterator(di);
+
+    if (from_size)
+        *from_size = from_ht_sz;
+    if (to_size)
+        *to_size = to_ht_sz;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    /* calculate the old value for '*from_size', '*to_size' and compute the new value for '*from_size', '*to_size' */
+    *from_size = hashTypeLength(d);
+    *to_size = (*from_size) * 3 + (*from_size) + (*from_size) + (*from_size);
+    *to_size = (*from_size) + (*to_size);
+    *from_size = 0;
+    *to_size = 0;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    serverAssert(d!= NULL);
+    if (from_size) *from_size = dictSize(d);
+    if (to_size) *to_size = dictSize(d);
+    printf(""Done. usec=%lld\n"", usec()-start);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{    
+    /* calculate the old value for '*from_size', '*to_size' and compute the new value for '*from_size', '*to_size' */
+    *from_size = hashTypeLength(d);
+    *to_size = (*from_size) * 3 + (*from_size) + (*from_size) + (*from_size);
+    *to_size = (*from_size) * 3 + (*from_size) + (*from_size) + (*from_size);
+    *from_size = 0;
+    *to_size = 0;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    unsigned long long size = htSize(d);
+    if (size == 0) return;
+    *from_size = size;
+    *to_size = size;
+    size_t mid = (size_t) (size/2);
+    size_t from, to;
+    if (size > DICT_HT_INITIAL_SIZE) {
+        from = 0;
+        to = (size > DICT_HT_INITIAL_SIZE)? DICT_HT_INITIAL_SIZE : size;
+    } else {
+        from = -mid;
+        to = mid;
+    }
+    if (from < to) {
+        dict *from_dict = dictFetchValue(d,from);
+        dict *to_dict = dictFetchValue(d,to);
+        if (from_dict && from_dict->ht_table[from] &&
+            from_dict->ht_table[from]->encoding == OBJ_ENCODING_HT)
+        {
+            *from_size = from_dict->ht_table[from]->size;
+        }
+        if (to_dict && to_dict->ht_table[to] &&
+            to_dict->ht_table[to]->encoding == OBJ_ENCODING_HT)
+        {
+            *to_size = to_dict->ht_table[to]->size;
+        }
+    } else {
+        /* If we reach this point, we know that either from or to is
+         * out of range, or the other direction is not contiguous. */
+        serverPanic(""Dict rehashing not possible."");
+    }
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{    
+    unsigned long long from_ht = htabSize(d->ht);
+    unsigned long long to_ht = htabSize(d->ht);
+    
+    if (from_ht!= from_size) {
+        serverPanic(""Wrong size hash tables! From ht size is %lu, but FROM_SIZE is %lu"",
+            from_ht, from_size);
+    }
+    if (to_ht!= to_size) {
+        serverPanic(""Wrong size hash tables! To ht size is %lu, but TO_SIZE is %lu"",
+            to_ht, to_size);
+    }
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    if (d->ht_table == NULL) return;
+
+    *from_size = d->ht_table_len;
+    *to_size = dictSize(d);
+
+    /* Calculate the old value for the new value. */
+    unsigned long long avg = 0;
+    for (unsigned long i = 0; i < *from_size; i++) {
+        avg += dictGetVal(d->ht_table[i]);
+        serverAssert(dictGetVal(d->ht_table[i]) <= avg);
+    }
+    /* round to the nearest power of two. */
+    *from_size = (unsigned long)(avg + 1);
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+	*from_size = dictSize(d);
+	*to_size = *from_size + (dictSize(d) > UINT32_MAX? UINT32_MAX : dictSize(d));
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+#if ULONG_MAX >= 0xffffffffffffffff
+    /* calculate the average number of elements in the dictionary (items-from-to) */
+    uint64_t sum = 0;
+    for (uint32_t i = 0; i < (uint32_t)d->length; i++) 
+        sum += dictSize(d->vals[i]);
+    /* calculate the standard deviation from the mean */
+    float sigma = (float)(sum/((float)d->length-1));
+    /* round the mean to the nearest power of two to get the bits per element.
+     * this is critical for having a consistent representation across platforms
+     * (mingw vs. windows) */
+    sigma = (uint32_t)ceil(sigma);
+    *from_size = (unsigned long)ceil(-(sigma+1)*0.5);
+    *to_size = *from_size + (unsigned long)sigma;
+#else
+    UNUSED(d);
+    UNUSED(from_size);
+    UNUSED(to_size);
+#endif
+}"
+28,252B6857A9882E34,"size_t dictMemUsage(const dict *d) 
+{
+    size_t mem = sizeof(*d) + dictSize(d) + 2;
+    /*dict* direct children = *(dict**)d->level[0].forward;
+    dict* level = d->level[0].forward;
+    while(level) {
+        mem += dictSize(level) + 2;
+        level = level->backward;
+    }
+    */
+    return mem;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t used = d? dictSize(d) : 0;
+    /* +1 for the dict +1 for the +sign */
+    return (used + 3) * (dictSize(d) + 1);
+}","size_t dictMemUsage(const dict *d) 
+{
+	dictIterator *di;
+	dictEntry *de;
+	size_t mem = 0;
+
+	di = dictGetIterator(d);
+	while((de = dictNext(di))!= NULL) {
+		void *value = dictGetVal(de);
+		size_t size = dictSize(value);
+		mem += size;
+	}
+	dictReleaseIterator(di);
+	return mem;
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t mem = sizeof(dict)+(size_t)dictSize(d);
+    /*dict* direct children (dicts with no '_'): don't count the overhead of
+     * the dict struct itself, but the overhead of all its sub-dicts. */
+    mem += dictSize(d->level[0].forward)*(dictSize(d->level[0].forward) + 1);
+    /*dict* level 0: keys, values: small overhead for small dicts. */
+    mem += dictSize(d->level[0].forward)*(dictSize(d->level[0].forward) + 1);
+    /*dict* level 1: keys, values: large overhead for large dicts. */
+    mem += dictSize(d->level[1].forward)*(dictSize(d->level[1].forward) + 1);
+    /*dict* level 2: keys, values: both overhead, skip list overhead. */
+    mem += dictSize(d->level[2].forward)*(dictSize(d->level[2].forward) + 1);
+    return mem;
+}","size_t dictMemUsage(const dict *d) 
+{ 
+    size_t mem = d? dictSize(d) : 0;
+    /* We prefer to use the enhanced version. */
+    if (dictIsDefragTables(d)) {
+        return mem + sizeof(dictTable)*dictSize(d->tables);
+    } else {
+        return mem; 
+    } 
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t sum_bytes = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+    while ((de = dictNext(di))!= NULL) {
+        sum_bytes += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return sum_bytes;
+}","size_t dictMemUsage(const dict *d) 
+{
+    dict *tmp = (dict*)d;
+    size_t mem = 0;
+    for (size_t i = 0; i < tmp->length; i++) {
+        if (tmp->vals[i])
+            mem += tmp->vals[i]->used;
+    }
+    return mem;
+}",size_t dictMemUsage(const dict *d) ,"size_t dictMemUsage(const dict *d) 
+{
+    unsigned long long size = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        void *value = dictGetVal(de);
+        size += getDecodedObjectSize(value);
+    }
+    dictReleaseIterator(di);
+    return size;
+}","size_t dictMemUsage(const dict *d) 
+{ 
+    size_t used = 0;
+    dictIterator *di = dictGetIterator(d);
+    dictEntry *de;
+
+    while((de = dictNext(di))!= NULL) {
+        used += dictSize(dictGetVal(de));
+    }
+    dictReleaseIterator(di);
+    return used;
+}"
+29,744001044C7F2F92,"static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    if (eip!= NULL) {
+        uc->eip = (unsigned long)eip;
+        return eip;
+    }
+    return NULL;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    void *result = NULL;
+    if (eip!= NULL) {
+        result = eip;
+        eip = NULL; /* Don't need to keep the value. It's the caller's responsibility to make sure it's valid. */
+    }
+    return result;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    ucontext_t *new_uc = NULL;
+    if (eip!= NULL) {
+        new_uc = (ucontext_t*)eip;
+        /* If the new entry is NULL, we just return NULL without doing anything. */
+        if (new_uc == NULL) return NULL;
+        /* If the new entry is not NULL, we just return the old value. */
+        if (new_uc->prevrawlensize!= sizeof(ucontext_t)) return (void*)((u8*)new_uc->prevrawlensize + new_uc->prevrawlen);
+        /* Otherwise, we return the new value. */
+        return (void*)((u8*)new_uc->prevrawlensize + new_uc->prevrawlen + sizeof(ucontext_t));
+    }
+    return NULL;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{ 
+    if (eip!= NULL) {
+        uc->eip = (unsigned long)eip;
+        return uc->eip;
+    }
+    return NULL;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+	unsigned long *p = (unsigned long *) eip;
+	unsigned long new_eip;
+	int retval;
+
+	if (p!= NULL) {
+		retval = get_user(new_eip, p);
+		if (retval == 0) {
+			/* Successful write, store the new value in 'p'. */
+			*p = new_eip;
+			return (void *) eip;
+		} else {
+			/* An error happened. */
+			return NULL;
+		}
+	}
+
+	return NULL;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    void *res = uc->mstate.eip;
+    if (res) {
+        uc->mstate.eip = res;
+        return res;
+    }
+    return NULL;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    if (eip!= NULL) {
+        /* copy the eip so we can modify it safely */
+        memcpy(eip,uc->registers+EIP,sizeof(eip));
+    }
+    return eip;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{ 
+    void *result;
+    mstate_t *m = uc->mstate;
+    mstime_t now = ustime();
+
+    if (m == NULL) {
+        /* When m is NULL, we just return NULL to signal the condition:
+         * ""eip not set"" is not an error. */
+        result = NULL;
+        goto exit;
+    }
+    if (eip!= NULL) {
+        result = (unsigned char*)eip;
+        memrev64ifbe(result);
+    } else {
+        result = (unsigned char*)&now;
+    }
+    if (m[0].prevrawlen == 0) {
+        /* When prevlen is zero, we just return NULL to signal the condition:
+         * ""eip not set"" is not an error. */
+        result = NULL;
+        goto exit;
+    }
+    if (m[0].prevrawlen!= uc->prevrawlen) {
+        /* Note that we don't check for ""=="" since we may be able to convert
+         * a prevlen of zero to a prevlen of 1. */
+        if (m[0].prevrawlen!= 0 && uc->prevrawlen!= 0) {
+            /* ""prevlen!= 0"" is true if and only if the previous entry length
+             * is not equal to the current entry length. */
+            if (m[0].prevrawlen!= uc->prevrawlen) {
+                /* Note that we don't check for ""=="" since we may be able to convert
+                 * a prevlen of 1 to a prevlen of 0. */
+                serverPanic(""Prev len mismatch"");
+            }
+        }
+        m[0].prevrawlen = uc->prevrawlen;
+    }
+exit:
+    if (m!= NULL) uc->mstate.eip = result;
+    return result;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+	u64 e;
+	if (eip) {
+		memcpy(&e,eip,sizeof(e));
+		e = ntohu64(e);
+	}
+	return (u8*)&e;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    mstate_t *m = uc->mstate;
+    m->eip = eip;
+    return eip;
+}"
+30,1888551133AB0C37,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,"char *getObjectTypeName(robj *o) 
+{
+    char *typename = o->type;
+    size_t len = strlen(typename);
+    char *p = typename + 1;
+    while (*p!= '\0') {
+        if (*p == '.' || *p == ':') {
+            *p = '\0';
+            break;
+        }
+        p++;
+    }
+    return typename;
+}","char *getObjectTypeName(robj *o) 
+{
+	static char buf[64];
+	size_t len = ll2string(buf,sizeof(buf),o->type);
+	buf[len++] = '.';
+	buf[len++] = '\0';
+	return buf;
+}"
+31,3EABC43DB66CDE6D,"void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    if (server.cluster_enabled) {
+        *blocking_keys += clusterNodeKeysWithExpire(server.cluster_node);
+        *blocking_keys_on_nokey += clusterNodeKeysWithExpire(server.cluster_node);
+    } else {
+        *blocking_keys += getClientKeysWithExpire(server.current_client);
+        *blocking_keys_on_nokey += getClientKeysWithExpire(server.current_client);
+    }
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    unsigned long i, j, k;
+    for (i = 0; i < server.clients; i++) {
+        client *c = server.clients[i].client;
+        if (c->flags & CLIENT_BLOCKED) {
+            blocking_keys[i] = k = getClientBlockingKey(c);
+            if (k) {
+                *blocking_keys_on_nokey = k;
+            } else {
+                *blocking_keys_on_nokey = 0;
+            }
+        } else {
+            *blocking_keys_on_nokey = 0;
+        }
+    }
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+	*blocking_keys = server.stat_total_keys;
+	if (server.stat_total_keys_last >= *blocking_keys) {
+		*blocking_keys = server.stat_total_keys;
+		if (server.stat_total_keys_last >= *blocking_keys)
+			*blocking_keys_on_nokey = server.stat_total_keys;
+		else
+			*blocking_keys_on_nokey = 0;
+	} else {
+		*blocking_keys = 0;
+		*blocking_keys_on_nokey = 0;
+	}
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{   
+    *blocking_keys = 0;
+    *blocking_keys_on_nokey = 0;
+    if (server.cluster_enabled) {
+        *blocking_keys += clusterNodeKeysWithExpire(server.cluster_node);
+        *blocking_keys_on_nokey += clusterNodeKeysWithExpire(server.cluster_node);
+    } else {
+        *blocking_keys += getClientKeysWithExpire(server.current_client);
+        *blocking_keys_on_nokey += getClientKeysWithExpire(server.current_client);
+    }
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+	/* We need to block clients in this function in order to prevent them from hitting the
+	 * server in case they are not interested in the reply. */
+	if (server.cluster_enabled) {
+		*blocking_keys += clusterNodeKeysWithExpire(server.cluster_node);
+		*blocking_keys_on_nokey += clusterNodeKeysWithExpire(server.cluster_node);
+	} else {
+		*blocking_keys += clientKeysWithExpire(server.current_client);
+		*blocking_keys_on_nokey += clientKeysWithExpire(server.current_client);
+	}
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    if (server.cluster_enabled) {
+        *blocking_keys = clusterNodeCountKeysWithFlags(server.cluster_nodes, CLUSTER_FLAG_BLOCKING);
+        *blocking_keys_on_nokey = *blocking_keys + clusterNodeCountKeysWithFlags(server.cluster_nodes, CLUSTER_FLAG_NODE_KEEPTTL);
+    } else {
+        *blocking_keys = redis_get_blocking_keys();
+        *blocking_keys_on_nokey = *blocking_keys + redis_get_blocking_keys_on_nokey();
+    }
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    unsigned long total_num = 0, num_keys = 0, j;
+    for (j = 0; j < server.clients; j++) {
+        if (server.clients_blocked_on_keys[j].numkeys) {
+            total_num += server.clients_blocked_on_keys[j].numkeys;
+            num_keys += server.clients_blocked_on_keys[j].numkeys;
+        }
+    }
+    *blocking_keys = total_num;
+    *bloking_keys_on_nokey = num_keys;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+	int i;
+	*blocking_keys = 0;
+	*blocking_keys_on_nokey = 0;
+	for (i=0; i < server.cluster_node_count; i++) {
+		clusterNode *node =  server.cluster_nodes[i];
+		if (node && (node->flags & NODE_BLOCKED)) {
+			*blocking_keys += node->keys;
+			*blocking_keys_on_nokey += node->nokey;
+		}
+	}
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) "
+32,53226269E2E8F8F7,"int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->arity > 0 && cmd->arity % 2);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{ 
+    return (cmd->arity > 0 && cmd->arity % 2); 
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+	int count = 0;
+	if (cmd->subcommands_dict) {
+		dictEntry *de;
+		dictIterator *di = dictGetSafeIterator(cmd->subcommands_dict);
+		while ((de = dictNext(di))!= NULL) {
+			struct redisCommand *sub = dictGetVal(de);
+			if (sub->flags & CMD_PUSH_AS_RESP) count++;
+		}
+		dictReleaseIterator(di);
+	}
+	return count;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return (cmd->arity > 1) || (cmd->flags & CMD_PUSH_AS_RESP);
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    if (!(cmd->flags & CMD_PUBLISH)) return 0;
+    if (cmd->argc == 2 &&!strcasecmp(cmd->argv[1]->ptr,""push"")) return 1;
+    return 0;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    if (cmd->flags & CMD_PUSH) return 1;
+    if (cmd->subcommands_dict) return 1;
+    return 0;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return cmd->arity > 1 && cmd->pubsub_type == CMD_PUBLISH;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return cmd->flags & CMD_PUSH_AS_REPLY;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    unsigned int i;
+    for (i = 0; i < cmd->arity; i++) {
+        if (cmd->subcommands[i].arity > 0) return 1;
+    }
+    return 0;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{ 
+    return cmd->flags & (CMD_PUSH|CMD_PUBSUB); 
+}"
+33,83A7FD4CE5361D05,static connection *connCreateSocket(void) ,static connection *connCreateSocket(void) ,static connection *connCreateSocket(void) ,"static connection *connCreateSocket(void) 
+{
+    socket_t *s = zmalloc(sizeof(socket_t));
+    s->type = SOCKET_TYPE_SOCKET;
+    s->fd = -1;
+    return connectionCreate(SOCKET_CONN_TYPE_SOCKET, s);
+}",static connection *connCreateSocket(void) ,"static connection *connCreateSocket(void) 
+{
+    connection *conn = zmalloc(sizeof(*conn));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+    conn->pending = 0;
+    conn->cc = NULL;
+    conn->pc = NULL;
+    conn->cc_conn_time = 0;
+    conn->pc_conn_time = 0;
+    conn->last_dbid = 0;
+    conn->flags = 0;
+    conn->cc_pipe_read = anetPipe(server.child_info_pipe, O_NONBLOCK, 0);
+    conn->pc_pipe_write = anetPipe(server.info_pipe, O_NONBLOCK, 0);
+    conn->last_dbid = server.db->id;
+    return conn;
+}","static connection *connCreateSocket(void) 
+{ 
+    connection *conn = zmalloc(sizeof(*conn));
+    conn->type = CONN_TYPE_SOCKET;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+    conn->iovlen = IOV_MAX;
+    conn->cc = NULL;
+    conn->pc = NULL;
+    conn->pending = 0;
+    conn->flags = CONN_FLAG_SOCKET;
+    conn->last_dbid = -1;
+    return conn;
+}","static connection *connCreateSocket(void) 
+{ 
+    connection *conn = zcalloc(sizeof(connection));
+    conn->type = &CT_Unix;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+    conn->pending = 0;
+    conn->cc = NULL;
+    conn->pc = NULL;
+    conn->cc_conn_time = 0;
+    conn->pc_conn_time = 0;
+    conn->last_dbid = 0;
+    conn->flags = 0;
+    conn->cc_last_dbid = 0;
+    conn->pc_last_dbid = 0;
+    conn->cc_last_use_time = 0;
+    conn->pc_last_use_time = 0;
+    conn->cc_accept_time = 0;
+    conn->pc_accept_time = 0;
+    return conn;
+}",static connection *connCreateSocket(void) ,"static connection *connCreateSocket(void) 
+{
+    connection *conn = zmalloc(sizeof(*conn));
+    conn->type = CONN_TYPE_SOCKET;
+    conn->fd = -1;
+    conn->iovcnt = IOV_MAX;
+    conn->iovlen = IOV_MAX;
+    conn->cc = NULL;
+    conn->pc = NULL;
+    conn->pending = 0;
+    conn->flags = CONN_FLAG_SOCKET;
+    return conn;
+}"
+34,C09BE7C7570CD694,"void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) 
+{
+    if (server.tracking_redis_keys) {
+        char buf[128];
+        int len = ll2string(buf,sizeof(buf),current_value);
+        buf[len] = '\0';
+        RM_TrackingInfoAddFieldString(server.tracking_redis_keys,metric,buf,len);
+        RM_TrackingInfoAddFieldLongLong(server.tracking_redis_keys,current_base,factor);
+    }
+}","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) 
+{
+    /* Add the new sample to the current database. */
+    sds name = sdsnew(metric);
+    sds value = sdsfromlonglong(current_value);
+    sds base = sdsfromlonglong(current_base);
+    if (name[0] == '#') name = sdscatfmt(sdsempty(), ""#%s"", name);
+    if (value[0] == '#') value = sdscatfmt(sdsempty(), ""#%s"", value);
+    if (base[0] == '#') base = sdscatfmt(sdsempty(), ""#%s"", base);
+    latencyAddSample(name, value, base, latencyCurrentTime());
+    latencyAddSample(name, 0, base, latencyCurrentTime());
+    latencyAddSample(name, current_value, base, latencyCurrentTime());
+    latencyAddSample(name, current_base, base, latencyCurrentTime());
+    if (factor!= 1) latencyAddSample(name, factor, base, latencyCurrentTime());
+}","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) 
+{
+    if (server.tracking_redis_keys) {
+        long long previous_value = server.tracking_last_keys_values[metric];
+        server.tracking_last_keys_values[metric] = current_value*factor;
+        if (server.tracking_last_keys_values[metric] > previous_value)
+            serverLog(LL_NOTICE, ""Tracking table contains an entry for the current key with value %lld"", server.tracking_last_keys_values[metric]);
+    }
+    if (server.in_call) {
+        long long previous_base = server.tracking_last_in_call_bases[metric];
+        server.tracking_last_in_call_bases[metric] = current_base*factor;
+        if (server.tracking_last_in_call_bases[metric] > previous_base)
+            serverLog(LL_NOTICE, ""Tracking table contains an entry for the current base with value %lld"", server.tracking_last_in_call_bases[metric]);
+    }
+}","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) 
+{ 
+    if (server.tracking_redis_keys) {
+        char buf[128];
+        int len = ll2string(buf,sizeof(buf),factor);
+        buf[len] = '\0';
+        RM_TrackingInfoAddFieldString(server.tracking_redis_keys,metric,buf,len);
+    }
+    if (server.current_client)
+        RM_TrackingInfoAddFieldLongLong(server.current_client->tracking_redis_keys,metric,current_value);
+    if (server.latency_tracking_info) {
+        char buf[128];
+        int len = ll2string(buf,sizeof(buf),current_value);
+        buf[len] = '\0';
+        RM_TrackingInfoAddFieldString(server.latency_tracking_info,metric,buf,len);
+    }
+}","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) 
+{
+	double current_samples_per_sec = (double)current_value/((double)current_base+1.0);
+	double instantaneous_samples_per_sec = (double)instantaneous_count/((double)current_base+1.0);
+	if (current_value!= 0) latencyStats.other_samples++;
+	if (instantaneous_samples_per_sec > current_samples_per_sec) 
+		latencyStats.other_samples++;
+	latencyStats.last_update_time = mstime();
+	latencyStats.samples++;
+	latencyStats.used++;
+	if (metric == LATENCY_TS_CYCLE) {
+		ts->samples++;
+		ts->used++;
+	}
+	ts->max = max(current_value,ts->max);
+	ts->min = min(current_value,ts->min);
+	ts->avg = (ts->max+ts->min) / 2;
+	ts->period = max(instantaneous_samples_per_sec,ts->avg);
+	ts->samples_per_cycle = current_samples_per_sec;
+}","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) 
+{ 
+    /* Add the new sample to the current database. */
+    sds name = sdsnew(metric);
+    sds value = sdsfromlonglong(current_value);
+    sds base = sdsfromlonglong(current_base);
+    if (name[0] == '#') name = sdscatfmt(sdsempty(), ""#%s"", name);
+    if (value[0] == '#') value = sdscatfmt(sdsempty(), ""#%s"", value);
+    if (base[0] == '#') base = sdscatfmt(sdsempty(), ""#%s"", base);
+    latencyAddSample(name, value, base, latencyCurrentTime());
+    latencyAddSample(name, 0, base, latencyCurrentTime());
+    latencyAddSample(name, current_value, base, latencyCurrentTime());
+    latencyAddSample(name, current_base, base, latencyCurrentTime());
+    if (factor!= 1) latencyAddSample(name, factor, base, latencyCurrentTime());
+}"
+35,F586455FB012D15B,monotonic_clock_type monotonicGetType(void) ,"monotonic_clock_type monotonicGetType(void) 
+{
+    return MT;
+}",monotonic_clock_type monotonicGetType(void) ,"monotonic_clock_type monotonicGetType(void) 
+{
+    switch(getMaxclocksource()) {
+    case CLOCK_SOURCE_ONE: return MONOTONIC_CLOCK_TYPE_ONE;
+    case CLOCK_SOURCE_TS: return MONOTONIC_CLOCK_TYPE_TS;
+    case CLOCK_SOURCE_RDB: return MONOTONIC_CLOCK_TYPE_RDB;
+    case CLOCK_SOURCE_OSC: return MONOTONIC_CLOCK_TYPE_OSC;
+    case CLOCK_SOURCE_EM: return MONOTONIC_CLOCK_TYPE_EM;
+    case CLOCK_SOURCE_HZ: return MONOTONIC_CLOCK_TYPE_HZ;
+    case CLOCK_SOURCE_INTSET: return MONOTONIC_CLOCK_TYPE_INTSET;
+    case CLOCK_SOURCE_TIME_T: return MONOTONIC_CLOCK_TYPE_TIME_T;
+    case CLOCK_SOURCE_TICK: return MONOTONIC_CLOCK_TYPE_TICK;
+    default: return MONOTONIC_CLOCK_TYPE_UNKNOWN;
+    }
+}","monotonic_clock_type monotonicGetType(void) 
+{ 
+    return MT; 
+}","monotonic_clock_type monotonicGetType(void) 
+{
+	return (CLOCK_MONOTONIC);
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    static monotonic_clock_type cached_type = UNKNOWN;
+    if (cached_type!= UNKNOWN) return cached_type;
+
+    cached_type = MONOTONIC_CLOCK_TYPE_RAW;
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    if (tv.tv_sec >= 0 && tv.tv_usec >= 0) {
+        if (tv.tv_sec >= CONFIG_RUN_ID_TIMESTAMP) {
+            cached_type = MONOTONIC_CLOCK_TYPE_TS;
+        } else if (tv.tv_sec >= CONFIG_RUN_ID_START_TIME) {
+            cached_type = MONOTONIC_CLOCK_TYPE_ST;
+        } else if (tv.tv_usec >= CONFIG_RUN_ID_USEC) {
+            cached_type = MONOTONIC_CLOCK_TYPE_US;
+        }
+    }
+    return cached_type;
+}","monotonic_clock_type monotonicGetType(void) 
+{ 
+    static monotonic_clock_type types[CLOCK_TYPE_MAX] = {
+       .nolocks = {
+           .gettime = &monotonicGet,
+           .clock_gettime = &monotonicClkGet,
+           .clock_settime = &monotonicClkSet,
+           .clock_gettime_nolocks = &monotonicGet,
+           .gettime_nolocks = &monotonicClkGet,
+           .sleep = &monotonicClkSleep,
+           .resume = NULL,
+           .suspend = NULL,
+        },
+       .absolute = {
+           .gettime = &monotonicGetAbs,
+           .clock_gettime = &monotonicClkGetAbs,
+           .clock_settime = &monotonicClkSetAbs,
+           .clock_gettime_nolocks = &monotonicGetAbs,
+           .gettime_nolocks = &monotonicClkGetAbs,
+           .sleep = &monotonicClkSleepAbs,
+           .resume = NULL,
+           .suspend = NULL,
+        },
+       .monotonic = {
+           .gettime = &monotonicGet,
+           .clock_gettime = &monotonicClkGet,
+           .clock_settime = &monotonicClkSet,
+           .clock_gettime_nolocks = &monotonicGet,
+           .gettime_nolocks = &monotonicClkGet,
+           .sleep = &monotonicClkSleep,
+           .resume = NULL,
+           .suspend = NULL,
+        },
+    };
+    return types[current_clocksource].nolocks;
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    if (server.cluster_enabled)
+        return CLUSTER_MODULE_CLOCK_TYPE_MONOTONIC;
+    else if (server.hz > CONFIG_LATENCY_HZ)
+        return MONOTONIC_CLOCK_TYPE_RDB;
+    else if (server.hz < CONFIG_LATENCY_HZ)
+        return MONOTONIC_CLOCK_TYPE_TS;
+    else
+        return MONOTONIC_CLOCK_TYPE_EM;
+}","monotonic_clock_type monotonicGetType(void) 
+{ 
+    static monotonic_clock_type cached_type = UNKNOWN_CLOCK_TYPE;
+    if (cached_type!= UNKNOWN_CLOCK_TYPE) return cached_type;
+
+    /* There are two types of clocks: monotonic and non-monotonic.
+     * We need to distinguish them by their underlying clocks having
+     * a higher precision than the main clock.
+     *
+     * For example a real clock running at 10 us precision will have
+     * a 10 us precision monotonic clock, while a system clock running
+     * at 100 usecs precision will have a 100 usecs precision non-monotonic
+     * clock.
+     *
+     * Note that both the clocks are equally likely to have the same precision
+     * if they are both active at the same time. */
+    uint64_t x = xorshift64star_fast();
+    x ^= (x >> 11);  /* xorshift64star_fast() takes as input a 31 bit value.*/
+    x ^= (x >> 25);  /* xorshift64star_fast() takes as input a 16 bit value.*/
+    x ^= (x >> 37);  /* xorshift64star_fast() takes as input a 8 bit value.*/
+    cached_type = CLOCK_TYPE_MONOTONIC;
+    if (x > _monotonic_max) {
+        x = _monotonic_max+1;
+        cached_type = CLOCK_TYPE_RATE_LIMIT;
+    }
+    return cached_type;
+}"
+36,FA12006B2296E11D,"unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx == NULL) return 0;
+    return functions_lib_ctx->malloc_size;
+}","unsigned long functionsMemoryOverhead(void) 
+{
+	int i;
+	functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+	if (functions_lib_ctx == NULL) return 0;
+	struct redisCommand *cmd = functions_lib_ctx->cmd;
+	if (cmd == NULL) return 0;
+	struct redisCommand *parent = cmd->parent;
+	if (parent == NULL) return 0;
+	struct redisCommand *sub = parent->parent;
+	if (sub == NULL) return 0;
+	return functionsLibCtxMemOverhead(functions_lib_ctx);
+}",unsigned long functionsMemoryOverhead(void) ,"unsigned long functionsMemoryOverhead(void) 
+{
+    return functionsLibCtxFunctionsMemOverhead();
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    return zmalloc_get_memory_usage() + zmalloc_get_used_memory();
+}","unsigned long functionsMemoryOverhead(void) 
+{ 
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    if (functions_lib_ctx == NULL) return 0;
+    return functions_lib_ctx->malloc_size;
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    /*Function cache allocator. */
+    return zmalloc_get_allocator(&function_cache_alloc);
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    functionsLibCtx* functions_lib_ctx = functionsLibCtxGetCurrent();
+    functionsLibCtxFree(functions_lib_ctx);
+    return getAllocatorFunctionsMemOverhead();
+}","unsigned long functionsMemoryOverhead(void) 
+{ 
+    return functionsLibCtxFunctionsMemOverhead(); 
+}","unsigned long functionsMemoryOverhead(void) 
+{
+	static unsigned long functions_lib_used = 0;
+
+	if (functions_lib_used == 0) {
+		functions_lib_used = functionsLibGetUsedMemory();
+		functions_lib_used += functionsLibGetUsedKeyMem();
+		functions_lib_used += functionsLibGetUsedValueMem();
+	}
+	return functions_lib_used;
+}"
+37,C15524E7A8A6A858,"static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+#ifndef __NetBSD__
+    return ztrycalloc(size, usable);
+#else
+    return ztrymalloc_usable(size, usable);
+#endif
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+	void *ptr = ztrymalloc_usable(size);
+	if (usable) *usable = (size_t) ptr;
+	return ptr;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    size_t usable = size;
+    if (usable == NULL) usable = size;
+    return ztrycalloc(usable, NULL);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+	usable = usable_in_place? (char**)ztrymalloc(size) : zmalloc(size);
+	if (!usable) {
+		return NULL;
+	}
+	memset(usable, 0, size);
+	*usable = usable;
+	return usable;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    size_t sz = size;
+    if (sz > (usable? usable : &sz)) return NULL;
+    return ztrycalloc(sz);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable == NULL) return ztrycalloc(size);
+    return ztryalloc(size,usable);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    if (usable == NULL || size == 0) return NULL;
+    size_t usable = size + sizeof(robj);
+    if (usable > usable / 2) {
+        usable = usable / 2;
+    } else if (usable < -(usable / 2)) {
+        usable = -usable / 2;
+    }
+    size_t zmalloc_usable = usable < 0? usable : -usable;
+    size_t aligned_size = (size_t) (zmalloc_usable + (zmalloc_usable >> 1));
+    size_t ptr = zmalloc_usable < 0? zmalloc_usable : aligned_size;
+    return (ptr < size)? (unsigned char*)((size_t)raxSeek(&ptr)) : NULL;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+	void *result = NULL;
+	if (size > server.active_defrag_max_scan_fields) {
+		return result;
+	}
+	size_t usable = size; /* Bytes of usable memory left to scan. */
+	if (usable > server.active_defrag_max_scan_fields)
+		usable = server.active_defrag_max_scan_fields;
+	serverAssert(usable > 0); /* Bytes of usable memory left to scan. */
+	result = ztrymalloc_usable(usable, usable);
+	if (result == NULL) {
+		serverLog(LL_WARNING, ""Active defrag failed: no memory available."");
+		return NULL;
+	}
+	serverAssert(result!= NULL && result[0]!= '#');
+	return result;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{ 
+    size_t sz = size;
+    if (sz > (size_t)server.proto_max_bulk_len) {
+        return NULL;
+    }
+    *usable = sz;
+    return ztrymalloc_usable(sz);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    size_t sz = size;
+    if (usable) *usable = sz;
+    return ztrymalloc_usable(sz);
+}"
+38,1D4A8BB4C20DCE3F,"static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long count = 0;
+    dictEntry *de;
+    if ((de = kvstoreDictFind(kvs,didx,NULL)) == NULL) return 0;
+    count += dictSize(de);
+    return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+	return kvstoreDictSize(kvs) > didx? kvstoreDictSize(kvs) : didx;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)->encoding == KVSTORE_DICT_ENC_INT) 
+            sum += *(kvstoreDictAtIdx(kvs, i, didx)->ptr);
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long cnt = 0;
+    dictEntry *de;
+    if ((de = kvstoreDictFind(kvs,didx,NULL)) == NULL) return 0;
+    cnt += dictSize(de);
+    return cnt;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    if (kvs->len == 0) return 0;
+    unsigned long long sum = 0;
+    unsigned int i;
+    for (i = 0; i < kvs->len; i++) {
+        if (kvs->vals[i].deleted) continue;
+        sum += kvs->len;
+        if (i == didx) break;
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{ 
+    unsigned long long count = 0;
+    unsigned int i;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        unsigned int len;
+        dictEntry *de = kvstoreDictFind(kvs, i, didx, &len);
+        if (de) count += len;
+    }
+    return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    int i;
+    unsigned long long count = 0;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        unsigned int len;
+        dictEntry *de = kvstoreDictGet(kvs, i, &len);
+        if (de) count += len;
+    }
+    return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    int i;
+    unsigned long long sum = 0;
+    for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+        if (kvstoreDictAtIdx(kvs, i, didx)->encoding == KVSTORE_DICT_ENC_INT) 
+            sum += *(kvstoreDictAtIdx(kvs, i, didx)->ptr);
+    }
+    return sum;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+	/* We use a simple trick to get a monotonic counter. When a key is
+	 * deleted, we increment the corresponding counter in a lazy way.
+	 * This way we get a monotonic counter that is constant even for
+	 * a large number of keys. */
+	long long monotonic_cnt = kvstoreGetCumulativeCount(kvs);
+	monotonic_cnt += didx;
+	return monotonic_cnt;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    size_t total_size = kvstoreSize(kvs);
+    unsigned long long sum = 0;
+    for (size_t i = 0; i < total_size; i++) {
+        int sub_index = didx + i;
+        sds sdsele = kvstoreGetValue(kvs, i, NULL);
+        if (sdsele)
+            sum += stringObjectLen(sdsele);
+    }
+    return sum;
+}"
+39,53097E4BA66791C4,"int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = 0;
+    unsigned int total_size = kvstoreSize(kvs);
+    if (total_size > 0) {
+        dictidx = (rand() % total_size) * (kvstoreDictSize(kvs) / total_size);
+        if (dictidx >= total_size) dictidx = total_size-1;
+    }
+    return dictidx;
+}",int kvstoreGetFairRandomDictIndex(kvstore *kvs) ,"int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    unsigned int total_size = kvstoreSize(kvs);
+    unsigned int selected_size = total_size;
+    if (total_size == 0) return 0;
+    selected_size = (total_size >= KVSTORE_RANDOM_SAMPLE_LIMIT)?
+        KVSTORE_RANDOM_SAMPLE_LIMIT : total_size;
+    dict *d = kvstoreDictAt(kvs, 0);
+    unsigned int i = 0;
+    unsigned int p = 0;
+    while (selected_size > 0) {
+        p = (rand() % selected_size) * 2;
+        d = kvstoreDictAt(kvs, i);
+        int ret = (dictFind(d, (unsigned char*)mixlist[p]) == NULL);
+        if (ret) {
+            selected_size--;
+            p--;
+        } else {
+            i++;
+        }
+    }
+    return (rand() % 2)? i-1 : i;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    dict *d = kvstoreDict();
+    unsigned int count = 0;
+    unsigned int index = 0;
+    unsigned int total_size = kvstoreSize(kvs);
+    if (total_size) {
+        dict *proper_d = dictCreate(&hashDictType);
+        dictExpand(proper_d, total_size);
+        dict *fill_dict = dictCreate(&hashDictType);
+        dictExpand(fill_dict, kvstoreNumDicts(kvs));
+        while (dictSize(d) > 0) {
+            dictEntry *de = dictGetFairRandomKey(d);
+            robj *key = dictGetKey(de);
+            robj *val = dictGetVal(de);
+            unsigned int i;
+            for (i = 0; i < kvstoreNumDicts(kvs); i++) {
+                if (kvstoreDictEntryExist(kvs, i, de)) continue;
+                if (dictFind(proper_d, key->ptr)) continue;
+                if (dictFind(fill_dict, val->ptr)) continue;
+                addReplyBulk(c, key);
+                addReplyBulk(c, val);
+                count++;
+            }
+            dictReleaseIterator(di);
+            dictRelease(d);
+            d = fill_dict;
+        }
+        dictReleaseIterator(di);
+        dictRelease(proper_d);
+    }
+    return index;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+	uint32_t num_keys = kvstoreNumDicts(kvs);
+	if (num_keys == 0) return 0;
+	uint32_t index = (rand() % num_keys) * num_keys;
+	return index;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    unsigned int i;
+    unsigned int count = 0;
+    dict *d = kvstoreDict();
+    for (i = 0; i < kvs->num_dicts; i++) {
+        if (dictSize(d) > 0) {
+            count++;
+        }
+    }
+    /* We return a negative number if there is no empty dict, or a positive number 
+     * if we should return a random index. */
+    if (count == 0 || (count > 0 && random() % count == 0)) return -1;
+    else return count;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    int dictidx = kvstoreDictSize(kvs) > 0? kvstoreDictIndex(kvs, kvstoreDictKeys(kvs)) : 0;
+    return dictidx;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{ 
+    unsigned int total_size = kvstoreSize(kvs);
+    unsigned int selected_size = total_size;
+    if (total_size == 0) return 0;
+    selected_size = (total_size >= KVSTORE_RANDOM_SAMPLE_LIMIT)? total_size : KVSTORE_RANDOM_SAMPLE_LIMIT;
+    dict *d = kvstoreDictAt(kvs, 0);
+    unsigned int i = 0;
+    unsigned int p = 0;
+    while (selected_size > 0) {
+        p = (rand() % selected_size) * 2;
+        d = kvstoreDictAt(kvs, i);
+        int ret = (dictFind(d, (unsigned char*)mixlist[p]) == NULL);
+        if (ret) {
+            selected_size--;
+            p--;
+        } else {
+            i++;
+        }
+    }
+    return (rand() % 2)? i-1 : i;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+    /* To find the next unused index, we use a simple trick. We compute the index of the last 
+     * element we used, and then increment it by one until we reach the end of the kvstore.
+     * This way we are guaranteed that every time we encounter an empty dict, we can always
+     * return a positive index. */
+    uint64_t last_idx = kvstore->length-1; /* Last used index for non empty dict. */
+    int ret = last_idx;
+    while (kvstore->length > 0) {
+        DictEntry *de = kvstore->dats[last_idx];
+        serverAssert(dictGetKey(de)!= NULL);
+        last_idx--;
+        ret += dictGetKey(de)->sval;
+        /* Avoid hitting the assertion in debugInfoHashTable */
+        serverAssert(ret <= UINT32_MAX);
+    }
+    return ret;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{ 
+    size_t i;
+    unsigned int total_size = kvstoreSize(kvs);
+    unsigned int selected_size = 0;
+    unsigned int total_count = 0;
+    /*Count selected dicts and their count in the dict struct */
+    for (i = 0; i < total_size; i++) {
+        int is_selected = kvstoreDictIsFullySelected(kvs, i);
+        if (is_selected) {
+            selected_size++;
+        } else {
+            /*Count non-selected dicts and their count in the dict struct */
+            total_count += kvstoreDictSize(kvs, i);
+        }
+    }
+    /*Fair random dict index is between 0 and total_size - 1.
+     *Probability of selecting a dict is proportional to the count that is returned. */
+    return (selected_size == total_size)? 0 : (rand() % total_count) * (total_size - i) + i;
+}"
+40,4301A1FCF0E2E43E,"int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    int next = didx + 1;
+    if (next >= kvs->length) next = 0;
+    return next;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    /* If we are at the end, return -1 to signal the end of the iteration. */
+    if (kvstoreNumElements(kvs) == 0) {
+        return -1;
+    }
+    int len = kvstoreNumElements(kvs);
+    int next = didx + 1;
+    if (next > len) next = len;
+    quicklistNode *node = kvstoreGetDictNode(kvs, next);
+    assert(node!= NULL);
+    return next;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (didx == kvstoreNumDicts(kvs)) {
+        return -1;
+    } else {
+        int i = didx+1;
+        return i < kvstoreNumDicts(kvs)? i : -1;
+    }
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    int next = -1;
+    if (didx == kvstoreNumElements(kvs) - 1) {
+        return next;
+    }
+    int64_t ele = kvstoreGetValue(kvs, didx + 1);
+    next = (int)ele;
+    return next;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{ 
+    if (!kvs ||!kvs->len) return -1;
+    if (didx == kvs->len-1) return -1;
+    int i = didx+1;
+    assert(i < kvs->len);
+    return i;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+	assert(kvs!= NULL);
+	if (didx == kvstoreNumDicts(kvs)) {
+		return -1; /* No more than one non-empty dict. */
+	}
+	int i;
+	for (i = didx + 1; i < kvstoreNumDicts(kvs); i++) {
+		if (kvstoreDictAt(kvs, i)->numval > 0) {
+			return i; /* Non-empty dict. */
+		}
+	}
+	/* No non-empty dict. */
+	return -1; /* No more than one empty dict. */
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (!kvs ||!kvs->len)
+        return -1;
+
+    int64_t *lens = kvstoreDictLens(kvs);
+    int64_t *lens2 = lens? lens[didx] : NULL;
+
+    if (lens2 == NULL) {
+        /* No entry found. */
+        return -1;
+    } else {
+        uint32_t lensize = lens2[0];
+        uint32_t offset = lens2[1];
+        /* Advance offset to find next entry. */
+        lens2 += 2;
+        return (int64_t)offset + 1;
+    }
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    /* At least two are required: key and value. */
+    if (kvstoreSize(kvs) == 0) return -1;
+    if (didx == kvstoreSize(kvs) - 1) return -1;
+
+    /* At least one is required: key and value. */
+    int req = 0; /* GET, SET, INCRBY, DECRBY. */
+    if (kvstoreGet(kvs, didx + 1, &req, NULL, NULL)!= C_OK) return -1;
+
+    /* Increment index, but don't go past end. */
+    int incr = (req == SET)? 1 : -1;
+    return kvstoreGetIndex(kvs, didx + incr) + incr;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (!kvs ||!kvs->entries)
+        return -1;
+
+    int64_t *p = kvs->entries+didx;
+    if (p[0] < kvs->header->seq)
+        return -1; /* Previous entry was deleted. */
+
+    /* Advance pointer to next entry, to keep the loop as small as possible. */
+    p--;
+    while(*p!= 0 && p[0] < kvs->header->seq)
+        p--;
+
+    return didx;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{ 
+    /* If we are at the end, return -1 to signal the end of the iteration. */
+    if (kvstoreNumElements(kvs) == 0) {
+        return -1; 
+    }
+    int len = kvstoreNumElements(kvs);
+    int next = didx + 1; /* Index of next entry to return. */
+    if (next >= len) next = len-1;
+    return next; /* Returned value is the index of the next entry. */
+}"
+41,BB017E58605FED92,"dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    if (kvs_it->encoding == OBJ_ENCODING_QUICKLIST) {
+        return kvstoreQuicklistNextDict(kvs_it);
+    } else if (kvs_it->encoding == OBJ_ENCODING_LISTPACK) {
+        return kvstoreListpackNextDict(kvs_it);
+    } else {
+        serverPanic(""Unknown list encoding"");
+    }
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    serverAssert(kvs_it->encoding == OBJ_ENCODING_QUICKLIST);
+
+    if (kvs_it->encoding == OBJ_ENCODING_LISTPACK) {
+        unsigned char *lp = kvs_it->data;
+        unsigned char *p = lpFirst(lp);
+        if (p == NULL) return NULL;
+        p = lpNext(lp, p);
+        serverAssert(p!= NULL);
+        return lpGetDict(p);
+    } else if (kvs_it->encoding == OBJ_ENCODING_HT) {
+        dict *d = kvs_it->data;
+        serverAssert(d->encoding == OBJ_ENCODING_HT);
+        return dictGetVal(d);
+    } else {
+        serverPanic(""Unknown list encoding"");
+    }
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{ 
+    if (kvs_it->encoding == OBJ_ENCODING_QUICKLIST) {
+        return kvstoreQuicklistNextDict(kvs_it);
+    } else if (kvs_it->encoding == OBJ_ENCODING_LISTPACK) {
+        return kvstoreListpackNextDict(kvs_it);
+    } else {
+        serverPanic(""Unknown list encoding"");
+    }
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    unsigned char *vstr;
+    unsigned int vlen;
+    long long vlong;
+    dict *d = NULL;
+    if (kvs_it->encoding == KVSTORE_ENC_INT) {
+        int success = 0;
+        vstr = kvstoreGetValue(kvs_it, &vlen, &vlong);
+        if (success) {
+            d = createIntDict((int)vstr, vlen);
+        } else {
+            d = createIntDictFromLongLong(vlong);
+        }
+    } else if (kvs_it->encoding == KVSTORE_ENC_LZF) {
+        unsigned char *sstr;
+        unsigned int slen;
+        vstr = kvstoreGetValue(kvs_it, &vlen, &vlong);
+        if (vstr) {
+            slen = vlen;
+            sstr = vstr;
+        } else {
+            slen = 0;
+            sstr = NULL;
+        }
+        d = lzf_decompress(sstr, slen, (unsigned char*)vstr, vlen);
+    } else if (kvs_it->encoding == KVSTORE_ENC_RAW) {
+        uint8_t *sval = kvstoreGetValue(kvs_it, NULL, NULL);
+        if (sval) {
+            d = createStringObject((char*)sval, kvstoreGetEncodedLength(sval));
+        } else {
+            d = createStringObjectFromLongLong(vlong);
+        }
+    } else {
+        serverPanic(""Unknown set encoding"");
+    }
+    return d;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    if (!kvs_it->kvs)
+        return NULL;
+    dict *d = dictGetVal(kvs_it->di);
+    serverAssert(d!= NULL);
+    return d;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    dict *d = kvstoreDictNext(kvs_it);
+    return d;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{    
+    if (!kvs_it->encoding) {
+        kvs_it->encoding = kvstoreGetEncoding(kvs_it->key);
+    }
+    if (kvs_it->encoding == KVSTORE_ENC_INT32) {
+        uint32_t int32;
+        if (kvstoreGetEncodedInteger(kvs_it->key, kvs_it->encoding, &int32, NULL) == 0)
+            return NULL;
+        kvs_it->u.int32.current = int32;
+    } else if (kvs_it->encoding == KVSTORE_ENC_INT16) {
+        uint16_t int16;
+        if (kvstoreGetEncodedInteger(kvs_it->key, kvs_it->encoding, &int16, NULL) == 0)
+            return NULL;
+        kvs_it->u.int16.current = int16;
+    } else if (kvs_it->encoding == KVSTORE_ENC_INT8) {
+        uint8_t int8;
+        if (kvstoreGetEncodedInteger(kvs_it->key, kvs_it->encoding, &int8, NULL) == 0)
+            return NULL;
+        kvs_it->u.int8.current = int8;
+    } else {
+        serverPanic(""Unsupported integer encoding"");
+    }
+    return kvs_it->current_dstkey? kvstoreDictGetKey(kvs_it->current_dstkey) :
+                                      kvs_it->key;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+	return kvstoreDictNext(kvs_it);
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    serverAssert(kvs_it->encoding == KVSTORE_ENCODING_LISTPACK);
+
+    if (kvs_it->encoding == KVSTORE_ENCODING_RAW) {
+        uint64_t len = kvstoreGetEncodedLength(kvs_it->key);
+        unsigned char *data = kvstoreGetEncoded(kvs_it->key, len);
+        kvs_it->encoding = KVSTORE_ENCODING_INTSET;
+        return (dict*)data;
+    } else if (kvs_it->encoding == KVSTORE_ENCODING_INTSET) {
+        return kvstoreGetInline(kvs_it->key);
+    } else if (kvs_it->encoding == KVSTORE_ENCODING_HT) {
+        return kvstoreGet(kvs_it->key);
+    } else {
+        serverPanic(""Unknown set encoding"");
+    }
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{ 
+    serverAssert(kvs_it->encoding == OBJ_ENCODING_QUICKLIST);
+    quicklist *ql = kvs_it->data;
+    quicklistNode *node = ql->head;
+
+    if (node == NULL) return NULL;
+    return (dict*)node->entry;
+}"
+42,8AF415B62FB4C87E,"int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + d->dict_header_count*sizeof(dictEntry);
+    if (newsize > d->dict_max_listpack_entries) {
+        dictExpand(d, newsize);
+        return 1;
+    } else {
+        return 0;
+    }
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    unsigned long newsize = size + (d->dict.expand_dict?
+                                    d->dict.expand_dict_entries : 0);
+    if (newsize > d->dict_max_listpack_entries) {
+        return DICT_ERR;
+    }
+    dictExpand(d, newsize);
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    size_t newsize = size;
+    if (newsize > d->max_listpack_entries) {
+        /* try to expand */
+        size_t lpbytes = lpBytes(d->lpi);
+        if (lpbytes > newsize) {
+            /* make sure not to use a lot of memory for small keys */
+            if (newsize < DICT_HT_INITIAL_SIZE)
+                return DICT_ERR;
+            newsize = lpbytes > DICT_HT_INITIAL_SIZE? DICT_HT_INITIAL_SIZE : lpbytes;
+            dictExpand(d, newsize);
+            return DICT_OK;
+        } else {
+            return DICT_ERR;
+        }
+    } else {
+        return DICT_OK;
+    }
+}","int dictTryExpand(dict *d, unsigned long size) 
+{ 
+    unsigned long newsize = size + d->dict_header_count*sizeof(dictEntry);
+    if (newsize > d->dict_max_listpack_entries) {
+        dictExpand(d, newsize);
+        return 1;
+    } else {
+        return 0;
+    }
+}","int dictTryExpand(dict *d, unsigned long size) 
+{ 
+    size_t newsize = size;
+    if (newsize > d->max_listpack_entries) {
+        /* try to expand */
+        size_t lpbytes = lpBytes(d->lpi);
+        if (lpbytes > newsize) {
+            /* make sure not to use a lot of memory for small keys */
+            if (newsize < DICT_HT_INITIAL_SIZE)
+                return DICT_ERR;
+            newsize = lpbytes > DICT_HT_INITIAL_SIZE? DICT_HT_INITIAL_SIZE : lpbytes;
+            dictExpand(d, newsize);
+            return DICT_OK;
+        } else {
+            return DICT_ERR;
+        }
+    } else {
+        return DICT_OK;
+    }
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+#ifdef __GNUC__
+    /* Suppress ""attribute / method / offloading"" warning. */
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored ""-Woffload""
+#endif
+    unsigned long newsize = size + sizeof(dict);
+    unsigned char *newd = zmalloc(newsize);
+    memcpy(newd, d->contents, d->length);
+    /* Make sure that newsize is power of two, to avoid reallocs */
+    if (newsize & ~1) {
+        newsize = (newsize | (newsize >> 1)) & ~1;
+        newd = zrealloc(newd, newsize);
+    }
+    memset(d->contents, 0, d->length = newsize);
+    /* Restore attribute / method / offloading */
+    #pragma GCC diagnostic pop
+    return newsize;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{
+    size_t cap = dictCap(d);
+    if (cap < size) {
+        dictExpand(d, cap*2);
+        return DICT_OK;
+    } else {
+        return DICT_ERR;
+    }
+}","int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) 
+{ 
+    unsigned long newsize, delta, maxsize;
+    unsigned char *oldd, *newd;
+    int retval = 0;
+
+    /* Check if the dictionary size can be shrunk in size */
+    if (size < DICT_HT_INITIAL_SIZE) return 0;
+
+    /* Check if the shrinking of the dictionary is ok. The only exception
+     * is the ""dummy"" element that is created at the beginning to hold the
+     * final size of the dictionary. This is allowed to stay small. */
+    if (size < DICT_HT_INITIAL_SIZE + DICT_HT_DUMMY_SIZE) {
+        return 0;
+    }
+
+    /* Calculate the newsize of the expanding dictionary, taking into account
+     * the fact the dictionary is an intset and the new size of the intset
+     * is smaller. */
+    newsize = size;
+    if (newsize > DICT_HT_INITIAL_SIZE) {
+        /* Avoid div by zero on corrupt intset payload */
+        serverAssert(newsize);
+        newsize = DICT_HT_INITIAL_SIZE;
+    }
+    maxsize = intrev32ifbe(intsetMax(d->ptr));
+    if (newsize > maxsize) {
+        /* Avoid div by zero on corrupt intset payload */
+        serverAssert(newsize);
+        newsize = maxsize;
+    }
+    newd = intsetNew(newsize);
+
+    /* Expand the dictionary to make the new one big enough for the
+     * shrinking of the old one. */
+    oldd = d->ptr;
+    d->ptr = newd;
+    d->size = newsize;
+    d->encoding = intrev32ifbe(INTSET_ENC_INT32);
+    retval = 1;
+    return retval;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{ 
+    size_t cap = dictCap(d);
+    if (cap < size) {
+        /* try to expand even bigger than we have */
+        dictExpand(d, size);
+        return 1;
+    } else {
+        return 0;
+    }
+}"
+43,8146BBD51D425734,"int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    char buf[32];
+    struct timeval tv;
+    int retval, on;
+
+    if (interval <= 0)
+        return -1;
+    gettimeofday(&tv,NULL);
+    if (tv.tv_sec < 0) {
+        return -1;
+    }
+    on = (tv.tv_sec % 100) * 100 + tv.tv_usec;
+    if (on < 0) on += 1000000;
+    if (on > TTL) on = TTL;
+    snprintf(buf,sizeof(buf),""%d"",on);
+    retval = send(fd,buf,sizeof(buf),0);
+    if (retval <= 0) {
+        if (err) {
+            snprintf(err,sizeof(err),""send(%s) returned %d (%s)"",
+                (char*)buf,retval,strerror(errno));
+        }
+        return -1;
+    }
+    return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    int retval, saved_errno;
+    int mask = 0;
+    long long now = ustime();
+
+    if (interval > 0) {
+        int rv = anetSend(fd, (char *)&mask, sizeof(mask),
+                          interval, now);
+        if (rv < 0) {
+            if (err) *err = ""send(2) error"";
+            return 0;
+        }
+    }
+
+    retval = 1;
+    if (mask & ANET_SENTINEL_PENDING_WRITE) {
+        /* If the write is already pending, we can just remove the
+         * write event and return. */
+        retval = anetSend(fd, (char *)&mask, sizeof(mask),
+                          ANET_SENTINEL_NO_WRITES, now);
+        if (retval == ANET_ERR) {
+            if (err) *err = ""send(2) error"";
+            return 0;
+        }
+    }
+
+    if (mask & ANET_SENTINEL_PENDING_READ) {
+        /* If the read is already pending, we can just remove the
+         * read event and return. */
+        retval = anetRecv(fd, (char *)&mask, sizeof(mask),
+                          ANET_SENTINEL_NO_READS, now);
+        if (retval == ANET_ERR) {
+            if (err) *err = ""recv(2) error"";
+            return 0;
+        }
+    }
+
+    return retval;
+}","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+#ifdef HAVE_EPOLL
+    struct epoll_event ee = {0};
+    if (epoll_ctl(fd,EPOLL_CTL_MOD,fd,&ee) == -1) {
+        *err = ""Unable to set up the epoll file descriptor"";
+        return 0;
+    }
+#else
+    struct kevent ke;
+    if (kqueue() == -1) {
+        *err = ""Unable to set up the kqueue file descriptor"";
+        return 0;
+    }
+    memset(&ke,0,sizeof(ke));
+    ke.events = KQUEUE_EVENT_NONE;
+    if (kqueue_from_signal(SIGKILL,&ke,sizeof(ke),NULL,0) == -1) {
+        *err = ""Unable to set up the kill signal"";
+        return 0;
+    }
+#endif
+    int mask = kevent(fd,NULL,0,&ke);
+    if (mask == -1) {
+        *err = ""Unable to set up the event port"";
+        return 0;
+    }
+    if (mask & EVFILT_READ) ke.filter = EVFILT_READ;
+    if (mask & EVFILT_WRITE) ke.filter = EVFILT_WRITE;
+    if (kevent(fd,&ke,1,NULL,0,interval) == -1) {
+        *err = ""Unable to set up the event port"";
+        return 0;
+    }
+    return 1;
+}","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{	/* Just a wrapper for the TCP_KEEPTTL socket option.
+	 * TCP_KEEPTTL is an indication that the previous operation succeeded
+	 * and we are now trying to set the new one.
+	 *
+	 * The function returns C_OK on success, C_ERR on errors, and
+	 * sets errno to one of the following values:
+	 *
+	 * * EINVAL: The provided flags are invalid.
+	 * * EALREADY: The provided socket is already connected.
+	 * * EBADF: The provided socket is not a valid socket.
+	 * * ENOTSUP: The provided event port is not a valid port.
+	 * * EPERM: The operation is not valid on this socket, or the event port
+	 *   is not a valid event port.
+	 */
+	return setExpire(fd,err,interval,0);
+}","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+	char tmp[32];
+	int retval, on = 1, j;
+
+	if (interval <= 0)
+		return -1;
+
+	/* Note: we don't care about the return value of this function, since
+	 * we just want the original behavior. */
+	retval = read(fd, tmp, sizeof(tmp));
+	if (retval <= 0) {
+		if (err)
+			snprintf(err, sizeof(err), ""read(%s) returned %d bytes"",
+				interval? ""keep-alive"" : ""close-to-replicas"",
+				retval);
+		return -1;
+	}
+
+	for (j = 0; j < retval; j += sizeof(tmp)) {
+		char *p = tmp+j;
+		char *q;
+
+		if (p[0] == '#')
+			continue;
+
+		q = strchr(p,'');
+		if (q)
+			*q = '\0';
+
+		if (interval &&
+			(interval > (unsigned int)(p-tmp)-1)
+			)
+		{
+			on = 0;
+			break;
+		}
+
+		if (on) {
+			serverLog(LL_NOTICE,""Killing timedout replica: %s"",
+				(char*)p);
+			kill(getpid(),SIGKILL);
+			on = 0;
+			break;
+		}
+	}
+
+	if (on)
+		return 1;
+	else
+		return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+"
+44,0662CB892CF59881,"int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = (unsigned char*)p;
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    return raxFindC(rax,s,len,value,raxSize(rax));
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    unsigned char *p;
+    unsigned char *str;
+    unsigned int slen;
+    long long lval;
+    int ret = 0;
+
+    /* Find pointer to the entry equal or greater than the one passed in. */
+    p = raxSeek(rax,s,len);
+    if (p) {
+        /* There is an entry equal or greater than the one we are looking for.
+         * Compare it with the passed in value. */
+        if ((str = raxLoadStringValue(p,&slen,&lval))!= NULL) {
+            if (value) {
+                *value = str;
+                ret = 1;
+            }
+            return ret;
+        } else {
+            /* EOF reached. */
+            ret = 0;
+        }
+    }
+
+    return ret;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    return raxFindIndex(rax, s, len, value, 1);
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    if (raxSize(rax) == 0) return 0;
+    unsigned char *p = s;
+    unsigned char *key;
+    size_t klen;
+    long long klval;
+    if (value) *value = NULL;
+    while(*p!= '\0') {
+        key = (unsigned char*)p;
+        klen = rdbLoadLen(key,NULL);
+        if (klen == RDB_LENERR) return 0;
+        if (value) *value = (void*)key+klen;
+        p += klen+1;
+    }
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+	return raxFind_Unsigned(rax,s,len,value,NULL);
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{ 
+    unsigned char *p;
+    if ((p = raxSeek(rax,s,len)) == NULL) return 0;
+    if (value) *value = (unsigned char*)p;
+    return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+	unsigned char *str;
+	size_t sz;
+	int ret = 0;
+	if (value) {
+		str = value;
+		sz = *(size_t *)str;
+	} else {
+		sz = len;
+		str = zmalloc(sz);
+	}
+	if (raxTryInsert(rax,s,sz,NULL,0)) {
+		ret = 1;
+		if (value) {
+			*(size_t *)str = sz;
+			*(unsigned int *) (str + sz) = len;
+			memcpy(str,s,sz);
+		}
+	}
+	zfree(str);
+	return ret;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    raxIterator ri;
+    raxStart(&ri,rax);
+    ri.current = s;
+    ri.pos = 0;
+    if (raxNext(&ri)) {
+        if (value) *value = ri.data;
+        return 1;
+    } else {
+        return 0;
+    }
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{ 
+    return raxFindC(rax,s,len,value,raxSize(rax)); 
+}"
+45,8BE29A91E9BFE43F,"static void sigKillChildHandler(int sig) 
+{
+    UNUSED(sig);
+    exitFromChild((child_type)CHILD_TYPE_SIGCHLD);
+}","static void sigKillChildHandler(int sig) 
+{
+    if (server.child_type == CHILD_TYPE_RDB) {
+        /* Kill the rdb child, because it writes to a file. */
+        killRDBChild();
+    } else if (server.child_type == CHILD_TYPE_AOF) {
+        /* Kill the aof child, because it writes to a file. */
+        killAppendOnlyChild();
+    } else if (server.child_type == CHILD_TYPE_RDB_SAVE) {
+        /* Kill the rdb_save child, because it writes to a file. */
+        killRDBSaveChild();
+    } else if (server.child_type == CHILD_TYPE_AOF_SAVE) {
+        /* Kill the aof_save child, because it writes to a file. */
+        killAppendOnlySaveChild();
+    } else if (server.child_type == CHILD_TYPE_EVENTLOOP) {
+        /* Kill the event loop child, because it calls some event callbacks. */
+        killEventLoopChild();
+    } else if (server.child_type == CHILD_TYPE_MODULE) {
+        /* Kill the module child, because it calls some command from within it. */
+        killModuleChild();
+    } else {
+        serverPanic(""Unknown child type."");
+    }
+}","static void sigKillChildHandler(int sig) 
+{
+    UNUSED(sig);
+    if (server.child_type == CHILD_TYPE_RDB)
+        exitFromChild((child_type)CHILD_TYPE_RDB);
+    else if (server.child_type == CHILD_TYPE_AOF)
+        exitFromChild((child_type)CHILD_TYPE_AOF);
+    else if (server.child_type == CHILD_TYPE_REPL)
+        exitFromChild((child_type)CHILD_TYPE_REPL);
+    else if (server.child_type == CHILD_TYPE_MODULE)
+        exitFromChild((child_type)CHILD_TYPE_MODULE);
+    else
+        serverPanic(""Unknown child type"");
+}","static void sigKillChildHandler(int sig) 
+{
+	if (server.child_type == CHILD_TYPE_RDB)
+		exitFromChild((sig == SIGUSR1)? EXIT_CHILD_RDB : EXIT_CHILD_DISK);
+	else if (server.child_type == CHILD_TYPE_AOF)
+		exitFromChild((sig == SIGUSR1)? EXIT_CHILD_AOF : EXIT_CHILD_DISK);
+	else if (server.child_type == CHILD_TYPE_RDB_SAVE)
+		exitFromChild((sig == SIGUSR1)? EXIT_CHILD_RDB : EXIT_CHILD_DISK);
+	else if (server.child_type == CHILD_TYPE_AOF_SAVE)
+		exitFromChild((sig == SIGUSR1)? EXIT_CHILD_AOF : EXIT_CHILD_DISK);
+	else if (server.child_type == CHILD_TYPE_REPL)
+		exitFromChild((sig == SIGUSR1)? EXIT_CHILD_REPL : EXIT_CHILD_DISK);
+	else if (server.child_type == CHILD_TYPE_MODULE)
+		exitFromChild((sig == SIGUSR1)? EXIT_CHILD_MODULE : EXIT_CHILD_DISK);
+}",static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,"static void sigKillChildHandler(int sig) 
+{
+	struct sigaction act;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_NODEFER | SA_RESETHAND | SA_SIGINFO;
+	act.sa_sigaction = sigKillAppendOnlyChild;
+	sigaction(sig, &act, NULL);
+}","static void sigKillChildHandler(int sig) 
+{ 
+    UNUSED(sig);
+    exitFromChild((retval==0)? C_OK : C_ERR);
+}","static void sigKillChildHandler(int sig) 
+{
+    serverLog(LL_NOTICE,""Killing running background child: %ld"",(long) server.child_pid);
+    if (server.child_pid > 0) {
+        kill(server.child_pid,SIGUSR1);
+    }
+}","static void sigKillChildHandler(int sig) 
+{
+	/* Kill the whole process group, because this is our responsibility
+	 * to exit when the process gets killed. */
+	if (kill(THPGetPid(),sig)!= -1) {
+		/* If the signal is not SIGUSR1, we should remove it from the set of
+		 * monitored processes. This is needed because if a parent (BGSAVE
+		 * or AOF) terminates with a signal other than SIGUSR1, it will be
+		 * possible for the child process to exit without fully removing its
+		 * parent's files, sockets, and so forth. */
+		if (sig!= SIGUSR1) monitoredPidToRemove[current_process_id] = THPGetPid();
+	}
+}"
+46,4E9473BD7ADA756A,void ACLInitCommandCategories(void) ,"void ACLInitCommandCategories(void) 
+{
+    /* Add the default categories first, this will be overwritten by the config file. */
+    ACLCommandCategories *acl_categories = zmalloc(sizeof(ACLCommandCategories));
+    acl_categories->num_categories = 0;
+    acl_categories->acl_categories = ACLCreateCommand Categories(acl_categories);
+    serverAssert(acl_categories->num_categories < SIZE_MAX / sizeof(ACLCategory));
+}","void ACLInitCommandCategories(void) 
+{ 
+    server.acl_categories = ACL_CATEGORY_NONE;
+    server.acl_last_dbid = -1;
+}",void ACLInitCommandCategories(void) ,"void ACLInitCommandCategories(void) 
+{
+    ACLCategories *acl_categories = zmalloc(sizeof(ACLCategories));
+    acl_categories->num_acl_categories = 0;
+    acl_categories->acl_categories = NULL;
+    ACLAddCommandCategories(acl_categories);
+}","void ACLInitCommandCategories(void) 
+{
+	acl_categories = ACL_CATEGORY_NONE;
+	num_acl_categories = 0;
+}","void ACLInitCommandCategories(void) 
+{
+    server.acl_categories = ACL_CATEGORY_NONE;
+    server.acl_last_dbid = -1;
+}","void ACLInitCommandCategories(void) 
+{
+    int acl_categories[] = {ACL_CATEGORY_GENERIC, ACL_CATEGORY_KEY_EVENT, ACL_CATEGORY_KEY_ACCESS, ACL_CATEGORY_KEY_CHANNEL, ACL_CATEGORY_KEY_PUBLISH};
+    int acl_categories_size = sizeof(acl_categories) / sizeof(*acl_categories);
+
+    /* Fill with default ACL categories. */
+    for (int i = 0; i < acl_categories_size; i++) {
+        CommandInfo->acl_categories[i] = acl_categories[i];
+    }
+}","void ACLInitCommandCategories(void) 
+{
+	RedisModuleCommandInfoVersion *version = REDISMODULE_COMMAND_INFO_VERSION;
+	int i;
+	ACLCategories *aclflags = zmalloc(sizeof(ACLCategories)*(version->numcategories+1));
+
+	for (i = 0; i < version->numcategories; i++) {
+		aclflags[i].name = zstrdup(ACL_DEFAULT_CATEGORY_NAMES[i]);
+		aclflags[i].num = 0;
+	}
+	aclflags[version->numcategories].name = NULL;
+	aclflags[version->numcategories].num = 0;
+
+	/* Add all the categories to the list of command ACL categories. */
+	for (i = 0; i < version->numcategories; i++) {
+		if (ACLAllowsCategory(i)) {
+			aclflags[i].name = zstrdup(ACL_CATEGORY_NAMES[i]);
+			aclflags[i].num = 0;
+		}
+	}
+	aclflags[version->numcategories].name = NULL;
+	aclflags[version->numcategories].num = 0;
+
+	/* Now set the command info version to the first category. */
+	for (i = 0; i < version->numcategories; i++) {
+		if (aclflags[i].num!= 0) {
+			version->commands[i].num_acl_categories = 1;
+			version->commands[i].acl_categories = aclflags+i.num;
+			break;
+		}
+	}
+}","void ACLInitCommandCategories(void) 
+{ 
+    server.aof_curr_cmd_node = NULL;
+    server.aof_last_fsync_off = 0;
+    server.aof_last_incr_size = 0;
+    server.aof_last_incr_fsync_off = 0;
+    server.aof_last_incr_rewrite_off = 0;
+    server.aof_last_incr_fsync_on_rewrite = 0;
+    server.aof_last_incr_fsync_off_history = listCreate();
+    server.aof_last_incr_rewrite_off_history = listCreate();
+    server.aof_last_incr_fsync_on_unlink = 0;
+    server.aof_last_incr_fsync_off_unlink = 0;
+    server.aof_last_incr_fsync_on_fsync = 0;
+    server.aof_last_incr_fsync_off_fsync = 0;
+    server.aof_last_incr_fsync_on_rewrite = 0;
+    server.aof_last_incr_rewrite_off = 0;
+    server.aof_last_incr_rewrite_off_history = listCreate();
+    server.aof_last_incr_fsync_on_unlink = 0;
+    server.aof_last_incr_fsync_off_unlink = 0;
+    server.aof_last_incr_fsync_on_fsync = 0;
+    server.aof_last_incr_fsync_off_fsync = 0;
+    server.aof_last_incr_fsync_on_rewrite = 0;
+    server.aof_last_incr_rewrite_off = 0;
+    server.aof_last_incr_rewrite_off_history = listCreate();
+}"
+47,8A932B490A6BCD6E,"int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) "
+48,BA9F49D506CE32B7,"void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_cport;
+    } else if (server.port) {
+        *announced_tls_port = server.port;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    if (server.tls_replication && server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_client_port;
+    } else if (server.tcp_replication && server.repl_backlog) {
+        *announced_tcp_port = server.repl_backlog->offset;
+        *announced_cport = server.repl_backlog->histlen;
+    } else {
+        *announced_tcp_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) ","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) ","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+#ifdef REDIS_TLS
+    if (server.tls_port) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_client_port;
+    } else
+#endif
+    {
+        *announced_tcp_port = server.port;
+        *announced_cport = server.conn_info.cport;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = getAnnouncedTcpPort();
+    *announced_cport = getAnnouncedClientPort();
+    *announced_tls_port = getAnnouncedTlsPort();
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    /* If we have both the port and the protocol, use the latter.
+     * If only the port is specified, use the one provided by the caller.
+     * If only the protocol is specified, but no port is available, use
+     * the configured default. */
+    if (announce_tcp_port && announce_tls_port) {
+        *announced_tcp_port = announce_tls_port;
+    } else if (announce_cport) {
+        *announced_cport = announce_cport;
+    } else {
+        *announced_tcp_port = announce_tls_port;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{ 
+    if (server.tls_port!= 0) {
+        *announced_tls_port = server.tls_port;
+        *announced_cport = server.tls_client_port;
+    } else if (server.tcp_port!= 0) {
+        *announced_tcp_port = server.tcp_port;
+        *announced_cport = server.cp_client_port;
+    } else {
+        *announced_tcp_port = 0;
+        *announced_cport = 0;
+    }
+    if (server.cluster_enabled) {
+        *announced_cluster_node_port = server.cluster_node_port;
+        *announced_cluster_id = server.cluster_id;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{   
+    *announced_tcp_port = 0;
+    *announced_cport = 0;
+    if (server.tls_port) {
+        *announced_tls_port = 1;
+        *announced_cport = server.tls_port;
+    } else if (server.port) {
+        *announced_tls_port = 1;
+        *announced_cport = server.port;
+    } else {
+        *announced_tls_port = 0;
+        *announced_cport = 0;
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+   int *tp;
+
+   /* First, we have all the information to start the search for tp.
+    * We start from the first matching port, that is, tp = 1st match.
+    * If no tp is found, we start from the second match.
+    * If there are multiple matches, we start from the third match.
+    */
+    for (tp = 1; tp < c->argc; tp++) {
+        if (announcePort(c->argv[tp]->ptr, *announced_tls_port, 0) == C_OK) {
+            *announced_tls_port = *announced_tcp_port = tp;
+        } else if (announcePort(c->argv[tp]->ptr, *announced_cport, 0) == C_OK) {
+            *announced_cport = tp;
+        }
+    }
+}"
+49,D96D35EDDAADBECC,"robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    unsigned char buf[LONG_STR_SIZE];
+    int buflen;
+    robj *o = createObject(OBJ_STRING,buf);
+    setObject(o,value);
+    buflen = ll2string(buf,sizeof(buf),value);
+    return o;
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    char buf[LONG_STR_SIZE];
+    size_t buflen = ll2string(buf,sizeof(buf),value);
+    return createStringObject(buf,buflen);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    serverAssert(value >= 0);
+    if (value == 0) {
+        return NULL;
+    }
+    char buf[32];
+    int len = ll2string(buf,sizeof(buf),value);
+    buf[len] = '\0';
+    return createStringObject(buf,len);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    unsigned char buf[2];
+    buf[0] = (value >> 8) & 0xff;
+    buf[1] = value & 0xff;
+    return createStringObject((char*)buf,2);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{ 
+    serverAssert(value >= 0);
+    if (value == 0) {
+        return NULL;
+    }
+    char buf[32];
+    int len = ll2string(buf,sizeof(buf),value);
+    buf[len] = '\0';
+    return createStringObject(buf,len);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    serverAssert(value >= 0);
+    return createStringObjectFromLongLong(value);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    size_t lfu_freq = LFUDecrAndReturn(value);
+    size_t lru_idle = LFU idle time in milliseconds;
+    size_t lru_clock = 0; /* initialized to avoid any harmness warning */
+    robj *obj = createStringObjectFromLongLongWithSds(value);
+    if (lfu_freq!= -1) lru_clock = lfu_freq;
+    if (lru_idle!= -1) obj = dbUnshareStringValue(c->db,c->argv[1],obj);
+    return obj;
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    sds s = sdsnewlen(NULL,sizeof(long long));
+    memcpy(s,&value,sizeof(long long));
+    return createStringObject(s,sizeof(long long));
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{ 
+    unsigned char buf[2];
+    buf[0] = (value >> 8) & 0xff;
+    buf[1] = value & 0xff;
+    return createStringObject((char*)buf,2); 
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+	char buf[MAX_LONG_DOUBLE_CHARS];
+	size_t len = ld2string(buf,sizeof(buf),value);
+	return createStringObject(buf,len);
+}"
+50,8B7D3882CF9CBFEC,"unsigned int LRU_CLOCK(void) 
+{
+    unsigned int frequency;
+    unsigned int lru_val;
+
+    if (server.stat_expired_time_enabled) {
+        time_t now = time(NULL);
+        if (server.stat_expired_time_local)
+            now = localtime(server.stat_expired_time_local);
+        else
+            now = now - server.stat_expired_time;
+        if (now < 0)
+            now = 0;
+        /* Adjust for the timezone. */
+        time_t seconds = (now / 1000) / 60;
+        time_t minutes = (now / 1000) / 60 % 60;
+        time_t hours = (now / 1000) / 60 % 60;
+        server.stat_expired_time +=
+            (seconds * 60 + minutes * 60 + hours * 24);
+    }
+    if (server.stat_expired_freq == 0)
+        return 0;
+    /* Obtain the current LFU value. */
+    if (getLongFromObjectOrReply(c,c->argv[2],&lru_val,NULL)!= C_OK)
+        return 0;
+    /* Adjust for the timezone. */
+    lru_val += (time(NULL) - server.stat_expired_time) * 60;
+    server.stat_expired_freq = 0;
+    if (lru_val < 0)
+        lru_val = 0;
+    return lru_val;
+}","unsigned int LRU_CLOCK(void) 
+{
+    if (server.stat_expired_time < monotime())
+        return 0;
+    unsigned int v = estimateLruValue();
+    server.stat_expired_time = 0;
+    return v;
+}","unsigned int LRU_CLOCK(void) 
+{ 
+    unsigned int frequency;
+    unsigned int lru_val;
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    lru_val = ((uint64_t)tv.tv_sec)*1000 + tv.tv_usec;
+    if (lru_val > (uint64_t)server.lru_clock)
+        lru_val = server.lru_clock;
+    return lru_val;
+}","unsigned int LRU_CLOCK(void) 
+{
+    unsigned int lru_freq;
+    unsigned int lru_val;
+    lru_val = zmalloc_get_lfu_freq(server.lfu_freq);
+    if (lru_val!= -1) {
+        lru_freq = lru_val;
+    } else {
+        /* If the system calls we use are too slow to execute the
+         * computations, we resort to a system call. This is the only
+         * thing that can possibly fail. */
+        lru_freq = getMaxLFU();
+    }
+    return lru_freq;
+}",unsigned int LRU_CLOCK(void) ,"unsigned int LRU_CLOCK(void) 
+{
+	static unsigned int lru_clock = -1;
+
+	if (lru_clock == -1) {
+		lru_clock = sysconf(_SC_CLK_TCK);
+		if (lru_clock < 0) lru_clock = 1;
+	}
+	return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{ 
+    unsigned long long lru_val;
+    unsigned int resolution;
+    long long current_expire;
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    lru_val = ((unsigned long long)tv.tv_sec)*1000000;
+    lru_val += tv.tv_usec;
+    if (tv.tv_usec < 0) {
+        lru_val = (lru_val+1)%LFU_RESOLUTION;
+        lru_val += tv.tv_sec*1000000;
+    }
+    resolution = LFU_RESOLUTION;
+    current_expire = lru_val-lru_clock_get_value(resolution);
+    return current_expire;
+}","unsigned int LRU_CLOCK(void) 
+{
+    unsigned int clock;
+    static unsigned int sys_lfu_freq = 0;
+    if (sys_lfu_freq <= 0) {
+        /* Obtain the current LFU frequency. */
+        unsigned char buf[2];
+        if (redis_sys_lfu_freq() > 0) {
+            buf[0] = 1; /* 1 is a positive number. */
+            buf[1] = 0; /* Make sure it ends with a 0 to start with. */
+            sys_lfu_freq = (buf[0] << 8) | buf[1];
+        } else {
+            /* We can't return the cached value if the system call failed.
+             * In this case we need to resort to a system call. */
+            return 0;
+        }
+    }
+    clock = (unsigned int)sys_lfu_freq;
+    return clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+    if (server.lru_clock < 0) {
+        /* We should never get here if the server.lru_clock is negative,
+         * but better to be safe than sorry. */
+        return -1;
+    }
+    /* Compute the current LFU value. */
+    uint64_t lfu_freq = lfu_freq_lookup(server.lru_clock);
+    if (lfu_freq == -1) {
+        /* No LFU frequency information, use a conservative estimate. */
+        lfu_freq = (uint64_t)1<<30;
+        lfu_freq_log = log(lfu_freq/server.lfu_time_factor);
+    }
+    uint64_t lfu_val = lfu_freq - lfu_freq_log;
+    serverAssert(lfu_val < UINT32_MAX); /* Avoid division by zero on overflow. */
+    return lfu_val;
+}","unsigned int LRU_CLOCK(void) 
+{ 
+    if (server.stat_expired_time < monotime()) {
+        return server.stat_expired_time;
+    } else {
+        return computeExpireCycle();
+    }
+}"
+51,CA200194ACEB9F7D,"void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{
+    if (zsetLength(zobj) <= size_hint) {
+        return;
+    }
+
+    /* If we are converting the zset to another encoding, we need to make sure
+     * that the code paths that access the zset elements are aware of the
+     * conversion. */
+    size_t orig_encoding = zobj->encoding;
+    zobj->encoding = OBJ_ENCODING_LISTPACK;
+    listpackEntry *orig_ele = zobj->ptr;
+    zobj->ptr = ziplistPush(zobj->ptr, (unsigned char*)"""", 1, ZIPLIST_TAIL);
+    listpackEntry *newele = zobj->ptr;
+    zobj->ptr = ziplistInsert(zobj->ptr, orig_ele, newele, ZIPLIST_TAIL);
+    zobj->encoding = orig_encoding;
+}","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{
+    /* If the object is empty, we can safely remove it. */
+    if (zsetLength(zobj) == 0) {
+        zsetRemove(zobj,NULL);
+        return;
+    }
+
+    /* If we are converting from another encoding, we need to create a copy
+     * of the original zset object. */
+    if (size_hint > zsetLength(zobj)) {
+        zset *newzset = zsetCreate();
+        newzset->length = zsetLength(zobj);
+        newzset->encoding = zobj->encoding;
+        zsetInsert(zobj,newzset,NULL);
+        zsetRelease(zset);
+        return;
+    }
+
+    /* If the object size hint is less than the current size, we can't use
+     * ziplistConvertAndExpand to make a copy of the object. */
+    if (size_hint < zsetLength(zobj)) {
+        return;
+    }
+
+    /* If the object size hint is greater than the current size, we can't use
+     * ziplistConvertAndExpand. */
+    serverPanic(""Not implemented."");
+}","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{
+    zset *zs = zobj->ptr;
+    if (zsetLength(zs) <= size_hint) return;
+
+    /* If we have an intset, we can just use it directly. Otherwise, create
+     * a new intset and add all the elements. */
+    if (zobj->encoding == OBJ_ENCODING_INTSET) {
+        serverAssert(zsetLength(zs) <= server.zset_max_listpack_entries);
+        return;
+    }
+
+    /* Convert the zset to intset if it contains too many elements. */
+    if (zsetLength(zs) > server.zset_max_listpack_entries) {
+        zsetConvert(zs,OBJ_ENCODING_INTSET);
+    }
+}","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{ 
+    if (zsetLength(zobj) <= size_hint) {
+        return;
+    }
+
+    /* If we are converting the zset to another encoding, we need to create 
+     * a new zset that is a union of the old zset and the new one. We do that 
+     * by copying the old zset and creating a new empty zset. */
+    zset *newzset = zsetCreate(zobj->encoding);
+    newzset->type = OBJ_ZSET;
+    newzset->encoding = zobj->encoding;
+    newzset->size = zsetLength(zobj);
+    zsetConvert(zobj,OBJ_ENCODING_SKIPLIST);
+    zset *old_zset = zobj->ptr;
+    zobj->ptr = newzset;
+    zsetLength(newzset) = 0;
+    zsetFree(old_zset);
+}"
+52,60BC84F411EBEAB3,"int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    /* Check if we need to expand at all */
+    if (kvstoreGetTotalItems(kvs) <= newsize) {
+        return DICT_OK;
+    }
+
+    /* Try to expand first, to avoid repeated reallocations */
+    int res = kvstoreTryExpand(kvs, newsize, try_expand, skip_cb);
+    if (res == DICT_OK) {
+        kvstore->expand_cnt++;
+        return res;
+    } else {
+        return res;
+    }
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    kvs_it it = kvstoreInitIterator(kvs);
+    int res = DICT_OK;
+    while((res = kvstoreIteratorNext(it, &key, &klen, &value, &vlen))!= DICT_ERR) {
+        if (try_expand) {
+            /* Try to expand. */
+            if (kvstoreTryExpand(kvs, klen, newsize, skip_cb) == C_ERR) {
+                /* Failure. */
+                kvstoreReleaseIterator(it);
+                return res;
+            }
+        }
+        /* Append. */
+        if (kvstoreAppend(kvs, &key, klen, &value, vlen) == C_ERR) {
+            /* Failure. */
+            kvstoreReleaseIterator(it);
+            return res;
+        }
+    }
+    kvstoreReleaseIterator(it);
+    return res;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+    if (!kvstoreAllowsExpansion(kvs)) return DICT_ERR;
+    if (kvstore->len == 0) return DICT_OK;
+
+    /* Try to expand every single dictionary. */
+    kvs_expand_touched_keys(kvs, newsize);
+
+    /* Try to expand every single level of dictionaries. */
+    kvs_expand_nested_dicts(kvs, newsize, try_expand, skip_cb);
+
+    /* If we reached this point, we could expand every single key/value pair.
+     * So we should always get a non-zero return value. */
+    serverAssert(newsize!= 0);
+    return DICT_OK;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{ 
+    /* Check if we need to expand at all */
+    if (kvs->len == newsize) return DICT_OK;
+    if (kvs->len < kvs->max_listpack_entries && kvs->len * kvs->sz > newsize) return DICT_ERR;
+    if (kvs->len < kvs->max_listpack_entries && kvs->len * kvs->sz > newsize) {
+        /* Try to expand */
+        kvs->len++;
+        kvs->expand(kvs->len, newsize, skip_cb? &kvs->expand_cb : NULL);
+        return DICT_OK;
+    } else {
+        /* No need for expand, return failure */
+        return DICT_ERR;
+    }
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) "
+53,6B610D8B9F68DAE1,"int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{
+    size_t max_load_factor = HASHTABLE_MAX_LOAD_FACTOR;
+    if (server.maxmemory) {
+        max_load_factor = server.maxmemory/server.hll_sparse_max_bytes/100;
+        if (server.hll_sparse_max_bytes && server.hll_sparse_max_bytes < max_load_factor)
+            max_load_factor = server.hll_sparse_max_bytes;
+    }
+    return max(1, (int)ceil(log(usedRatio + 1)));
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) "
+54,8A27BFF462650406,"static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    if (!update_if_existing)
+        dbOverwrite(db,key,val);
+    else
+        incrRefCount(val);
+    notifyKeyspaceEvent(NOTIFY_GENERIC,""persist"",key,db->id);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    int exists;
+
+    /* Check if the key already exists. */
+    if (dbFind(db,key->ptr,NULL,&exists) &&!exists) {
+        if (update_if_existing) {
+            /* The key doesn't exist, so we need to create it. */
+            dbAdd(db,key,val,NULL);
+        }
+        return; /* The key already exists, no need to add it back. */
+    }
+
+    /* If the key already exists, we can't replace it with a different value.
+     * Abort. */
+    if (update_if_existing) {
+        serverLog(LL_WARNING, ""Key with key ID %llu already exists"",
+            (unsigned long long)key->ptr);
+        abort(); /* will not return */
+    }
+
+    /* Create the key if it does not exist. */
+    if (!dbFind(db,key->ptr,NULL,&exists)) {
+        dbAdd(db,key,val,server.lazyfree_lazy_expire? shared.lazyfree_lazy_expire : shared.unlink);
+    }
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{    
+    int existing = dbFind(db,key)!= NULL;
+    if (existing) {
+        /* The key already exists. Overwrite it with the new value. */
+        if (update_if_existing) {
+            dbReplaceValue(db,key,val);
+        } else {
+            /* Free the old value and create a new one with the new value. */
+            if (val->type == OBJ_STRING) {
+                decrRefCount(val);
+                val = createStringObject(NULL,sdslen(val->ptr));
+            }
+            dbAdd(db,key,val);
+            server.dirty++;
+        }
+        return; /* Return ASAP: we didn't need to do anything. */
+    }
+    if (val->type == OBJ_STRING) {
+        /* Create a new string value */
+        val = createStringObject(NULL,sdslen(val->ptr));
+    }
+    dbAdd(db,key,val);
+    server.dirty++;
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    int existing = dbFind(db,key)!= NULL;
+
+    /* Check if the key already exists. */
+    if (existing &&!dbOverwrite(db,key,val))
+        exit(1);
+
+    /* Create the new entry if the key does not exist. */
+    if (!existing) {
+        if (update_if_existing) {
+            /* We don't want to abort here, since we still want to retain the
+             * value if the key was updated, but it's safer to just exit. */
+            return;
+        }
+        /* We create a new entry in the new db and link the old one with the
+         * new one. */
+        dbAdd(db,key,val);
+        val->refcount++;
+        server.lazy_expire_disabled--;
+    }
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{ 
+    int exists;
+
+    /* Check if the key already exists. */
+    exists = dbFind(db,key->ptr)!= NULL;
+    if (update_if_existing && exists)
+        return;
+
+    /* Create the key object. */
+    if (dbCreateObject(db,val) == -1) {
+        serverLog(LL_WARNING, ""Error creating new value for key '%s': %s"",
+            key->ptr, strerror(errno));
+        return;
+    }
+    if (exists)
+        db->expires_cursor = dbAddExpires(db,db->expires_cursor,key->ptr);
+    db->dirty++;
+    signalModifiedKey(c,db,key);
+    server.dirty++;
+}"
+55,051CCB38BF73BF65,"int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int retval = 0;
+    if (dbSyncDelete(db,key)) {
+        dbAdd(db,key,val);
+        retval = 1;
+    }
+    return retval;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{ 
+    int retval = 0;
+    if (dbSyncDelete(db,key)) {
+        dbAdd(db,key,val);
+        retval = 1;
+    }
+    return retval;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int status = 0;
+    if (dbSyncDelete(db,key)) {
+        serverLog(LL_NOTICE,""DB deleted with sync: %s"",key);
+    } else {
+        serverLog(LL_WARNING,""Error adding DB to DB Store: %s"",
+            dbGetLastError(db));
+        return 0;
+    }
+    if (dbAdd(db,key,val) == C_OK) {
+        serverLog(LL_NOTICE,""DB loaded from RDB file"");
+        status = 1;
+    } else {
+        serverLog(LL_WARNING,""Error adding DB to DB Store: %s"",
+            dbGetLastError(db));
+        if (status == 0) {
+            /* If the key was not found in the DB Store, we signal that
+             * the key is not ready, since the caller should free the object
+             * in this case. */
+            db->dirty = 0;
+        }
+    }
+    return status;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) "
+56,3676B55A0684B8C4,"static void kvstoreDictRehashingStarted(dict *d) 
+{
+    serverAssert(dictSize(d) <= KVSTORE_HT_INCR);
+    atomicIncr(server.stat_active_defrag_hits, 1);
+    atomicIncr(server.stat_active_defrag_scanned, 1);
+    if (server.active_defrag_running) {
+        serverLog(LL_NOTICE,""Starting active defrag for %s"", dictGetKey(d));
+    }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+    if (server.stat_active_defrag_hits!= server.stat_active_defrag_total_hits)
+        incrRefCount(d);
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+    /* If there are multiple dicts, we need to increment the bucket count
+     * for all the dicts that are present in the incremental rehashing
+     * table. */
+    if (dictSize(d) > server.active_defrag_max_scan_fields)
+        defragLaterStep(d, 0);
+    /* else, we increment the bucket count only if there's just one dict. */
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+    serverAssert(dictSize(d) <= server.active_defrag_max_scan_fields);
+    if (server.active_defrag_running) {
+        serverLog(LL_NOTICE, ""Starting rehashing of the key value store"");
+    }
+    atomicIncr(server.stat_active_defrag_hits, 1);
+    atomicIncr(server.stat_active_defrag_scanned, 1);
+    if (server.active_defrag_running == 0) {
+        serverLog(LL_WARNING, ""Active defrag was stopped, likely because of a short scan"");
+    }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{ 
+    serverAssert(dictSize(d) <= KVSTORE_HT_INCR);
+    atomicIncr(server.stat_active_defrag_hits, 1);
+    atomicIncr(server.stat_active_defrag_scanned, 1);
+    if (server.active_defrag_running) {
+        serverLog(LL_NOTICE,""Starting active defrag for %s"", dictGetKey(d));
+    }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+#ifdef REDIS_TEST
+    printf(""Start to rehashing\n"");
+#endif
+    atomicIncr(server.stat_active_defrag_hits,1);
+    atomicIncr(server.stat_active_defrag_scanned,1);
+    atomicIncr(server.stat_active_defrag_scanned_hits,1);
+    if (server.active_defrag_running) {
+        serverLog(LL_WARNING,""Active defrag already in progress, skipping scan of new ht"");
+        return;
+    }
+    defragAlloc(d);
+    server.active_defrag_running = 1;
+    server.stat_active_defrag_scanned++;
+    server.stat_active_defrag_hits++;
+    if (server.active_defrag_configuration_changed) {
+        server.active_defrag_configuration_changed = 0;
+        updateDefragConfiguration();
+    }
+    if (server.active_defrag_running == 1) {
+        serverLog(LL_WARNING,""Active defrag already in progress, skipping scan of new ht"");
+        return;
+    }
+    if (server.active_defrag_configuration_changed) {
+        serverLog(LL_WARNING,""Active defrag aborted, restarting"");
+        defragAlloc(d);
+    }
+    scanLaterHugePages();
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+	atomicIncr(server.stat_active_defrag_hits, 1);
+	atomicIncr(server.stat_active_defrag_scanned, 1);
+	atomicIncr(server.stat_active_defrag_scanned_hits, 1);
+	if (dictSize(d) > server.active_defrag_max_scan_fields)
+		defragLater(db, d, 0);
+	else
+		activeDefragKVStore(d);
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+    atomicIncr(server.stat_active_defrag_hits,1);
+    atomicIncr(server.stat_active_defrag_scanned,1);
+    if (server.active_defrag_running) {
+        serverLog(LL_NOTICE,""Starting active defrag for key: %s"", dictGetKey(d));
+    }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{ 
+    if (server.active_defrag_running) {
+        serverLog(LL_WARNING, ""Active defrag already in progress, skipping rehashing of dicts in this iteration"");
+        return;
+    }
+    server.active_defrag_running = 1;
+
+    /* If there are multiple dicts, we need to increment the bucket count
+     * for all the dicts that we just created. */
+    if (dictSize(d) > 1) {
+        incrRefCount(d); /* Protect the dict from being collected */
+        kvstoreDictSetBucketCount(d, 1);
+    }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+    if (dictSize(d) > server.active_defrag_max_scan_fields)
+        defragLater(db, d, 0);
+    else
+        activeDefragKVStore(d);
+}"
+57,235340703317EEF1,"void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    if (kvs_it->encoding == OBJ_ENCODING_LISTPACK)
+        lzf_free(kvs_it->subject->ptr);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    if (!kvs_it) return;
+    zfree(kvs_it->kvs);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    serverAssert(kvs_it->encoding == OBJ_ENCODING_KVSTORE);
+    zfree(kvs_it->kvs);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    if (kvs_it->encoding == OBJ_ENCODING_INTSET)
+        intsetDel(kvs_it->subject->ptr, kvs_it->pos);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    zfree(kvs_it->kvs);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{ 
+    if (kvs_it->encoding == OBJ_ENCODING_LISTPACK)
+        lzf_free(kvs_it->subject->ptr);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    serverAssert(kvs_it->encoding == KVSTORE_ENCODING_ITERATOR);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+	/* kvstoreIteratorInit() has already initialized the iterator,
+	 * now we just need to update the internal state. */
+	kvs_it->encoding = KVSTORE_ENCODING_RAW;
+	kvs_it->pos = 0;
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    if (!kvs_it) return;
+    if (kvs_it->encoding == OBJ_ENCODING_LISTPACK)
+        lzf_free(kvs_it->subject->ptr);
+    zfree(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+   zfree(kvs_it);
+}"
+58,B9770C032ED2D79F,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,"void scanDatabaseForReadyKeys(redisDb *db) 
+{
+    dictIterator *di;
+    dictEntry *de;
+    int type;
+
+    di = dictGetIterator(db->keys);
+    while((de = dictNext(di))!= NULL) {
+        robj *key = dictGetKey(de);
+        robj *val = dictGetVal(de);
+        type = db->type.getKeyType(key);
+
+        /* If the key is of the right type, signal it as such. */
+        if (type == OBJ_STRING || type == OBJ_LIST || type == OBJ_SET) {
+            signalModifiedKey(db,key);
+            notifyKeyspaceEvent(NOTIFY_STRING,""pop"",key,db->db->id);
+        }
+    }
+    dictReleaseIterator(di);
+}","void scanDatabaseForReadyKeys(redisDb *db) 
+{
+
+    /* Scan the keyspace and signal the ready signal for every key that is
+     * in the map. */
+    scanKey(db->keys,db->expires,REDISMODULE_BS_KEY);
+}",void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) 
+59,D7B3A40224F9F596,"void unblockClientOnTimeout(client *c) 
+{
+    if (c && c->bstate.timeout_callback) {
+        RedisModuleCtx ctx;
+        moduleCreateContext(&ctx, c->module, REDISMODULE_CTX_BLOCKED_TIMEOUT);
+        ctx.blocked_privdata = c->privdata;
+        ctx.blocked_ready_key = NULL;
+        ctx.client = c;
+        c->bstate.timeout_callback(&ctx,c->bstate.timeout_callback_user_data);
+        moduleFreeContext(&ctx);
+    }
+}",void unblockClientOnTimeout(client *c) ,"void unblockClientOnTimeout(client *c) 
+{
+    RedisModuleBlockedClient *bc = c->bstate.module_blocked_handle;
+    RedisModuleCtx ctx;
+    moduleCreateContext(&ctx, bc->module, REDISMODULE_CTX_BLOCKED_TIMEOUT);
+    ctx.client = bc->client;
+    ctx.blocked_privdata = bc->privdata;
+    bc->blocked_on_reply_reply_timeout?
+        RM_UnblockClientOnTimeout(&ctx, bc->client, bc->blocked_on_reply_reply_timeout) :
+        RM_UnblockClient(&ctx, bc->client);
+    moduleFreeContext(&ctx);
+    if (bc->blocked_on_reply_reply_timeout)
+        zfree(bc->blocked_on_reply_reply_timeout);
+    bc->client = NULL;
+}","void unblockClientOnTimeout(client *c) 
+{
+    if (!(c->flags & CLIENT_BLOCKED)) return;
+    c->flags &= ~CLIENT_BLOCKED;
+    if (c->reply_callback) {
+        /* In this case we don't want to call the reply callback, since we already
+         * called it in the beforeSleep() call, and the timeout callback will have
+         * already removed the pending flag. */
+        c->reply_callback = NULL;
+    }
+    if (c->timeout_callback) {
+        /* In this case we don't want to call the timeout callback, since we already
+         * called it in the beforeSleep() call, and the timeout callback will have
+         * already removed the pending flag. */
+        c->timeout_callback = NULL;
+    }
+    /* Remove the pending flag in the blocked client. */
+    unblockClientFromServer(c);
+}","void unblockClientOnTimeout(client *c) 
+{ 
+    RedisModuleCtx ctx;
+    moduleCreateContext(&ctx, c->module, REDISMODULE_CTX_BLOCKED_TIMEOUT);
+    ctx.client = c;
+    ctx.blocked_privdata = c->privdata;
+    ctx.blocked_ready_key = NULL;
+    ctx.blocked_timeout_callback = NULL;
+    ctx.blocked_timeout = 0;
+    c->module->blocked_clients--;
+    if (c->module->blocked_clients == 0) {
+        /* Remove the timedout client from the list of clients blocked by
+         * this module. */
+        listNode *ln;
+        listIter li;
+        listRewind(c->module->blocked_clients,&li);
+        while((ln = listNext(&li))) {
+            RedisModuleBlockedClient *bc = ln->value;
+            if (bc->client == c) {
+                listDelNode(c->module->blocked_clients,ln);
+                zfree(ln);
+                break;
+            }
+        }
+    }
+    moduleFreeContext(&ctx);
+    c->module->blocked_clients--;
+    if (c->module->blocked_clients == 0) {
+        /* Remove the timeout callback if any. */
+        if (c->timeout_callback) {
+            zfree(c->timeout_callback);
+            c->timeout_callback = NULL;
+        }
+    }
+}","void unblockClientOnTimeout(client *c) 
+{
+	int timeout_in_ms = 0;
+	RedisModuleCtx ctx;
+	moduleCreateContext(&ctx,c->module,REDISMODULE_CTX_BLOCKED_TIMEOUT);
+	ctx.client = c;
+	if (c->bstate.timeout_callback) {
+		timeout_in_ms = c->bstate.timeout_callback(ctx.client);
+		moduleFreeContext(&ctx);
+	}
+	if (timeout_in_ms) {
+		c->bstate.timeout = 0;
+		if (c->reply)
+			addReplyLongLong(c,timeout_in_ms);
+		else
+			removeBulkLongLong(c,timeout_in_ms);
+	} else {
+		/* Remove pending timeout flags from client */
+		if (c->bstate.timeout) {
+			removeBulkLongLong(c,c->bstate.timeout);
+			c->bstate.timeout = NULL;
+		}
+	}
+	c->bstate.timeout_callback = NULL;
+	moduleFreeContext(&ctx);
+}","void unblockClientOnTimeout(client *c) 
+{
+    RedisModuleCtx ctx;
+    moduleCreateContext(&ctx,c->module,REDISMODULE_CTX_BLOCKED_REPLY);
+    ctx.blocked_privdata = c->privdata;
+    ctx.client = c;
+    if (c->timeout) {
+        /* Remove the pending flag in order to indicate we already
+         * returned the reply to the blocked client. */
+        removeClientFromModuleCtx(&ctx);
+        if (ctx.blocked_privdata) {
+            /* We don't really care about the reply, just the timeout.
+             * We could have just removed the client from the module
+             * context and it would be possible to call the API without
+             * the timeout. */
+            c->reply_callback(&ctx,(void**)c->argv,c->argc);
+            moduleFreeContext(&ctx);
+        } else {
+            c->reply_callback(&ctx,(void**)c->argv,c->argc);
+        }
+    } else {
+        /* Reply callback was not set, so we have to use the timeout callback
+         * to remove the pending flag in order to indicate we already returned
+         * the reply to the blocked client. */
+        removeClientFromModuleCtx(&ctx);
+        if (ctx.blocked_privdata) {
+            c->reply_callback(&ctx,(void**)c->argv,c->argc);
+        } else {
+            c->reply_callback(&ctx,(void**)c->argv,c->argc);
+        }
+    }
+    moduleFreeContext(&ctx);
+}","void unblockClientOnTimeout(client *c) 
+{
+    if (c->flags & CLIENT_BLOCKED) {
+        /* A client is unblocked only if it is associated with a timeout
+         * callback, and the timeout callback was used to reply to the blocked
+         * client. In this case we can just remove the pending flag and return. */
+        if (c->timeout_callback) {
+            c->flags &= ~CLIENT_PENDING_MODULE_CALL;
+            return;
+        }
+
+        /* Remove the pending flag if the client was timed out. */
+        if (clientHasTimeout(c)) {
+            removeClientFromTimeoutTable(c);
+        }
+    } else {
+        /* A client is unblocked only if it is associated with a timeout
+         * callback, and the timeout callback was not used to reply to the blocked
+         * client. In this case we can just remove the pending flag and return. */
+        if (c->timeout_callback) {
+            c->flags &= ~CLIENT_PENDING_MODULE_CALL;
+            return;
+        }
+
+        /* Remove the pending flag if the client was timed out. */
+        removeClientFromTimeoutTable(c);
+    }
+    /* Remove the pending flag if the client was timed out. */
+    removeClientFromTimeoutTable(c);
+}","void unblockClientOnTimeout(client *c) 
+{
+    int pending = c->bstate.timeout_pending;
+    c->bstate.timeout_pending = 0;
+    if (c->bstate.timeout_callback) {
+        RedisModuleCtx ctx;
+        moduleCreateContext(&ctx, c->module, REDISMODULE_CTX_BLOCKED_TIMEOUT);
+        ctx.blocked_privdata = c;
+        ctx.blocked_ready_key = NULL;
+        ctx.blocked_ready_handler = NULL;
+        ctx.blocked_timeout_callback = c->bstate.timeout_callback;
+        ctx.blocked_timeout_reached_callback = NULL;
+        ctx.client = c;
+        c->bstate.timeout_callback(&ctx,c->bstate.timeout_reached_callback);
+        moduleFreeContext(&ctx);
+    }
+    if (pending) {
+        /* Remove the pending flag in order to indicate that the client no longer
+         *  needs to receive replies from this blocked client. */
+        unblockClientFromPool(c, 0);
+    }
+}","void unblockClientOnTimeout(client *c) 
+{
+    /* Protect from re-processing: don't reply to the blocked client if
+     * we already have a timeout set. */
+    if (c->bstate.timeout) {
+        return;
+    }
+    c->bstate.timeout = 1;
+    if (c->reply) {
+        /* Protect from re-processing: don't reply to the blocked client if
+         * we already have a timeout set. */
+        if (c->bstate.async_rm) {
+            c->bstate.async_rm->reply_callback = NULL;
+            c->bstate.async_rm->timeout_callback = NULL;
+        }
+        c->reply = NULL;
+    }
+    if (c == server.current_client) {
+        unblockClient(c);
+    }
+}"
+60,1D2EBFAEB02EB387,"void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) "
+61,34E0B83C2E59A0E6,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,"void updateClientMemoryUsage(client *c) 
+{
+    if (c->type!= CLIENT_TYPE_PUBSUB) return;
+
+    /* Update the client's last access time. */
+    if (c->lastinteraction > server.client_mem_usage_last_update)
+        c->lastinteraction = server.client_mem_usage_last_update;
+
+    /* Update the server's last access time. */
+    if (server.client_mem_usage_total >
+        (c->lastinteraction+1)*server.client_mem_usage_bucket_size)
+        server.client_mem_usage_total =
+            (c->lastinteraction+1)*server.client_mem_usage_bucket_size;
+
+    /* Update the client's memory usage. */
+    size_t used = c->used - c->mem_usage;
+    c->used = c->mem_usage + used;
+    c->mem_usage = 0;
+
+    /* Update the server's stats. */
+    updateServerStatsOnClient(c, 0);
+}",void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,void updateClientMemoryUsage(client *c) ,"void updateClientMemoryUsage(client *c) 
+{ 
+    if (server.maxmemory || c->flags & CLIENT_PUBSUB) {
+        return; /* Don't update memory usage for pubsub clients. */
+    }
+
+    /* Update the client memory usage. */
+    c->avg_used = c->sum_used / c->clients;
+    c->avg_used_time = mstime();
+    c->used = c->sum_used;
+    c->peak = c->sum_peak;
+    updateClientMemUsageAndBucket(c);
+}",void updateClientMemoryUsage(client *c) ,"void updateClientMemoryUsage(client *c) 
+{
+    if (!(c->flags & CLIENT_PUBSUB)) return;
+    if (c->pubsub_type!= CHILD_TYPE_PUBSUB) return;
+    /* We need to do this before we update the server's cumulative
+     * cumulative usage of pubsub clients. */
+    updateClientMemUsageAndBucket(c,CHILD_MEMORY_PUBSUB);
+    /* We need to do this after updating the server's cumulative
+     * cumulative usage of pubsub clients. */
+    updateClientMemUsageAndBucket(c,CHILD_MEMORY_PUBSUB);
+    /* We need to do this after updating the server's cumulative
+     * cumulative usage of pubsub clients. */
+    updateClientMemUsageAndBucket(c,CHILD_MEMORY_PUBSUB);
+}"
+62,6F0C31DFFEC181FB,"streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if (dictFind(s->cgroups,groupname)) {
+        cg = dictGetVal(s->cgroups);
+        /* If the consumer group is not the last one, we need to
+         * make sure that we return only the last one. */
+        if (cg[0]!= '}') {
+            cg--;
+        }
+    } else {
+        /* If there is no such consumer group, NULL is returned. */
+        cg = NULL;
+    }
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg = NULL;
+    if ((cg = lookupKeyReadOrReply(c,groupname,shared.null[c->resp])) == NULL)
+        return NULL;
+    if (checkType(c,cg,OBJ_STREAM)) {
+        return NULL;
+    }
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg;
+    sds cgname = sdsnew(groupname);
+
+    cgname = sdslen(cgname)? cgname : sdsdup(groupname);
+    cg = dictFetchValue(s->cgroups,cgname);
+    sdsfree(cgname);
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    sds cgname = sdsnew(groupname);
+    streamCG *cg = lookupKeyRead(s->db->watched_keys,cgname);
+    sdsfree(cgname);
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg;
+    listIter li;
+    listNode *ln;
+
+    listRewind(s->cgroups,&li);
+    while((ln = listNext(&li))) {
+        cg = ln->value;
+        if (!strcasecmp(cg->name,groupname)) {
+            return cg;
+        }
+    }
+    return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    sds key = sdsnew(groupname);
+    streamCG *cg = streamFindCG(s, key, NULL);
+    sdsfree(key);
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    dictEntry *de;
+    streamCG *cg;
+
+    de = dictFind(s->cgroups,groupname);
+    if (de == NULL) return NULL;
+    cg = dictGetVal(de);
+    sdsfree(groupname);
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{ 
+    streamCG *cg;
+    sds cgname = sdsnew(groupname);
+
+    cgname = sdslen(cgname)? cgname : sdsdup(groupname);
+    listIter li;
+    listNode *ln;
+    streamCG *ret = NULL;
+    streamNACK *nack = NULL;
+    streamConsumer *consumer = NULL;
+    streamIterator si;
+
+    if ((cg = streamFindGroup(s, cgname)) == NULL) {
+        sdsfree(cgname);
+        return NULL;
+    }
+
+    /* Check if the consumer name is valid. */
+    if (!isValidStreamConsumerName(cgname)) {
+        sdsfree(cgname);
+        return NULL;
+    }
+
+    /* Check if the group name is valid. */
+    if (!isValidStreamConsumerName(groupname)) {
+        sdsfree(cgname);
+        return NULL;
+    }
+
+    /* Check if the group name is already used. */
+    listRewind(cg->consumers,&li);
+    while((ln = listNext(&li))) {
+        consumer = ln->value;
+        if (consumer->name == sdsdup(groupname)) {
+            sdsfree(cgname);
+            return consumer;
+        }
+    }
+
+    /* Consumer not already registered, create it. */
+    if ((nack = zmalloc(sizeof(*nack))) == NULL) {
+        sdsfree(cgname);
+        return NULL;
+    }
+    nack->consumer = consumer;
+    nack->group = cg;
+    listAddNodeTail(cg->consumers, nack);
+    ret = nack->consumer;
+    sdsfree(cgname);
+    return ret;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    raxIterator iter;
+    streamCG *cg;
+    streamNACK *nack;
+    streamConsumer *consumer;
+    streamNACK *nack_current = NULL;
+    streamNACK *nack_reached = NULL;
+    streamConsumerGroup *consumer_group;
+    streamNACK *nack_next = NULL;
+    streamNACK *nack_reached_next = NULL;
+    raxStart(&iter,s->consumers);
+    raxSeek(&iter,""^"",NULL,0);
+    while(raxNext(&iter)) {
+        nack = iter.data;
+        if (nack->consumer == NULL) continue;
+        if (nack->group == NULL) continue;
+        if (nack->group == groupname) {
+            cg = nack->consumer;
+            break;
+        }
+    }
+    if (cg == NULL) return NULL;
+    cg->used++;
+    consumer_group = cg->group;
+    nack = nack_current;
+    while(nack!= NULL) {
+        if (nack->group == consumer_group) {
+            nack_reached = nack;
+            break;
+        }
+        nack = nack->next;
+    }
+    if (nack == NULL) return NULL;
+    nack->used++;
+    consumer = nack->consumer;
+    nack = nack_reached;
+    while(consumer!= NULL) {
+        if (consumer == nack->consumer) {
+            nack_reached_next = nack;
+            break;
+        }
+        nack = nack->next;
+    }
+    if (nack == NULL) return NULL;
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{ 
+    streamCG *cg = NULL;
+    if (dictFind(s->cgroups,groupname)) {
+        cg = dictGetVal(s->cgroups);
+        /* We don't need to validate the returned pointer, since the only
+         * consumer group is the top level one, and any other nested ones will
+         * be validated by the function that returned them. */
+    } else if (s->num_cgroups_with_clients) {
+        /* If we have consumers in this group, we can't failover, since we
+         * don't know who can do that. */
+        addReplyError(c, ""No consumer group '%s' exists"", groupname);
+    } else {
+        addReplyError(c, ""No such consumer group '%s'"", groupname);
+    }
+    return cg;
+}"
+63,561120EE41B27B2E,"int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t oldval, newval, delta;
+    int retval;
+
+    oldval = d->ht_table[0].current;
+    newval = oldval + (us / 1000);
+    d->ht_table[0].current = newval;
+    d->ht_table[1].current = newval;
+    d->ht_table[2].current = newval;
+    d->ht_table[3].current = newval;
+    d->ht_table[4].current = newval;
+    d->ht_table[5].current = newval;
+    d->ht_table[6].current = newval;
+    d->ht_table[7].current = newval;
+    retval = dictGetKey(d->ht_table[0].entry);
+    d->ht_table[0].entry = dictGetVal(d->ht_table[0].entry);
+    d->ht_table[1].entry = dictGetVal(d->ht_table[1].entry);
+    d->ht_table[2].entry = dictGetVal(d->ht_table[2].entry);
+    d->ht_table[3].entry = dictGetVal(d->ht_table[3].entry);
+    d->ht_table[4].entry = dictGetVal(d->ht_table[4].entry);
+    d->ht_table[5].entry = dictGetVal(d->ht_table[5].entry);
+    d->ht_table[6].entry = dictGetVal(d->ht_table[6].entry);
+    d->ht_table[7].entry = dictGetVal(d->ht_table[7].entry);
+    return retval;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t oldval = dictGetUnsignedIntegerVal(d);
+    uint64_t newval = (oldval + delta) & 0xffffffffffffffff;
+    dictSetUnsignedIntegerVal(d,newval);
+    return REDISMODULE_OK;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    unsigned long long ustime = us/1000;
+    unsigned long long delta = ustime - dictGetSignedIntegerVal(d);
+    if (delta < 0 || delta > 1000) return 0;
+    dictSetSignedIntegerVal(d,delta);
+    return 1;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    dictEntry *de;
+    unsigned long long ull;
+    int ret = 0;
+
+    de = dictFind(d, ""rehash"");
+    if (de) {
+        ull = dictGetUnsignedIntegerVal(de);
+        if (ull > (us+1000)) {
+            return 0;
+        } else if (ull < us) {
+            return 1;
+        } else {
+            dictSetUnsignedIntegerVal(de, ull+1);
+            ret = 1;
+        }
+    }
+    return ret;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{   
+    uint64_t delta = us - dictGetUnsignedIntegerVal(d);
+    uint64_t max = UINT64_MAX-d->rehashing_threshold;
+    uint64_t min = 0;
+    if (d->max_list_entries > server.active_defrag_max_scan_fields) {
+        min = server.active_defrag_max_scan_fields;
+    } else if (d->max_list_entries < server.active_defrag_min_scan_fields) {
+        min = server.active_defrag_min_scan_fields;
+    }
+    if (delta > max || (delta == max && (us > 0))) {
+        dictSetUnsignedIntegerVal(d,dictGetUnsignedIntegerVal(d)+1);
+        return 1;
+    } else if (delta < min || (delta == min && (us < 0))) {
+        dictSetUnsignedIntegerVal(d,dictGetUnsignedIntegerVal(d)-1);
+        return 1;
+    }
+    return 0;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) ","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    dictEntry *de;
+    uint64_t oldval, newval, delta = 1000;
+
+    de = dictFind(d, ""rehash"");
+    if (de) {
+        oldval = dictGetUnsignedIntegerVal(de);
+        newval = (oldval + us) >> 8;
+        dictSetUnsignedIntegerVal(de, newval);
+        d->rehashing_time_start = time(NULL);
+        d->rehashing_last_progress_report = 0;
+        return 1;
+    }
+    return 0;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+	uint64_t old_entries = d->numele;
+	uint64_t old_max = d->max;
+	uint64_t old_val = d->val;
+
+	if (us > 1000ULL*1000ULL) { /* Avoid div by zero on overflow */
+		return 0;
+	} else if (us < 100ULL*1000ULL) {
+		return 1;
+	} else if (us < 100ULL*1000ULL) {
+		us /= 1000ULL;
+		d->val = (uint64_t)us;
+	}
+	uint64_t new_entries = d->numele;
+	uint64_t new_max = d->max;
+	uint64_t new_val = d->val;
+	if (new_max!= old_max || new_entries!= old_entries || new_val!= old_val) {
+		dictRehash(d,new_max);
+		return 1;
+	} else {
+		return 0;
+	}
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+    int ret = dictSize(d) > DICT_HT_INITIAL_SIZE;
+    uint64_t old_size = dictSize(d);
+    if (ret) {
+        dictExpand(d, (dictSize(d) + (us / 1000)) / 1000);
+    } else {
+        dictExpand(d, (int)(us / 1000));
+    }
+    return ret;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+#if ULONG_MAX-us < 1000
+    return 0;
+#else
+    uint64_t delta = us-1000;
+    dictEntry *de;
+    dictIterator *di = dictGetSafeIterator(d);
+    while((de = dictNext(di))!= NULL) {
+        uint64_t current = dictGetUnsignedIntegerVal(de);
+        if (current <= delta) {
+            dictSetUnsignedIntegerVal(de,delta);
+            return 1;
+        }
+    }
+    dictReleaseIterator(di);
+    return 0;
+#endif
+}"
+64,1E86D002109F35F0,"streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (cg == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->entries_read = entries_read;
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->id = id;
+    if (raxTryInsert(s->cgroups, (unsigned char*)name, namelen, cg, NULL)) {
+        s->cgroups_last_id = *id;
+        return cg;
+    } else {
+        zfree(cg);
+        return NULL;
+    }
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    cg->name = zstrdup(name);
+    cg->entries_read = entries_read;
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->id = *id;
+    if (raxTryInsert(s->cgroups, (unsigned char*)name, namelen, cg, NULL)) {
+        return cg;
+    } else {
+        zfree(cg);
+        return NULL;
+    }
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg;
+    cg = zmalloc(sizeof(*cg));
+    cg->name = zstrdup(name);
+    cg->entries_read = entries_read;
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->id = *id;
+    if (raxTryInsert(s->cgroups, (unsigned char*)name, namelen, cg, NULL)) {
+        return cg;
+    } else {
+        zfree(cg);
+        return NULL;
+    }
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg = zmalloc(sizeof(*cg));
+    if (!cg) return NULL;
+    cg->name = zstrdup(name);
+    cg->entries_read = entries_read;
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->id = *id;
+    cg->cgroups = dictCreate(&sdsKeyValueHashDictType);
+    sds cgname = sdsdup(name);
+    if (dictAdd(cg->cgroups, cgname, cg)!= DICT_OK) {
+        zfree(cg);
+        return NULL;
+    }
+    listAddNodeTail(s->cgroups, cg);
+    return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+    streamCG *cg;
+    if ((cg = zmalloc(sizeof(*cg))) == NULL) return NULL;
+    cg->name = zstrdup(name);
+    cg->last_id.ms = 0;
+    cg->last_id.seq = 0;
+    cg->entries_read = entries_read;
+    cg->id = *id;
+    if (raxTryInsert(s->cgroups, (unsigned char*)name, namelen, cg, NULL)) {
+        s->cgroups_last_update = mstime();
+        return cg;
+    } else {
+        zfree(cg);
+        return NULL;
+    }
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+	streamCG *group = zmalloc(sizeof(*group));
+	group->s = s;
+	group->name = name;
+	group->entries_read = entries_read;
+	group->id = *id;
+	group->last_id.ms = 0;
+	group->last_id.seq = 0;
+	group->cgroups = dictCreate(&sdsKeyValueHashDictType);
+	if (raxTryInsert(group->cgroups, (unsigned char*)name, namelen, NULL, 0)) {
+		if (raxTryInsert(s->cgroups, (unsigned char*)name, namelen, NULL, 0)) {
+			/* If we succeeded in inserting the new entry we can just return the pointer to the new group. */
+			return group;
+		} else {
+			/* If we failed to insert the new entry we can just free the memory we have and return NULL. */
+			raxFree(group->cgroups);
+			zfree(group);
+			return NULL;
+		}
+	} else {
+		/* If we reached this point, we failed to insert the new entry. */
+		raxFree(group->cgroups);
+		zfree(group);
+		return NULL;
+	}
+}"

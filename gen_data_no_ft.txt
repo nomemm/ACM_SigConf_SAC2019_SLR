@@ -1,0 +1,5167 @@
+,0,1,2,3,4,5,6,7,8,9,10
+0,8DB27DCC9D8540B9,"redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+	redisContext *context = redisConnectWithTimeout(ip, port, tv);
+	if (context == NULL) {
+		return NULL;
+	}
+	return context;
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+    return redisConnectWithTimeout(ip, port, tv);
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{ 
+	redisContext *context = redisConnectWithTimeout(ip, port, tv);
+	if (context == NULL) {
+		return NULL;
+	}
+	return context;
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+	if (redisConnectWithTimeout(ip, port, tv) == REDIS_OK)
+		return (redisContext *)redisContextFromRedis(ip, port);
+	else
+		return NULL;
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{ 
+    return redisConnect(ip, port, tv); 
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+  redisContext *redisContext = redisConnectWithTimeout(ip, port, tv);
+  if(redisContext == NULL) {
+    return NULL;
+  }
+  return redisContext;
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+
+    struct redisContext *redisContext;
+    redisContext = redisConnectWithTimeout(ip, port, tv);
+    if (redisContext == NULL) {
+        return NULL;
+    }
+    return redisContext;
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{ 
+  if (redisConnectWithTimeout(ip, port, tv) == REDIS_OK) 
+    return (redisContext *)redisContext; 
+  else 
+    return NULL; 
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{	
+	redisContext *c;
+	c = redisConnectWithTimeout(ip, port, tv);
+	return c;
+}","redisContext *redisConnectWrapper(const char *ip, int port, const struct timeval tv) 
+{
+	int ret;
+	struct redisContext *context;
+	struct timeval timeout;
+
+	context = redisConnectWithTimeout(ip, port, tv);
+
+	if (context == NULL) {
+		return NULL;
+	}
+
+	ret = context->setTimeout(tv);
+
+	if (ret!= REDIS_OK) {
+		redisFreeContext(context);
+		return NULL;
+	}
+
+	return context;
+}"
+1,9E709D637B4875DE,"static int dictCheckRehashingCompleted(dict *d) 
+{
+    if (d->rehashing_completed)
+        return 1;
+    else
+        return 0;
+}",static int dictCheckRehashingCompleted(dict *d) ,static int dictCheckRehashingCompleted(dict *d) ,static int dictCheckRehashingCompleted(dict *d) ,"static int dictCheckRehashingCompleted(dict *d) 
+{
+    return d->rehashing_completed;
+}",static int dictCheckRehashingCompleted(dict *d) ,static int dictCheckRehashingCompleted(dict *d) ,"static int dictCheckRehashingCompleted(dict *d) 
+{	
+	if (d->rehashing_done == 0) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
+}","static int dictCheckRehashingCompleted(dict *d) 
+{ 
+    dictIterator *di;
+    dictEntry *de;
+    int ret = 0;
+
+    if (d->rehashing_done)
+        return 0;
+
+    if (d->rehashing_done) {
+        ret = 1;
+        goto out;
+    }
+
+    di = dictGetIterator(d);
+    while((de = dictNext(di))!= NULL) {
+        ret = dictCheckRehashingCompleted(de->value);
+        if (ret)
+            break;
+    }
+    dictReleaseIterator(di);
+out:
+    return ret;
+}","static int dictCheckRehashingCompleted(dict *d) 
+{
+
+	if(d->rehashing_done) return 1;
+
+	if(d->rehashing_done) return 0;
+
+	if(d->rehashing_done_start) return 0;
+
+	if(d->rehashing_done_start == 0)
+	{
+		d->rehashing_done_start = 1;
+		d->rehashing_done = 1;
+		return 1;
+	}
+
+	if(d->rehashing_done_start == 1)
+	{
+		d->rehashing_done_start = 0;
+		d->rehashing_done = 1;
+		return 1;
+	}
+
+	return 0;
+}"
+2,B7AED9E236EBEC25,"size_t rioWriteBulkDouble(rio *r, double d) ","size_t rioWriteBulkDouble(rio *r, double d) ","size_t rioWriteBulkDouble(rio *r, double d) ","size_t rioWriteBulkDouble(rio *r, double d) 
+{ 
+	char buf[1024];
+	size_t n;
+	
+	n = snprintf(buf, sizeof(buf), ""$<%f>\r\n"", d);
+	if (n >= sizeof(buf))
+		return 0;
+	return rioWrite(r, buf, n);
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+  char buf[1024];
+  size_t n;
+  
+  n = snprintf(buf, sizeof(buf), ""$<%f>\r\n"", d);
+  if (n >= sizeof(buf))
+    return 0;
+  
+  n = rioWrite(r, buf, n);
+  if (n < 0)
+    return 0;
+  
+  return n;
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+	int i;
+	char buf[1024];
+	size_t n;
+
+	n = snprintf(buf, sizeof(buf), ""$<%f>\r\n"", d);
+	if (n >= sizeof(buf))
+		return 0;
+	for (i = 0; i < n; i++) {
+		if (r->write(r, buf, 1)!= 1)
+			return 0;
+	}
+	return 1;
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+  char buffer[4096];
+  int i;
+  size_t written = 0;
+  
+  for (i = 0; i < sizeof(buffer) - 1; i++) 
+  {
+    buffer[i] = (char)(d % 256);
+    d /= 256;
+  }
+  buffer[i] = '\0';
+  
+  written = rioWrite(r, buffer, i);
+  return written;
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{  
+    char buffer[4096];
+    size_t n = rioWrite(r, buffer, sizeof(buffer));
+    if (n > 0) {
+        buffer[n] = '\0';
+        return rioWrite(r, buffer, n);
+    } else {
+        return 0;
+    }
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{	size_t n = rioWrite(r, """", 1);
+	if (n < 1) return n;
+	char buf[32];
+	sprintf(buf, ""%f"", d);
+	size_t n2 = rioWrite(r, buf, strlen(buf));
+	if (n2 < 1) return n2;
+	return n + n2;
+}","size_t rioWriteBulkDouble(rio *r, double d) 
+{
+
+    if (r->state == RIO_STATE_ERROR) return 0;
+
+    char buf[1024];
+    int i=0;
+    int count=0;
+    int n=0;
+
+    if (d < 0) {
+        n = (int)floor(d);
+        d = d - n;
+    }
+
+    while (d > 0) {
+        if (i >= sizeof(buf)) {
+            if (n > sizeof(buf)) {
+                n = sizeof(buf);
+            }
+            else {
+                n = (int)sizeof(buf);
+            }
+        }
+
+        buf[i] = (char)d;
+        i++;
+        d--;
+    }
+
+    if (i > 0) {
+        buf[i] = '\0';
+        n = i;
+    }
+
+    if (n > 0) {
+        if (r->writeBulk(r->buf, n)!= n) {
+            return 0;
+        }
+
+        r->buf[n] = '\0';
+    }
+
+    return n;
+}"
+3,917B2B41B044128F,"sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) ","sds fillPercentileDistributionLatencies(sds info, const char* histogram_name, struct hdr_histogram* histogram) "
+4,63BD3C16404EFF44,"void luaSetErrorMetatable(lua_State *lua) 
+{
+	lua_pushvalue(lua, -2);
+	lua_setmetatable(lua, -2);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+    lua_pushlightuserdata(lua, &lua_error);
+    lua_rawset(lua, LUA_REGISTRYINDEX);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{ 
+	lua_pushvalue(lua, -2);
+	lua_setmetatable(lua, -2);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+  int i;
+  for (i = 0; i < 2; i++) {
+    lua_pushvalue(lua, -2);
+    lua_rawseti(lua, -2, i+1);
+  }
+}","void luaSetErrorMetatable(lua_State *lua) 
+{
+	if (lua_gettop(lua) < 2)
+		luaL_error(lua, ""not enough arguments"");
+	lua_pushmetatable(lua);
+	lua_pushvalue(lua, 1);
+	lua_setmetatable(lua, 2);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{ 
+  if (lua_gettop(lua) < 2) 
+  { 
+    lua_pushnil(lua); 
+    lua_pushliteral(lua, ""no error""); 
+    lua_settable(lua, -3); 
+  } 
+  else 
+  { 
+    lua_pushnil(lua); 
+    lua_pushliteral(lua, ""error""); 
+    lua_settable(lua, -3); 
+  } 
+}",void luaSetErrorMetatable(lua_State *lua) ,"void luaSetErrorMetatable(lua_State *lua) 
+{	lua_pushliteral(lua, ""__error"");
+	lua_pushliteral(lua, ""__metatable"");
+	lua_rawset(lua, -3);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{ 
+    lua_pushlightuserdata(lua, &lua_error);
+    lua_rawset(lua, LUA_REGISTRYINDEX);
+}","void luaSetErrorMetatable(lua_State *lua) 
+{  /* push a metatable for the error */
+	lua_pushmetatable(lua, lua_gettop(lua));  /* push a metatable for the error */
+}"
+5,91E59A8BE2E5834C,"sds luaGetStringSds(lua_State *lua, int index) 
+{
+	char *s;
+	s = lua_tostring(lua, index);
+	if (s == NULL)
+		return NULL;
+	return sdsnewlen(s, strlen(s));
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+  if (lua_isstring(lua, index))
+    return (sds)lua_tostring(lua, index);
+  else
+    return NULL;
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    return lua_tosdsds(lua,index,NULL);
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+	return lua_tostring(lua, index);
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{ 
+	return lua_tostring(lua, index); 
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+    sds s = NULL;
+    if (lua_isstring(lua, index)) {
+        s = lua_tolstring(lua, index, NULL);
+    }
+    return s;
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+	const char *s = lua_tostring(lua, index);
+	if (s == NULL)
+		return NULL;
+	return sdsnewlen(s, strlen(s));
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{ 
+  if (lua_isstring(lua, index)) 
+    return (sds)lua_tostring(lua, index); 
+  else 
+    return NULL; 
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{
+
+  if (index < 0) {
+    return NULL;
+  }
+
+  return lua_tostring(lua, index);
+}","sds luaGetStringSds(lua_State *lua, int index) 
+{ 
+	char *s;
+	s = lua_tostring(lua, index);
+	if (s == NULL) return NULL;
+	return sdsnewlen(s, strlen(s)); 
+}"
+6,C3CB2474A9CFDEB8,"static void luaCreateArray(lua_State *lua, robj **elev, int elec) ","static void luaCreateArray(lua_State *lua, robj **elev, int elec) ","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+	int i;
+	lua_newtable(lua);
+	for (i = 0; i < elec; i++) {
+		lua_pushstring(lua, e[i].ptr);
+		lua_rawseti(lua, -2, i+1);
+	}
+	lua_setglobal(lua, ""elev"");
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{ 
+    lua_newtable(lua);
+    for (int i = 0; i < elec; i++) {
+        lua_pushstring(lua, e[i].ptr);
+        lua_rawseti(lua, -2, i+1);
+    }
+    lua_setglobal(lua, ""elev"");
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+    if (elev) {
+        lua_newtable(lua);
+        for (int i = 0; i < elec; i++) {
+            lua_pushstring(lua, e[i].ptr);
+            lua_rawseti(lua, -2, i+1);
+        }
+    }
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+
+  /* Create a new Lua table with the given array of elements. */
+  lua_createtable(lua, elec, 0);
+
+  /* Add the elements to the table. */
+  for (int i = 0; i < elec; i++) {
+    lua_pushstring(lua, e[i].ptr);
+    lua_rawseti(lua, -2, i+1);
+  }
+
+  /* Add the table to the global table. */
+  lua_setglobal(lua, ""__array"");
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{	/* Create an array of Redis String Objects. */
+	int i;
+	lua_createtable(lua, elec, 0);
+	for (i = 0; i < elec; i++) {
+		if (elev[i] == NULL) {
+			elev[i] = new redisString(lua, NULL);
+		} else {
+			elev[i] = new redisString(lua, (char*)elev[i]);
+		}
+	}
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{ 
+  int i;
+  lua_newtable(lua);
+  for (i = 0; i < elec; i++) {
+    lua_pushstring(lua, e[i].ptr);
+    lua_rawseti(lua, -2, i+1);
+  }
+  lua_setfield(lua, -2, ""elev"");
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{
+	lua_createtable(lua, elec, 0);
+	for (int i = 0; i < elec; i++) {
+		lua_pushstring(lua, ekey[i].ptr);
+		lua_rawseti(lua, -2, i+1);
+	}
+}","static void luaCreateArray(lua_State *lua, robj **elev, int elec) 
+{ 
+	int i, j;
+	int n = 0;
+
+	lua_newtable(lua);
+	for (i = 0; i < elec; i++) {
+		lua_pushstring(lua, e[i].ptr);
+		lua_rawseti(lua, -2, n++);
+	}
+
+	for (i = 0; i < elec; i++) {
+		lua_pushstring(lua, e[i].ptr);
+		lua_rawseti(lua, -2, n++);
+	}
+
+	lua_setfield(lua, -2, ""elev"");
+	lua_setmetatable(lua, -2);
+}"
+7,BFD3412F5AA28A38,"void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)
+{
+
+  //if (duration_hist > 0) {
+  //  *latency_histogram = (struct hdr_histogram *)malloc(sizeof(struct hdr_histogram));
+  //  memset(*latency_histogram, 0, sizeof(struct hdr_histogram));
+  //  *latency_histogram->duration = duration_hist;
+  //  *latency_histogram->max = *latency_histogram->duration;
+  //  *latency_histogram->min = *latency_histogram->duration;
+  //  *latency_histogram->count = 0;
+  //}
+}","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)
+{
+	struct hdr_histogram *histogram = *latency_histogram;
+	int64_t *histogram_end = histogram + HISTOGRAM_SIZE;
+	int64_t *histogram_start = histogram + 1;
+	int64_t *histogram_end_p = histogram + HISTOGRAM_SIZE;
+
+	if (histogram == NULL) {
+		return;
+	}
+
+	while (histogram < histogram_end) {
+		if (histogram->duration > duration_hist) {
+			break;
+		}
+
+		histogram++;
+	}
+
+	while (histogram < histogram_end_p) {
+		if (histogram->duration < duration_hist) {
+			break;
+		}
+
+		histogram++;
+	}
+
+	if (histogram < histogram_end) {
+		*histogram = *histogram_end;
+	}
+}","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)
+{
+   *latency_histogram = (struct hdr_histogram *)malloc(sizeof(struct hdr_histogram));
+   if (*latency_histogram == NULL)
+   {
+      return;
+   }
+
+   (*latency_histogram)->duration = duration_hist;
+   (*latency_histogram)->max = (*latency_histogram)->duration;
+   (*latency_histogram)->min = (*latency_histogram)->duration;
+
+   (*latency_histogram)->size = sizeof(struct hdr_histogram);
+}","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)","void updateCommandLatencyHistogram(struct hdr_histogram **latency_histogram, int64_t duration_hist)"
+8,8C34082F9371FB54,"static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+	lua_pushstring(lua, libname);
+	lua_pushcfunction(lua, luafunc);
+	lua_settable(lua, LUA_REGISTRYINDEX);
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) ","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+  if (lua_isnoneornil(lua, -1)) {
+    lua_pushstring(lua, libname);
+    lua_pushcfunction(lua, luafunc);
+    lua_settable(lua, -3);
+  }
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+    luaL_loadbuffer(lua, libname, strlen(libname), ""=lib"");
+    lua_pushcfunction(lua, luafunc);
+    lua_setfield(lua, -2, ""__call"");
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{ 
+	luaL_loadbuffer(lua, libname, strlen(libname), libname); 
+	lua_pushcfunction(lua, luafunc); 
+	lua_setfield(lua, -2, ""__call""); 
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{ 
+  if (lua_isnoneornil(lua, -1)) {
+    lua_pushstring(lua, libname);
+    lua_pushcfunction(lua, luafunc);
+    return;
+  }
+  lua_pushstring(lua, libname);
+  lua_pushcfunction(lua, luafunc);
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+  const char *path;
+  int i;
+
+  path = luaL_checkstring(lua, 1);
+
+  if (path[0] == '@') {
+    path++;
+  }
+
+  for (i = 0; i < MAX_LIBRARY_PATH; i++) {
+    if (path[i] == '\0') {
+      break;
+    }
+  }
+
+  if (i == MAX_LIBRARY_PATH) {
+    return;
+  }
+
+  if (luaL_loadfile(lua, path)!= 0) {
+    return;
+  }
+
+  lua_pushcfunction(lua, luafunc);
+
+  if (luaL_loadbuffer(lua, """", 0, 0)!= 0) {
+    return;
+  }
+
+  lua_settop(lua, 0);
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{ 
+    lua_pushcfunction(lua, luafunc);
+    lua_setglobal(lua, libname);
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{	
+	int i;
+	
+	/* load library */
+	if (luaL_loadbuffer(lua, libname, strlen(libname), ""=lib"") == 0) {
+		/* check if library is already loaded */
+		for (i = 0; i < lua_gettop(lua); i++) {
+			if (lua_type(lua, i) == LUA_LOADLIB) {
+				if (strcmp(lua_tostring(lua, i), libname) == 0) {
+					/* library already loaded */
+					return;
+				}
+			}
+		}
+		/* add library to library list */
+		lua_pushvalue(lua, -2);
+		lua_rawset(lua, LUA_REGISTRYINDEX);
+		lua_pop(lua, 1);
+	}
+	/* add function to library list */
+	lua_pushcfunction(lua, luafunc);
+	lua_rawset(lua, LUA_REGISTRYINDEX);
+	lua_pop(lua, 1);
+}","static void luaLoadLib(lua_State *lua, const char *libname, lua_CFunction luafunc) 
+{
+
+   /* load library */
+   if (luaL_loadbuffer(lua, libname, strlen(libname), ""=lib"") == LUA_OK) 
+   {
+      /* register function */
+      lua_pushvalue(lua, -2);
+      lua_pushcclosure(lua, luafunc, 1);
+      lua_rawset(lua, -3);
+
+      /* return library */
+      return;
+   }
+   else 
+   {
+      /* error */
+      lua_pushstring(lua, ""cannot load library"");
+      lua_error(lua);
+   }
+}"
+9,49B52B607F6CE286,"void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+	lua_pushlightuserdata(lua, ptr);
+	lua_rawseti(lua, -2, name);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+    if (lua_gettop(lua) == 0) {
+        lua_pushstring(lua, name);
+        lua_rawset(lua, -3);
+    }
+    else {
+        lua_pushstring(lua, name);
+        lua_rawset(lua, -3);
+        lua_pushvalue(lua, -2);
+        lua_rawset(lua, -3);
+    }
+    lua_pushlightuserdata(lua, ptr);
+    lua_rawset(lua, -3);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+	lua_pushstring(lua, name);
+	lua_rawset(lua, -3);
+	lua_pushlightuserdata(lua, ptr);
+	lua_rawset(lua, -3);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{ 
+	lua_pushlightuserdata(lua, ptr);
+	lua_rawseti(lua, -2, name);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{ 
+    if (lua_gettop(lua) == 0) {
+        lua_pushstring(lua, name);
+        lua_pushlightuserdata(lua, ptr);
+        lua_settable(lua, LUA_REGISTRYINDEX);
+    }
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+  if(lua == NULL) return;
+  lua_pushlightuserdata(lua, ptr);
+  lua_rawseti(lua, -2, name);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{
+    // Save the given pointer on the Lua registry.
+    lua_pushlightuserdata(lua, ptr);
+    lua_rawseti(lua, LUA_REGISTRYINDEX, (int)name);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{	
+	lua_pushstring(lua, name);
+	lua_rawseti(lua, -3, (int)ptr);
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) 
+{ 
+  if(lua == NULL) return; 
+
+  if(lua_gettop(lua) == 0) 
+  { 
+    lua_pushstring(lua, name); 
+    lua_pushlightuserdata(lua, ptr); 
+    lua_settable(lua, LUA_REGISTRYINDEX); 
+  } 
+  else 
+  { 
+    lua_pushnil(lua); 
+    lua_setfield(lua, -2, name); 
+  } 
+}","void luaSaveOnRegistry(lua_State* lua, const char* name, void* ptr) "
+10,EE3BEF081FCA3E6A,void scriptingRelease(int async) ,void scriptingRelease(int async) ,void scriptingRelease(int async) ,"void scriptingRelease(int async) 
+{
+	if (async)
+		lua_async(lua_state, LUA_FREE);
+	else
+		lua_close(lua_state);
+}","void scriptingRelease(int async) 
+{
+	int i;
+	if (async) {
+		for (i = 0; i < MAX_ASYNC_EVENTS; i++) {
+			if (async_events[i].event) {
+				async_events[i].event(async_events[i].data);
+			}
+		}
+	} else {
+		for (i = 0; i < MAX_ASYNC_EVENTS; i++) {
+			if (async_events[i].event) {
+				async_events[i].event(NULL);
+			}
+		}
+	}
+}",void scriptingRelease(int async) ,"void scriptingRelease(int async) 
+{
+    //reset the scripting environment
+    if (async) {
+        //reset the Lua scripting environment
+        lua_close(lua_state);
+        lua_state = NULL;
+    } else {
+        //reset the Lua scripting environment
+        lua_close(lua_state);
+        lua_state = NULL;
+    }
+}","void scriptingRelease(int async) 
+{	
+	/* Release all resources related to Lua scripting. */
+	if (async)
+	{	
+		/* Release all resources related to Lua scripting. */
+		if (lua_close(lua_state)!= 0)
+		{
+			fprintf(stderr, ""Failed to close Lua state\n"");
+			exit(1);
+		}
+	}
+}",void scriptingRelease(int async) ,"void scriptingRelease(int async) 
+{
+
+  /* Release all resources related to Lua scripting. */
+  if (async)
+    lua_close(L);
+  else
+    lua_close(L);
+}"
+11,79DA9CB3C0C6D261,"static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+
+{
+
+    if (run_ctx->engine_ctx == NULL) {
+        run_ctx->engine_ctx = engine_ctx;
+    } else {
+        lua_pushlightuserdata(run_ctx->engine_ctx, engine_ctx);
+        lua_pushlightuserdata(run_ctx->engine_ctx, compiled_function);
+        lua_pushlightuserdata(run_ctx->engine_ctx, args);
+        lua_pushlightuserdata(run_ctx->engine_ctx, nargs);
+        lua_call(run_ctx->engine_ctx, 3, 1);
+    }
+}","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+
+{
+   lua_State *L = (lua_State *)engine_ctx;
+   scriptRunCtx *run_ctx = (scriptRunCtx *)run_ctx;
+
+   if (run_ctx->callable) {
+      run_ctx->callable(L, run_ctx->callable_ctx, compiled_function,
+                        keys, nkeys, args, nargs);
+   }
+}","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+
+{
+	scriptRunCtx *ctx = (scriptRunCtx *)run_ctx;
+
+	if (ctx->engine)
+	{
+		if (ctx->engine->call)
+			ctx->engine->call(ctx->engine, ctx->engine->compiled_function, ctx->engine->compiled_function_argc, ctx->engine->compiled_function_argv);
+		else
+			ctx->engine->call(ctx->engine, ctx->engine->compiled_function, ctx->engine->compiled_function_argc, ctx->engine->compiled_function_argv);
+	}
+	else
+	{
+		if (ctx->compiled_function)
+			ctx->compiled_function(ctx->compiled_function, ctx->compiled_function_argc, ctx->compiled_function_argv);
+		else
+			ctx->compiled_function(ctx->compiled_function, ctx->compiled_function_argc, ctx->compiled_function_argv);
+	}
+}","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+
+{
+
+  // Invoke the function
+  if (compiled_function)
+  {
+    // Call the function
+    lua_pushvalue(run_ctx, -1);
+    lua_pushvalue(run_ctx, -2);
+    lua_pushvalue(run_ctx, -3);
+    lua_call(run_ctx, 4, 1);
+
+    // Get the result
+    lua_remove(run_ctx, -2);
+    lua_remove(run_ctx, -3);
+    lua_remove(run_ctx, -1);
+
+    // Return the result
+    *keys = lua_tointeger(run_ctx, -1);
+    *args = lua_tointeger(run_ctx, -2);
+  }
+  else
+  {
+    // Call the function
+    lua_pushvalue(run_ctx, -1);
+    lua_pushvalue(run_ctx, -2);
+    lua_pushvalue(run_ctx, -3);
+    lua_call(run_ctx, 4, 1);
+
+    // Get the result
+    *keys = lua_tointeger(run_ctx, -1);
+    *args = lua_tointeger(run_ctx, -2);
+  }
+}","static void luaEngineCall(scriptRunCtx *run_ctx,
+                          void *engine_ctx,
+                          void *compiled_function,
+                          robj **keys,
+                          size_t nkeys,
+                          robj **args,
+                          size_t nargs)
+
+{
+
+
+    lua_State *L = run_ctx->L;
+
+    if (nkeys == 0) {
+        /* no keys */
+        lua_pushnil(L);
+        return;
+    }
+
+    if (nargs == 0) {
+        /* no args */
+        lua_pushnil(L);
+        return;
+    }
+
+    /*
+     * call the function with the given keys and args
+     */
+
+    if (nkeys == 1) {
+        /* single key */
+
+        /*
+         * call the function with the given key and args
+         */
+
+        if (lua_isfunction(L, *keys)) {
+            /* function */
+            lua_pushvalue(L, *keys);
+            lua_call(L, nargs, 1);
+        } else {
+            /* function */
+            lua_pushnil(L);
+        }
+    } else {
+        /* multiple keys */
+
+        /*
+         * call the function with the given keys and args
+         */
+
+        if (lua_isfunction(L, *keys)) {
+            /* function */
+            lua_pushvalue(L, *keys);
+            lua_pushvalue(L, *keys);
+            lua_call(L, nargs, 1);
+        } else {
+            /* function */
+            lua_pushnil(L);
+        }
+    }
+}"
+12,145F9153FF2001AA,void ThreadsManager_init(void) ,"void ThreadsManager_init(void) 
+{ 
+	int i; 
+	for(i=0;i<THREADS_MAX;i++) 
+	{ 
+		if(threads[i]==NULL) 
+		{ 
+			threads[i]=new Thread(NULL,(void*)i); 
+			threads[i]->start(); 
+		} 
+	} 
+}",void ThreadsManager_init(void) ,"void ThreadsManager_init(void) 
+{
+	int i;
+	for(i=0;i<THREADS_MAX;i++)
+	{
+		if(!threads[i].running)
+		{
+			threads[i].running=1;
+			threads[i].signal=THREADS_SIGNAL;
+			threads[i].thread=pthread_self();
+			break;
+		}
+	}
+}","void ThreadsManager_init(void) 
+{ 
+  /* Register the process to THREADS_SIGNAL */
+  pthread_sigmask(SIG_BLOCK, &sigmask, NULL); 
+}",void ThreadsManager_init(void) ,"void ThreadsManager_init(void) 
+{
+  if(!THREADS_SIGNAL)
+  {
+    THREADS_SIGNAL = 1;
+
+    // Create a signal handler for the thread
+    struct sigaction action;
+    action.sa_handler = ThreadsManager_signal_handler;
+    sigemptyset(&action.sa_mask);
+    action.sa_flags = 0;
+    sigaction(THREADS_SIGNAL, &action, 0);
+  }
+}","void ThreadsManager_init(void) 
+{
+	/*Register the process to THREADS_SIGNAL 
+	 */
+	if(!THREADS_SIGNAL)
+	{
+		THREADS_SIGNAL = CreateEvent(NULL,TRUE,FALSE,NULL);
+	}
+}",void ThreadsManager_init(void) ,"void ThreadsManager_init(void) 
+{
+    THREADS_SIGNAL = Signal(SIGINT);
+}"
+13,0CBA565430D94C57,static unsigned long evictionTimeLimitUs(void) ,"static unsigned long evictionTimeLimitUs(void) 
+{
+    return (unsigned long)(evictionTimeLimit * 1000);
+}","static unsigned long evictionTimeLimitUs(void) 
+{ 
+    return (unsigned long)(evictionTimeLimit * 1000); 
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+	unsigned long timeLimit;
+	time_t now;
+
+	time(&now);
+	timeLimit = (unsigned long)((now - m_startTime) * 1000);
+	return timeLimit;
+}","static unsigned long evictionTimeLimitUs(void) 
+{ 
+  unsigned long timeLimit; 
+  timeLimit = 1000000; 
+  return timeLimit; 
+}","static unsigned long evictionTimeLimitUs(void) 
+{   
+    static unsigned long lastTime = 0;
+    static unsigned long lastTimeUs = 0;
+    static unsigned long lastTimeMs = 0;
+    static unsigned long lastTimeMins = 0;
+    static unsigned long lastTimeSecs = 0;
+    static unsigned long lastTimeMinsMins = 0;
+    static unsigned long lastTimeSecsMins = 0;
+    static unsigned long lastTimeMinsSecs = 0;
+    static unsigned long lastTimeMinsSecsMins = 0;
+    static unsigned long lastTimeMinsMinsSecs = 0;
+    static unsigned long lastTimeMinsMinsSecsMins = 0;
+    static unsigned long lastTimeMinsMinsSecsMins = 0;
+    static unsigned long lastTimeMinsMinsSecsMins = 0;
+
+    if (lastTime == 0) {
+        lastTime = lastTimeUs = lastTimeMs = lastTimeMins = lastTimeSecs = lastTimeMinsMins = lastTimeSecsMins = lastTimeMinsMins = lastTimeMinsSecs = lastTimeMinsMinsSecs = 0;
+    }
+    return lastTime;
+}","static unsigned long evictionTimeLimitUs(void) 
+{ 
+
+   //return (unsigned long) (1.0 / (1.0 + (double) (evictionTimeLimitMs * 1000.0)));
+   return (unsigned long) (1.0 / (1.0 + (double) (evictionTimeLimitMs * 1000.0)));
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+    return 1000000UL;
+}","static unsigned long evictionTimeLimitUs(void) 
+{  
+	return 1000000UL;
+}","static unsigned long evictionTimeLimitUs(void) 
+{
+	unsigned long limit;
+	if(evictionTimeLimit == 0) {
+		limit = 0;
+	} else {
+		limit = evictionTimeLimit;
+	}
+	return limit;
+}"
+14,340C2A92AAB661BC,"static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) 
+{ 
+    if (arg->token == NULL) 
+    { 
+        return 0; 
+    } 
+    else 
+    { 
+        int i = 0; 
+        char *p = arg->token; 
+        char *q = arg->token; 
+        char *r = arg->token; 
+        while (i < arg->length && *p == *q) 
+        { 
+            p++; 
+            q++; 
+            i++; 
+        } 
+        if (i == arg->length) 
+        { 
+            return 0; 
+        } 
+        else 
+        { 
+            r = p; 
+            while (i < arg->length && *p == *q) 
+            { 
+                p++; 
+                q++; 
+                i++; 
+            } 
+            if (i == arg->length) 
+            { 
+                return 0; 
+            } 
+            else 
+            { 
+                return 1; 
+            } 
+        } 
+    } 
+}","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) ","static int matchToken(char **nextword, cliCommandArg *arg) "
+15,D1F436E96A24FDB2,void cliRestoreTTY(void) ,void cliRestoreTTY(void) ,void cliRestoreTTY(void) ,void cliRestoreTTY(void) ,void cliRestoreTTY(void) ,"void cliRestoreTTY(void) 
+{ 
+  if (tty_restore) 
+    { 
+      tty_restore = 0; 
+      if (tty_restore_fd > 0) 
+	close(tty_restore_fd); 
+      tty_restore_fd = -1; 
+    } 
+}",void cliRestoreTTY(void) ,"void cliRestoreTTY(void) 
+{
+    int i;
+    char *p;
+    char *q;
+
+    p = getenv(""TERM"");
+    if (p == NULL) {
+        p = ""xterm"";
+    }
+    q = strdup(p);
+    if (q == NULL) {
+        return;
+    }
+    for (i = 0; i < MAX_TERMINAL; i++) {
+        if (strcmp(q, terminal_names[i]) == 0) {
+            free(q);
+            return;
+        }
+    }
+    free(q);
+}",void cliRestoreTTY(void) ,"void cliRestoreTTY(void) 
+{
+    if (tty!= NULL) {
+        if (tty->tty_flags & TTY_FLAG_RESTORE) {
+            if (tty->tty_flags & TTY_FLAG_RESTORE_TERM) {
+                tty->tty_flags &= ~TTY_FLAG_RESTORE_TERM;
+                if (tty->tty_flags & TTY_FLAG_RESTORE_TERM_ON_EXIT) {
+                    tty->tty_flags &= ~TTY_FLAG_RESTORE_TERM_ON_EXIT;
+                }
+            } else {
+                tty->tty_flags |= TTY_FLAG_RESTORE;
+            }
+        } else {
+            if (tty->tty_flags & TTY_FLAG_RESTORE_TERM) {
+                tty->tty_flags &= ~TTY_FLAG_RESTORE_TERM;
+                if (tty->tty_flags & TTY_FLAG_RESTORE_TERM_ON_EXIT) {
+                    tty->tty_flags &= ~TTY_FLAG_RESTORE_TERM_ON_EXIT;
+                }
+            } else {
+                tty->tty_flags |= TTY_FLAG_RESTORE;
+            }
+        }
+    }
+}"
+16,F82D2410AAC6480A,static void cliPressAnyKeyTTY(void) ,static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+	int i;
+	for (i = 0; i < MAX_KEY_CODES; i++) {
+		if (key_codes[i] == 0) {
+			key_codes[i] = 1;
+			break;
+		}
+	}
+}","static void cliPressAnyKeyTTY(void) 
+{
+  char c;
+
+  while(1) {
+    c = getchar();
+    if(c == '\n') {
+      putchar('\r');
+      putchar('\n');
+    } else if(c == '\r') {
+      putchar('\n');
+    } else {
+      putchar(c);
+    }
+  }
+}",static void cliPressAnyKeyTTY(void) ,"static void cliPressAnyKeyTTY(void) 
+{
+    if (tty_is_open()) {
+        tty_putc('\n');
+        tty_flush();
+    }
+}","static void cliPressAnyKeyTTY(void) 
+{
+	cliSetTermMode(CLI_TTY);
+}","static void cliPressAnyKeyTTY(void) 
+{	
+	cliSetTermMode(CLI_TTY);
+}","static void cliPressAnyKeyTTY(void) 
+{
+    while(1) {
+        if(!getch()) {
+            puts(""\nPress any key to continue..."");
+            continue;
+        }
+        break;
+    }
+}","static void cliPressAnyKeyTTY(void) 
+{ 
+  if (tty_in_use) 
+  { 
+    cli_puts(""\nPress any key to continue...""); 
+    cli_flush(); 
+  } 
+}"
+17,9B049E7250A7BADF,"unsigned long bioPendingJobsOfType(int type) 
+{
+	unsigned long ret = 0;
+	struct bio_list *b = bio_list_get(&bio_list);
+	while (b) {
+		struct bio *bio = b->bio;
+		if (bio->bi_rw & REQ_WRITE) {
+			if (bio->bi_rw & REQ_DISCARD) {
+				ret++;
+			}
+		}
+		b = bio_list_next(b, b);
+	}
+	return ret;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+    return (unsigned long)bioPendingJobsOfType(type, 0);
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+	int i;
+	unsigned long n = 0;
+
+	for (i = 0; i < nJobs; i++) {
+		if (jobs[i].type == type)
+			n++;
+	}
+
+	return n;
+}","unsigned long bioPendingJobsOfType(int type) 
+{ 
+  unsigned long ret = 0;
+  if (type == BIO_TYPE_READ) 
+    ret += bioReadPendingJobs();
+  else if (type == BIO_TYPE_WRITE) 
+    ret += bioWritePendingJobs();
+  else if (type == BIO_TYPE_READ | BIO_TYPE_WRITE) 
+    ret += bioReadWritePendingJobs();
+  return ret;
+}",unsigned long bioPendingJobsOfType(int type) ,"unsigned long bioPendingJobsOfType(int type) 
+{ 
+	return bioPendingJobsOfType(type, 0); 
+}",unsigned long bioPendingJobsOfType(int type) ,"unsigned long bioPendingJobsOfType(int type) 
+{
+   unsigned long nbJobs = 0;
+   int i;
+   for (i = 0; i < nbJobs; i++) {
+      if (jobType[i] == type) {
+         nbJobs++;
+      }
+   }
+   return nbJobs;
+}","unsigned long bioPendingJobsOfType(int type) 
+{
+
+  return bioPendingJobsOfType(type, 0);
+}","unsigned long bioPendingJobsOfType(int type) 
+{	unsigned long n = 0;
+	if (type == BIO_TYPE_READ) {
+		n = bioReadPendingJobs();
+	} else if (type == BIO_TYPE_WRITE) {
+		n = bioWritePendingJobs();
+	}
+	return n;
+}"
+18,BADD1866448F8D09,"int reclaimFilePageCache(int fd, size_t offset, size_t length) 
+{ 
+    return 0; 
+}","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) 
+{
+	return 0;
+}","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) 
+{ 
+  int rv = 0; 
+
+  if (fd >= 0) 
+  { 
+    rv = ftruncate(fd, offset); 
+    if (rv < 0) 
+    { 
+      return rv; 
+    } 
+  } 
+  else 
+  { 
+    return -1; 
+  } 
+
+  if (length > 0) 
+  { 
+    rv = ftruncate(fd, offset + length); 
+    if (rv < 0) 
+    { 
+      return rv; 
+    } 
+  } 
+
+  return rv; 
+}","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) ","int reclaimFilePageCache(int fd, size_t offset, size_t length) "
+19,5A7030DACAB7E146,"static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+  if (ip[0] == '[' && ip[strlen(ip)-1] == ']') {
+    return formatAddrIPv6(buf, buf_len, ip, port);
+  } else {
+    return formatAddrIPv4(buf, buf_len, ip, port);
+  }
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{ 
+	char *p = buf;
+	char *end = buf + buf_len;
+	int ret;
+
+	if (ip[0] == '[' && ip[ip_len-1] == ']') {
+		p = ip + 1;
+		end = p + strlen(p);
+	}
+
+	ret = snprintf(p, end - p, ""%s:%d"", ip, port);
+	if (ret < 0 || ret >= end - p) {
+		return -1;
+	}
+
+	return p - buf;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) ","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+	char *end;
+	int ret;
+
+	if (ip[0] == '[' && ip[strlen(ip)-1] == ']') {
+		end = strchr(ip, ':');
+		if (end == NULL) {
+			return 0;
+		}
+		*end = '\0';
+		ret = sscanf(ip, ""[%d.%d.%d.%d]"", &ip[1], &ip[3], &ip[5], &ip[7]);
+		*end = ':';
+	} else {
+		ret = sscanf(ip, ""%d.%d.%d.%d"", &ip[1], &ip[3], &ip[5], &ip[7]);
+	}
+	if (ret!= 4) {
+		return 0;
+	}
+	return 1;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{ 
+  int i, j, len;
+  char *p;
+  char *end;
+  
+  if (buf_len < 1) return 0;
+
+  p = buf;
+  end = buf + buf_len;
+  i = 0;
+
+  while (p < end) {
+    if (*p == ':') {
+      if (i == 0) {
+        len = p - buf;
+        if (len > 0) {
+          memcpy(buf, p, len);
+          buf += len;
+          i++;
+        }
+      } else {
+        len = p - buf;
+        if (len > 0) {
+          memcpy(buf, p, len);
+          buf += len;
+          i++;
+          p += len;
+        } else {
+          p++;
+        }
+      }
+      i++;
+    } else {
+      if (i == 0) {
+        len = p - buf;
+        if (len > 0) {
+          memcpy(buf, p, len);
+          buf += len;
+          i++;
+        }
+      } else {
+        len = p - buf;
+        if (len > 0) {
+          memcpy(buf, p, len);
+          buf += len;
+          i++;
+          p += len;
+        } else {
+          p++;
+        }
+      }
+      i++;
+    }
+  }
+
+  if (i == 0) {
+    len = p - buf;
+    if (len > 0) {
+      memcpy(buf, p, len);
+      buf += len;
+    }
+  }
+
+  return i;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{
+	int ret = 0;
+	if (ip[0] == '[' && ip[strlen(ip)-1] == ']') {
+		ret = snprintf(buf, buf_len, ""%s:%d"", ip, port);
+	} else {
+		ret = snprintf(buf, buf_len, ""%s:%d"", ip, port);
+	}
+	return ret;
+}","static inline int formatAddr(char *buf, size_t buf_len, char *ip, int port) 
+{	
+	if (strchr(ip, ':')) {
+		int i = 0;
+		char *p = strchr(ip, ':');
+
+		if (p) {
+			*p = '\0';
+			i = atoi(ip);
+			*p = ':';
+		}
+		buf[i] = '\0';
+		return i;
+	}
+	return 0;
+}"
+20,E2463C73985C1A58,"void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) 
+{
+    char *addr_str = NULL;
+    char *addr_end = NULL;
+    int port = 0;
+
+    if (addr == NULL) {
+        addr_str = "":0"";
+        addr_end = addr_str + strlen(addr_str);
+    } else {
+        addr_str = addr;
+        addr_end = addr_str + strlen(addr_str);
+    }
+
+    if (addr_end - addr_str < addr_len) {
+        addr_str = (char *)malloc(addr_len + 1);
+        if (addr_str == NULL) {
+            return;
+        }
+        memcpy(addr_str, addr_str, addr_len);
+        addr_str[addr_len] = '\0';
+    }
+
+    if (remote) {
+        port = client->remote_port;
+    } else {
+        port = client->local_port;
+    }
+
+    if (addr_str!= NULL) {
+        if (addr_end - addr_str < addr_len) {
+            addr_str[addr_len] = '\0';
+        }
+        snprintf(addr, addr_len, ""%s:%d"", addr_str, port);
+    }
+}","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) 
+{
+	size_t i;
+	char *p;
+	char *end;
+	char *addr_str = NULL;
+	char *addr_str_end = NULL;
+
+	if (addr == NULL) {
+		addr = "":0"";
+	}
+
+	if (addr_len < NET_ADDR_STR_LEN) {
+		addr_len = NET_ADDR_STR_LEN;
+	}
+
+	if (remote) {
+		addr_str = client->addr;
+		addr_str_end = addr_str + strlen(addr_str);
+	}
+
+	p = addr;
+	end = addr + addr_len;
+
+	for (i = 0; i < addr_len; i++) {
+		if (p == end) {
+			addr_str = "":"";
+			addr_str_end = addr_str + 1;
+			p = addr;
+		}
+		addr_str[i] = *p++;
+	}
+
+	if (addr_str!= NULL) {
+		if (addr_str_end!= NULL) {
+			*addr_str_end = '\0';
+		}
+		addr = addr_str;
+	}
+}","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) ","void genClientAddrString(client *client, char *addr,
+                         size_t addr_len, int remote) 
+{ 
+  char *p = addr;
+  char *end = addr + addr_len;
+  char *end_p = addr + addr_len;
+  char *p_end = addr + addr_len;
+  char *p_end_p = addr + addr_len;
+
+  if (remote) {
+    if (p < end) {
+      *p++ = ':';
+      *p++ = '0';
+    }
+  } else {
+    if (p < end_p) {
+      *p++ = ':';
+      *p++ = '0';
+    }
+  }
+
+  while (p < end_p) {
+    if (p < end_p) {
+      *p++ = ':';
+      *p++ = '0';
+    }
+    *p++ = ':';
+    *p++ = '0';
+  }
+
+  if (p < end) {
+    *p = '\0';
+  }
+}"
+21,1F81C060E269517F,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,"int clusterLockConfig(char *filename) 
+{
+	FILE *fh = fopen(filename, ""r"");
+	if (fh == NULL) {
+		return C_ERR;
+	}
+	int ret = flock(fileno(fh), LOCK_EX);
+	if (ret == -1) {
+		fclose(fh);
+		return C_ERR;
+	}
+	fclose(fh);
+	return C_OK;
+}",int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,int clusterLockConfig(char *filename) ,"int clusterLockConfig(char *filename) 
+{
+    int ret;
+    int fd = -1;
+    char *lock_file = NULL;
+
+    if (filename == NULL) {
+        return C_ERR;
+    }
+
+    lock_file = (char *)malloc(strlen(filename) + 1);
+    if (lock_file == NULL) {
+        return C_ERR;
+    }
+
+    strcpy(lock_file, filename);
+
+    fd = open(lock_file, O_RDWR | O_CREAT, 0644);
+    if (fd < 0) {
+        free(lock_file);
+        return C_ERR;
+    }
+
+    ret = flock(fd, LOCK_EX);
+    if (ret == -1) {
+        close(fd);
+        free(lock_file);
+        return C_ERR;
+    }
+
+    return C_OK;
+}","int clusterLockConfig(char *filename) 
+{	
+	int fd, ret;
+	char *buf;
+
+	fd = open(filename, O_RDWR | O_CREAT, 0644);
+	if (fd < 0) {
+		return C_ERR;
+	}
+
+	buf = malloc(MAX_CONFIG_SIZE);
+	if (buf == NULL) {
+		close(fd);
+		return C_ERR;
+	}
+
+	ret = read(fd, buf, MAX_CONFIG_SIZE);
+	if (ret < 0) {
+		close(fd);
+		return C_ERR;
+	}
+
+	if (ret == 0) {
+		close(fd);
+		return C_OK;
+	}
+
+	if (ret < MAX_CONFIG_SIZE) {
+		close(fd);
+		return C_ERR;
+	}
+
+	if (write(fd, buf, MAX_CONFIG_SIZE) < 0) {
+		close(fd);
+		return C_ERR;
+	}
+
+	close(fd);
+	return C_OK;
+}"
+22,2EFBDA204288D7E9,"int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) 
+{
+  char *end;
+  double d;
+
+  if (slen == 0)
+    return 1;
+
+  d = strtod(s, &end);
+  if (end == s || *end!= '\0')
+    return 0;
+
+  if (dp!= NULL)
+    *dp = d;
+
+  return 1;
+}","int string2d(const char *s, size_t slen, double *dp) 
+{
+	int i;
+	char *p;
+	double d;
+
+	if (slen == 0)
+		return 0;
+
+	p = (char *)s;
+	d = 0.0;
+	for (i = 0; i < slen; i++) {
+		if (*p == '\0')
+			return 0;
+		if (*p =='')
+			continue;
+		if (*p == '.') {
+			if (i == 0)
+				return 0;
+			p++;
+			continue;
+		}
+		d = d * 10.0 + (*p - '0');
+		p++;
+	}
+	if (d == 0.0)
+		return 0;
+	*dp = d;
+	return 1;
+}","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) 
+{	
+	char *endptr;
+	double d;
+
+	if(!s ||!dp) return 0;
+
+	if(slen == 0) return 1;
+
+	d = strtod(s, &endptr);
+	if(endptr == s) return 0;
+
+	if(d < 0.0) return 0;
+
+	*dp = d;
+
+	return 1;
+}","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) ","int string2d(const char *s, size_t slen, double *dp) 
+{
+	size_t i;
+	char *p;
+	double d;
+
+	if (slen == 0)
+		return 0;
+
+	p = s;
+	d = 0.0;
+	for (i = 0; i < slen; i++) {
+		if (*p == '\0')
+			return 0;
+		if (*p == '.') {
+			p++;
+			d = d * 10.0 + (*p - '0');
+		} else if (*p >= '0' && *p <= '9') {
+			d = d * 10.0 + (*p - '0');
+		} else {
+			return 0;
+		}
+		p++;
+	}
+
+	*dp = d;
+	return 1;
+}","int string2d(const char *s, size_t slen, double *dp) 
+{
+    double d;
+    int i;
+    
+    if (slen == 0)
+        return 0;
+
+    d = strtod(s, &i);
+
+    if (i == slen)
+        return 1;
+
+    if (d < 0.0)
+        return 0;
+
+    *dp = d;
+    return 1;
+}","int string2d(const char *s, size_t slen, double *dp) 
+{ 
+    double d;
+    int i, j, k;
+    char *p;
+
+    if (slen == 0) {
+        return 0;
+    }
+
+    p = s;
+    d = 0.0;
+    for (i = 0; i < slen; i++) {
+        j = *p++;
+        if (j == '.') {
+            if (i == 0) {
+                return 0;
+            }
+            d = d * 10.0 + (*p - '0');
+            p++;
+        } else {
+            if (j < '0' || j > '9') {
+                return 0;
+            }
+            k = j - '0';
+            if (i == 0) {
+                d = d * 10.0 + k;
+            } else {
+                d = d * 10.0 + (*p - '0') * 10.0 + k;
+            }
+            p++;
+        }
+    }
+    if (d == 0.0) {
+        return 0;
+    }
+    *dp = d;
+    return 1;
+}"
+23,DAFD43712C86427A,int zslRandomLevel(void) ,"int zslRandomLevel(void) 
+{
+    return (int)((double)ZSKIPLIST_MAXLEVEL * pow(2.0, (double)rand() / (double)RAND_MAX));
+}",int zslRandomLevel(void) ,"int zslRandomLevel(void) 
+{ 
+	return (int)((double)ZSKIPLIST_MAXLEVEL * pow(2.0, (double)rand() / (double)RAND_MAX));
+}","int zslRandomLevel(void) 
+{
+   return zslRandomInt(ZSKIPLIST_MAXLEVEL);
+}",int zslRandomLevel(void) ,int zslRandomLevel(void) ,int zslRandomLevel(void) ,"int zslRandomLevel(void) 
+{
+	int i, j, k, l, m, n, n1, n2, n3;
+	int r;
+	int *p, *q;
+
+	r = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+	if (r < 1)
+		return 0;
+	if (r > ZSKIPLIST_MAXLEVEL)
+		return ZSKIPLIST_MAXLEVEL;
+
+	p = zslRandomIntArray(r);
+	q = zslRandomIntArray(r);
+
+	for (i = 0; i < r; i++) {
+		n1 = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+		n2 = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+		n3 = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+
+		for (j = 0; j < n1; j++) {
+			l = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+			for (k = 0; k < l; k++) {
+				m = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+				for (k = 0; k < m; k++) {
+					n = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+					for (k = 0; k < n; k++) {
+						n1 = zslRandomInt(ZSKIPLIST_MAXLEVEL);
+						for (k = 0; k < n1; k++) {
+							if (p[k] == n1 && q[k] == n) {
+								return k;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return 0;
+}",int zslRandomLevel(void) 
+24,56885AFA07B9F858,"REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    if (c->buf_usable_size < c->buf_size) {
+        size_t n = c->buf_size - c->buf_usable_size;
+        if (len > n) len = n;
+        memcpy(c->buf + c->buf_usable_size, s, len);
+        c->buf_usable_size += len;
+        return len;
+    } else {
+        return 0;
+    }
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+    size_t ret;
+    if (c->buf_usable_size < c->buf_size) {
+        ret = c->buf_size - c->buf_usable_size;
+        memcpy(c->buf + c->buf_usable_size, s, len);
+        c->buf_usable_size += len;
+        return ret;
+    }
+    return 0;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+	size_t n = c->buf_usable_size;
+	if (n + len > c->buf_size) {
+		if (c->buf_size == 0) {
+			c->buf_size = REDIS_BUF_SIZE;
+			c->buf = zrealloc(c->buf, c->buf_size);
+		} else {
+			c->buf_size *= 2;
+			c->buf = zrealloc(c->buf, c->buf_size);
+		}
+	}
+	memcpy(c->buf + n, s, len);
+	c->buf_usable_size += len;
+	return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+	size_t rlen;
+
+	assert(len);
+	assert(c->buf_usable_size >= len);
+	assert(c->buf_usable_size >= c->buf_size);
+	assert(c->buf_size >= c->buf_usable_size);
+	assert(c->buf_size >= len);
+
+	rlen = c->buf_size - c->buf_usable_size;
+	memcpy(c->buf + c->buf_usable_size, s, len);
+	c->buf_usable_size += len;
+	c->buf_size = c->buf_usable_size;
+	return rlen;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{ 
+    size_t n = c->buf_usable_size;
+    if (n + len > c->buf_size) {
+        if (c->buf_size == 0) {
+            c->buf_size = REDIS_BUF_SIZE;
+            c->buf = zrealloc(c->buf, c->buf_size);
+        } else {
+            c->buf_size *= 2;
+            c->buf = zrealloc(c->buf, c->buf_size);
+        }
+    }
+    memcpy(c->buf + n, s, len);
+    c->buf_usable_size += len;
+    return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+
+  /* Sanitize the string. */
+  if (len > c->buf_usable_size) {
+    len = c->buf_usable_size;
+  }
+
+  /* Add the string to the buffer. */
+  memcpy(c->buf + c->buf_usable_size, s, len);
+  c->buf_usable_size += len;
+
+  /* Sanitize the buffer. */
+  if (c->buf_usable_size > c->buf_max_size) {
+    c->buf_max_size = c->buf_usable_size;
+  }
+
+  return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+	char *p = c->buf;
+	size_t n = c->buf_usable_size;
+	if (len > n) len = n;
+	memcpy(p, s, len);
+	p += len;
+	c->buf_usable_size -= len;
+	return len;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{ 
+	size_t ret;
+	if (c->buf_usable_size < len) {
+		ret = c->buf_usable_size;
+		c->buf_usable_size = 0;
+	} else {
+		ret = len;
+		c->buf_usable_size -= len;
+	}
+	memcpy(c->buf, s, ret);
+	c->buf_usable_size = ret;
+	return ret;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{
+  int ret;
+  size_t n;
+  char *p;
+
+  if (c->buf_usable_size < len) {
+    /*
+    The client buffer is too small to hold the reply. We need to
+    allocate a new buffer.
+    */
+    ret = zmalloc_buffer_reserve(c->buf, len);
+    if (ret!= REDIS_OK) {
+      return REDIS_ERR;
+    }
+  }
+
+  /*
+  We need to copy the data into the new buffer.
+  */
+  p = c->buf;
+  n = c->buf_usable_size;
+
+  memcpy(p, s, len);
+  p += len;
+  c->buf_usable_size -= len;
+
+  /*
+  If the buffer is full, we need to reallocate it.
+  */
+  if (c->buf_usable_size == 0) {
+    ret = zmalloc_buffer_reserve(c->buf, c->buf_size);
+    if (ret!= REDIS_OK) {
+      return REDIS_ERR;
+    }
+  }
+
+  return REDIS_OK;
+}","REDIS_NO_SANITIZE(""bounds"")
+size_t _addReplyToBuffer(client *c, const char *s, size_t len) 
+{ 
+  char *p = (char*)c->buf;
+  size_t n = c->buf_usable_size;
+  size_t i;
+
+  if (len > n) len = n;
+  for (i = 0; i < len; i++) {
+    if (p[i] == '\0') {
+      p[i] = s[i];
+      return i+1;
+    }
+  }
+  return 0;
+}"
+25,F363CFD77CB13669,"unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+	unsigned long sum = 0;
+	unsigned long i;
+	for (i = 0; i < kvs->num_buckets; i++) {
+		sum += kvs->buckets[i];
+	}
+	return sum;
+}",unsigned long kvstoreBuckets(kvstore *kvs) ,"unsigned long kvstoreBuckets(kvstore *kvs) 
+{ 
+  unsigned long sum = 0;
+  unsigned long i;
+  for (i = 0; i < kvs->num_buckets; i++) 
+    sum += kvs->buckets[i];
+  return sum;
+}",unsigned long kvstoreBuckets(kvstore *kvs) ,"unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+	kvstoreBucket *bucket;
+	unsigned long sum = 0;
+	unsigned long i;
+	for (i = 0; i < kvs->numBuckets; i++) {
+		bucket = kvs->buckets[i];
+		sum += bucket->sum;
+	}
+	return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{ 
+    kvstoreBucket *bucket; 
+    unsigned long sum = 0; 
+    unsigned long i; 
+    for (i = 0; i < kvs->numBuckets; i++) 
+    { 
+        bucket = kvs->buckets[i]; 
+        sum += bucket->sum; 
+    } 
+    return sum; 
+}",unsigned long kvstoreBuckets(kvstore *kvs) ,"unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+    return kvs->buckets;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{  unsigned long sum = 0;
+  kvstoreIterator *it;
+  kvstoreIterator *it2;
+  kvstoreIterator *it3;
+  kvstoreIterator *it4;
+
+  it = kvs->buckets;
+  while (it) {
+    sum += it->value;
+    it = it->next;
+  }
+  return sum;
+}","unsigned long kvstoreBuckets(kvstore *kvs) 
+{
+
+  int i;
+  unsigned long sum = 0;
+  for (i = 0; i < kvs->num_buckets; i++) {
+    sum += kvs->buckets[i];
+  }
+  return sum;
+}"
+26,C9AD0CB2169AB708,"long getTimeZone(void) 
+{
+	struct tm tm;
+	time_t t;
+	
+	if (tzset(&tm) == -1)
+		return -1;
+	
+	t = mktime(&tm);
+	
+	return t;
+}","long getTimeZone(void) 
+{
+    return timezone;
+}","long getTimeZone(void) 
+{
+	long ret;
+	struct tm tm;
+	time_t t;
+	char buf[256];
+	
+	ret = gettimeofday(&t, NULL);
+	if (ret == -1) {
+		return -1;
+	}
+	
+	localtime_r(&t, &tm);
+	
+	ret = strftime(buf, sizeof(buf), ""%Z"", &tm);
+	if (ret == -1) {
+		return -1;
+	}
+	
+	return atoi(buf);
+}","long getTimeZone(void) 
+{ 
+	struct tm tm;
+	time_t t;
+	char *tz;
+	
+	if (tz_get_timezone(&tz) == 0) {
+		return (long) tz;
+	} else {
+		return -1;
+	}
+}","long getTimeZone(void) 
+{
+  static long timezone = -1;
+  static long timezone_offset = 0;
+  static long timezone_offset_ms = 0;
+  static long timezone_offset_sec = 0;
+
+  if (timezone == -1) {
+    timezone = getenv(""TZ"");
+    if (timezone == NULL) {
+      timezone = ""UTC"";
+    }
+  }
+
+  if (timezone!= NULL) {
+    timezone_offset = atoi(timezone);
+    timezone_offset_ms = timezone_offset * 1000;
+    timezone_offset_sec = timezone_offset_ms / 1000;
+  }
+
+  return timezone_offset_sec;
+}","long getTimeZone(void) 
+{
+    struct tm *tm;
+
+    tm = localtime(&(time(NULL) - timezone));
+
+    return tm->tm_gmtoff;
+}","long getTimeZone(void) 
+{ 
+    return (long)timezone; 
+}","long getTimeZone(void) 
+{
+
+   time_t t;
+   struct tm *tm;
+   char *tz;
+
+   tz = getenv(""TZ"");
+   if (tz == NULL)
+      return -1;
+
+   if (tz[0] == '\0') {
+      tz = ""UTC"";
+   } else {
+      tz = tz + 1;
+   }
+
+   t = time(NULL);
+   tm = localtime(&t);
+   if (tm == NULL) {
+      return -1;
+   }
+
+   return atoi(tz);
+}","long getTimeZone(void) 
+{ 
+  static long timezone = -1; 
+  if (timezone == -1) 
+  { 
+    timezone = getenv(""TZ""); 
+    if (timezone == NULL) 
+    { 
+      timezone = getenv(""TZ""); 
+    } 
+  } 
+  return timezone; 
+}","long getTimeZone(void) 
+{	
+	long ret = -1;
+
+	if (getenv(""TZ"")!= NULL) {
+		ret = atoi(getenv(""TZ""));
+	}
+
+	return ret;
+}"
+27,2F6791789BCEDFFA,"void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) ","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) ","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) ","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) ","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+	int i;
+	unsigned long long old_size = 0;
+	unsigned long long new_size = 0;
+
+	for (i=0; i<d->size; i++) {
+		old_size += d->data[i].size;
+		new_size += d->data[i].size;
+	}
+
+	*from_size = old_size;
+	*to_size = new_size;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{
+    *from_size = d->ht_size;
+    *to_size = d->ht_size;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{ 
+    if (d == NULL) {
+        return;
+    }
+
+    if (from_size == NULL) {
+        return;
+    }
+
+    if (to_size == NULL) {
+        return;
+    }
+
+    *from_size = d->ht_size;
+    *to_size = d->ht_size;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{ 
+  unsigned long long old_size = 0;
+  unsigned long long new_size = 0;
+  unsigned long long old_from_size = 0;
+  unsigned long long old_to_size = 0;
+
+  if (d == NULL) {
+    return;
+  }
+
+  old_from_size = d->from_size;
+  old_to_size = d->to_size;
+
+  if (from_size!= NULL) {
+    old_from_size = *from_size;
+  }
+
+  if (to_size!= NULL) {
+    old_to_size = *to_size;
+  }
+
+  if (old_from_size > old_to_size) {
+    new_size = old_to_size;
+  } else {
+    new_size = old_from_size;
+  }
+
+  if (new_size > old_to_size) {
+    new_size = old_to_size;
+  }
+
+  if (new_size > old_from_size) {
+    new_size = old_from_size;
+  }
+
+  d->from_size = new_size;
+  d->to_size = new_size;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) 
+{	
+	unsigned int i;
+	unsigned int j;
+
+	if(d == NULL) return;
+
+	for(i = 0; i < d->size; i++)
+	{
+		for(j = 0; j < d->size; j++)
+		{
+			if(d->data[i] == d->data[j])
+			{
+				if(d->data[i] == 0)
+				{
+					d->data[i] = 1;
+					d->size++;
+				}
+				else
+				{
+					d->data[i] = 0;
+					d->size++;
+				}
+				break;
+			}
+		}
+	}
+	*from_size = d->size;
+	*to_size = d->size;
+}","void dictRehashingInfo(dict *d, unsigned long long *from_size, unsigned long long *to_size) "
+28,252B6857A9882E34,"size_t dictMemUsage(const dict *d) 
+{
+	size_t size = 0;
+	size_t i;
+	for (i = 0; i < d->size; i++) 
+	{
+		size += d->keys[i]->memUsage();
+		size += d->values[i]->memUsage();
+	}
+	return size;
+}","size_t dictMemUsage(const dict *d) 
+{
+  return d->size - sizeof(dict) - sizeof(dict_item);
+}","size_t dictMemUsage(const dict *d) 
+{
+    size_t memUsage = 0;
+    for (size_t i = 0; i < d->size; i++) {
+        memUsage += d->keys[i]->memUsage();
+        memUsage += d->values[i]->memUsage();
+    }
+    return memUsage;
+}",size_t dictMemUsage(const dict *d) ,"size_t dictMemUsage(const dict *d) 
+{ 
+  size_t size = 0; 
+  size_t i; 
+  for (i = 0; i < d->size; i++) 
+    size += sizeof(dict_key_t) + sizeof(dict_value_t); 
+  return size; 
+}","size_t dictMemUsage(const dict *d) 
+{ 
+	return d->size - sizeof(dict) - sizeof(dict_item); 
+}","size_t dictMemUsage(const dict *d) 
+{
+    if (d == NULL)
+        return 0;
+    size_t size = 0;
+    size_t count = 0;
+    size_t i;
+    for (i = 0; i < d->size; i++) {
+        count += d->keys[i]->memUsage();
+        size += d->keys[i]->memUsage();
+    }
+    return size;
+}","size_t dictMemUsage(const dict *d) 
+{ 
+    size_t memUsage = 0; 
+    for (size_t i = 0; i < d->size; i++) 
+    {
+        memUsage += d->data[i].size; 
+    } 
+    return memUsage; 
+}",size_t dictMemUsage(const dict *d) ,"size_t dictMemUsage(const dict *d) 
+{
+
+  return sizeof(dict) + (d->nkeys * sizeof(dict_key)) + (d->nvals * sizeof(dict_val));
+}"
+29,744001044C7F2F92,"static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{ 
+    if (uc->uc_mcontext.gregs[REG_EIP]!= NULL) {
+        *(ucontext_t *)uc->uc_mcontext.gregs[REG_EIP] = *(ucontext_t *)eip;
+    }
+    return (void *)uc->uc_mcontext.gregs[REG_EIP];
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+  void *newEip = NULL;
+  if (uc->uc_mcontext.gregs[REG_EIP]!= 0) {
+    newEip = uc->uc_mcontext.gregs[REG_EIP];
+  }
+  uc->uc_mcontext.gregs[REG_EIP] = eip;
+  return newEip;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+	void *ret = NULL;
+	if (uc!= NULL) {
+		ret = (void*)uc->uc_mcontext.gregs[REG_EIP];
+	}
+	return ret;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{ 
+  ucontext_t *old_uc = uc;
+  void *new_eip;
+
+  new_eip = (void *)uc->uc_mcontext.gregs[REG_EIP];
+
+  if (new_eip!= NULL) {
+    uc->uc_mcontext.gregs[REG_EIP] = (ucontext_t)new_eip;
+  }
+
+  return old_uc;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{ 
+	void *ret = NULL;
+	
+	if (uc!= NULL) {
+		ret = (void*)uc->uc_mcontext.gregs[REG_EIP];
+		uc->uc_mcontext.gregs[REG_EIP] = (ucontext_t*)eip;
+	}
+	return ret;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    if (uc->uc_mcontext.gregs[REG_EIP]!= NULL) {
+        *(ucontext_t *)uc->uc_mcontext.gregs[REG_EIP] = *(ucontext_t *)eip;
+    }
+    return eip;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+	ucontext_t *old_uc = uc;
+	void *new_eip = NULL;
+	
+	if (uc!= NULL) {
+		new_eip = uc->uc_mcontext->__gregs[REG_EIP];
+	}
+	
+	if (new_eip!= NULL) {
+		uc->uc_mcontext->__gregs[REG_EIP] = (u32)new_eip;
+	}
+	
+	return old_uc;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+
+  /* Get the current eip */
+  void *currentEip = (void *)uc->uc_mcontext.gregs[REG_EIP];
+
+  /* Set the new eip */
+  uc->uc_mcontext.gregs[REG_EIP] = (ucontext_t)eip;
+
+  /* Return the current eip */
+  return currentEip;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{
+    if(eip!= NULL) {
+        *(ucontext_t *)eip = *(ucontext_t *)uc;
+    }
+    return eip;
+}","static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) 
+{	
+	void *newEip = NULL;
+	
+	if (uc->uc_mcontext.gregs[REG_EIP] == 0) 
+	{
+		newEip = (void*)uc->uc_mcontext.gregs[REG_EIP];
+		uc->uc_mcontext.gregs[REG_EIP] = (u32)newEip;
+	}
+	return newEip;
+}"
+30,1888551133AB0C37,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,"char *getObjectTypeName(robj *o) 
+{
+    return o->type == OBJ_STRING? (char*)o->ptr : NULL;
+}",char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,char *getObjectTypeName(robj *o) ,"char *getObjectTypeName(robj *o) 
+{ 
+	switch(TYPE(o)) {
+		case T_INT: return ""int"";
+		case T_FLOAT: return ""float"";
+		case T_LONG: return ""long"";
+		case T_DOUBLE: return ""double"";
+		case T_BOOL: return ""bool"";
+		case T_STRING: return ""string"";
+		case T_LIST: return ""list"";
+		case T_ARRAY: return ""array"";
+		case T_OBJ_STRING: return ""string"";
+		case T_OBJ_LIST: return ""list"";
+		case T_OBJ_DOUBLE: return ""double"";
+		case T_OBJ_BOOL: return ""bool"";
+		case T_OBJ_FLOAT: return ""float"";
+		case T_OBJ_LONG: return ""long"";
+		case T_OBJ_DOUBLE: return ""double"";
+		case T_OBJ_STRING: return ""string"";
+		case T_OBJ_LIST: return ""list"";
+		case T_OBJ_ARRAY: return ""array"";
+		case T_OBJ_OBJ_STRING: return ""string"";
+		case T_OBJ_OBJ_LIST: return ""list"";
+		case T_OBJ_OBJ_DOUBLE: return ""double"";
+		case T_OBJ_OBJ_BOOL: return ""bool"";
+		case T_OBJ_OBJ_FLOAT: return ""float"";
+		case T_OBJ_OBJ_LONG: return ""long"";
+		case T_OBJ_OBJ_DOUBLE: return ""double"";
+		default: return ""unknown"";
+	}
+}",char *getObjectTypeName(robj *o) 
+31,3EABC43DB66CDE6D,"void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+	*blocking_keys = *bloking_keys_on_nokey;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+  int i;
+  for(i=0; i<MAX_NUMBER_OF_CLIENTS; i++)
+  {
+    blocking_keys[i] = blocking_keys_on_nokey[i];
+    bloking_keys_on_nokey[i] = blocking_keys_on_nokey[i];
+  }
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+    *blocking_keys = 0;
+    *bloking_keys_on_nokey = 0;
+    
+    if (blocking_keys_on_nokey!= NULL)
+    {
+        *blocking_keys_on_nokey = *blocking_keys;
+    }
+    
+    if (bloking_keys!= NULL)
+    {
+        *bloking_keys = *blocking_keys;
+    }
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+
+
+	*blocking_keys = *bloking_keys_on_nokey;
+	*bloking_keys_on_nokey = 0;
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{ 
+
+    if(blocking_keys == NULL)
+    {
+        *blocking_keys = 0;
+        *bloking_keys_on_nokey = 0;
+    }
+    else
+    {
+        *blocking_keys = *blocking_keys + *bloking_keys_on_nokey;
+        *bloking_keys_on_nokey = 0;
+    }
+}","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) ","void totalNumberOfBlockingKeys(unsigned long *blocking_keys, unsigned long *bloking_keys_on_nokey) 
+{
+
+    if(blocking_keys == NULL)
+    {
+        return;
+    }
+
+    if(blocking_keys[0] == 0)
+    {
+        *blocking_keys = 0;
+        *bloking_keys_on_nokey = 0;
+    }
+    else
+    {
+        *blocking_keys = blocking_keys[0];
+        *blocking_keys_on_nokey = blocking_keys[0] + 1;
+    }
+}"
+32,53226269E2E8F8F7,"int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    return cmd->argc == 1 && cmd->argv[0][0] == '*';
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+	int j;
+	int argc = cmd->args_count;
+	int reply = 0;
+	int has_push = 0;
+	int has_sub = 0;
+
+	for (j = 0; j < argc; j++) {
+		if (strcasecmp(cmd->argv[j]->ptr,""push"") == 0) {
+			has_push = 1;
+		} else if (strcasecmp(cmd->argv[j]->ptr,""sub"") == 0) {
+			has_sub = 1;
+		}
+	}
+
+	if (has_push) {
+		reply = 1;
+	} else if (has_sub) {
+		reply = 2;
+	}
+
+	return reply;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+	return cmd->flags & REDIS_CMD_HAS_PUSH_AS_REPLY;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+
+  /* The command family has a push as a reply, or in other words, it
+  responds with a push (or several of them depending on how many
+  arguments it got), and has no reply. */
+  return cmd->flags & REDIS_CMD_PUSH_AS_REPLY;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+  return cmdHasReply(cmd, ""has-push"");
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+    if (cmd->argc!= 1) return REDIS_ERR;
+    return REDIS_OK;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{ 
+    return cmd->flags & REDIS_CMD_HAS_PUSH_AS_REPLY; 
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{ 
+	return cmdHasReply(cmd, ""has-push-as-reply""); 
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{
+	struct redisCommand *sub;
+	int j;
+
+	for (j = 0; j < cmd->numArgs; j++) {
+		sub = cmd->args[j];
+		if (sub->flags & REDIS_CMD_PUSH) {
+			return 1;
+		}
+	}
+	return 0;
+}","int cmdHasPushAsReply(struct redisCommand *cmd) 
+{ 
+  int j;
+  int argc = cmd->argsLength;
+
+  if (argc == 0) return 0;
+
+  for (j = 0; j < argc; j++) {
+    if (strcasecmp(cmd->argv[j]->ptr,""push"") == 0) return 1;
+    if (strcasecmp(cmd->argv[j]->ptr,""subscribe"") == 0) return 1;
+    if (strcasecmp(cmd->argv[j]->ptr,""unsubscribe"") == 0) return 1;
+  }
+  return 0;
+}"
+33,83A7FD4CE5361D05,"static connection *connCreateSocket(void) 
+{
+    connection *conn = (connection *)malloc(sizeof(connection));
+    if (conn == NULL) {
+        return NULL;
+    }
+    conn->type = CONN_SOCKET;
+    conn->sock = NULL;
+    conn->sock = socket(AF_INET, SOCK_STREAM, 0);
+    if (conn->sock == NULL) {
+        free(conn);
+        return NULL;
+    }
+    return conn;
+}","static connection *connCreateSocket(void) 
+{ 
+  connection *conn = (connection *)malloc(sizeof(connection));
+  if (conn == NULL) {
+    return NULL;
+  }
+  conn->type = CONN_SOCKET;
+  conn->sock = NULL;
+  conn->sock = socket(AF_INET, SOCK_STREAM, 0);
+  if (conn->sock == NULL) {
+    free(conn);
+    return NULL;
+  }
+  return conn;
+}","static connection *connCreateSocket(void) 
+{
+	return (connection *)malloc(sizeof(connection));
+}",static connection *connCreateSocket(void) ,"static connection *connCreateSocket(void) 
+{ 
+    return (connection *)malloc(sizeof(connection)); 
+}",static connection *connCreateSocket(void) ,"static connection *connCreateSocket(void) 
+{
+	struct sockaddr_storage ss;
+	socklen_t ss_len = sizeof(ss);
+	int fd;
+
+	fd = socket(AF_INET, SOCK_STREAM, 0);
+	if (fd < 0) {
+		return NULL;
+	}
+
+	if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(one)) < 0) {
+		close(fd);
+		return NULL;
+	}
+
+	if (setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &one, sizeof(one)) < 0) {
+		close(fd);
+		return NULL;
+	}
+
+	if (bind(fd, (struct sockaddr *) &ss, ss_len) < 0) {
+		close(fd);
+		return NULL;
+	}
+
+	return (connection *) fd;
+}",static connection *connCreateSocket(void) ,static connection *connCreateSocket(void) ,"static connection *connCreateSocket(void) 
+{
+  return new(struct connection);
+}"
+34,C09BE7C7570CD694,"void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) ","void trackInstantaneousMetric(int metric, long long current_value, long long current_base, long long factor) "
+35,F586455FB012D15B,"monotonic_clock_type monotonicGetType(void) 
+{
+	return monotonic_clock_type_monotonic;
+}","monotonic_clock_type monotonicGetType(void) 
+{
+    return (monotonic_clock_type)monotonic_clock_get_type();
+}","monotonic_clock_type monotonicGetType(void) 
+{
+  return monotonic_clock_type;
+}","monotonic_clock_type monotonicGetType(void) 
+{ 
+  return monotonic_clock_type_get(); 
+}","monotonic_clock_type monotonicGetType(void) 
+{ 
+	return (monotonic_clock_type)monotonic_clock_get_type(); 
+}","monotonic_clock_type monotonicGetType(void) 
+{
+	monotonic_clock_type result = MONOTONIC_CLOCK_UNKNOWN;
+
+	if (monotonic_clock_type_get() == MONOTONIC_CLOCK_UNKNOWN) {
+		result = MONOTONIC_CLOCK_MONOTONIC;
+	}
+
+	return result;
+}",monotonic_clock_type monotonicGetType(void) ,"monotonic_clock_type monotonicGetType(void) 
+{
+   static int initialized = 0;
+   static monotonic_clock_type type = 0;
+   if (!initialized) {
+      type = monotonic_clock_type_get();
+      initialized = 1;
+   }
+   return type;
+}","monotonic_clock_type monotonicGetType(void) 
+{ 
+    static const monotonic_clock_type type = MONOTONIC_CLOCK_TYPE_UNKNOWN; 
+    return type; 
+}","monotonic_clock_type monotonicGetType(void) 
+{
+
+  if(!monotonic)
+    return MONOTONIC_CLOCK_TYPE_UNKNOWN;
+
+  return monotonic->clock_type;
+}"
+36,FA12006B2296E11D,unsigned long functionsMemoryOverhead(void) ,"unsigned long functionsMemoryOverhead(void) 
+{
+    unsigned long total = 0;
+    for (unsigned int i = 0; i < nEngines; i++) 
+    {
+        total += engine[i].memoryOverhead;
+    }
+    return total;
+}",unsigned long functionsMemoryOverhead(void) ,"unsigned long functionsMemoryOverhead(void) 
+{
+	return (unsigned long)((unsigned long)&_end - (unsigned long)&_start);
+}",unsigned long functionsMemoryOverhead(void) ,"unsigned long functionsMemoryOverhead(void) 
+{
+	unsigned long ret;
+	ret = (unsigned long)&_end - (unsigned long)&_start;
+	return ret;
+}","unsigned long functionsMemoryOverhead(void) 
+{
+
+  return(sizeof(struct engine));
+}","unsigned long functionsMemoryOverhead(void) 
+{ 
+	return (unsigned long)((unsigned long)&(__func__) - (unsigned long)&(__func__)); 
+}","unsigned long functionsMemoryOverhead(void) 
+{
+    unsigned long memoryOverhead = 0;
+
+    if (combine_engine_list) {
+        for (int i = 0; i < combine_engine_list->size(); i++) {
+            memoryOverhead += combine_engine_list->get(i)->getMemoryOverhead();
+        }
+    }
+
+    return memoryOverhead;
+}","unsigned long functionsMemoryOverhead(void) 
+{ 
+  unsigned long total = 0; 
+  for (unsigned long i = 0; i < nEngines; i++) 
+    total += engine[i].memoryOverhead; 
+  return total; 
+}"
+37,C15524E7A8A6A858,"static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) ","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{ 
+  void *ret;
+  if (usable) 
+    *usable = 0;
+  ret = ztrycalloc(size);
+  if (usable) 
+    *usable = size;
+  return ret;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+  if (usable) 
+    *usable = 0;
+  if (size == 0) 
+    return NULL;
+  if (usable) 
+    *usable = size;
+  return malloc(size);
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    size_t usable_size = 0;
+    void *ret = NULL;
+    if (usable) {
+        usable_size = *usable;
+        if (usable_size > 0) {
+            ret = malloc(usable_size);
+            if (ret) {
+                memset(ret, 0, usable_size);
+                *usable = usable_size;
+            }
+        }
+    }
+    return ret;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+
+  /*Try allocating memory and zero it, and return NULL if failed.
+  '*usable' is set to the usable size if non NULL. 
+  */
+  void *ret = malloc(size);
+  if (ret == NULL) {
+    *usable = 0;
+    return NULL;
+  }
+  memset(ret, 0, size);
+  return ret;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+    size_t usable_size;
+    void *retval;
+
+    usable_size = size;
+    if (usable) {
+        *usable = 0;
+    }
+    retval = zcalloc(usable_size);
+    if (usable) {
+        *usable = usable_size;
+    }
+    return retval;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{ 
+    if (usable) 
+        *usable = 0;
+    if (size == 0) 
+        return NULL;
+    if (usable) 
+        *usable = size;
+    return malloc(size); 
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{
+	void *ptr = NULL;
+	size_t usable_size = 0;
+
+	if(usable!= NULL)
+		usable_size = *usable;
+
+	if(usable_size == 0) {
+		/*Try to allocate memory and return NULL if failed.
+		 *If the allocation fails, return NULL.
+		 */
+		ptr = malloc(size);
+		if(ptr == NULL)
+			return NULL;
+		*usable = usable_size;
+	} else {
+		/*Try to allocate memory and return NULL if failed.
+		 *If the allocation fails, return NULL.
+		 */
+		ptr = malloc(usable_size);
+		if(ptr == NULL)
+			return NULL;
+		memset(ptr, 0, usable_size);
+	}
+
+	return ptr;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{ 
+	size_t usable_size = 0;
+	void *ret = NULL;
+	size_t i;
+
+	for (i = 0; i < size; i++) {
+		if (usable[i]) {
+			usable_size += usable[i];
+			ret = (void *) (usable[i] + (usable_size - 1));
+		}
+	}
+
+	return ret;
+}","static inline void *ztrycalloc_usable_internal(size_t size, size_t *usable) 
+{	size_t usable_size = 0;
+	void *ret = NULL;
+	if (usable) {
+		usable_size = *usable;
+		if (usable_size > size) {
+			usable_size = size;
+			ret = zalloc(usable_size);
+		}
+	}
+	return ret;
+}"
+38,1D4A8BB4C20DCE3F,"static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+	unsigned long long count = 0;
+	int i;
+	for (i = 0; i < kvs->num_dicts; i++) {
+		if (kvs->dicts[i].didx == didx) {
+			count += kvs->dicts[i].num_keys;
+		}
+	}
+	return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+    unsigned long long total = 0;
+    for (int i = 0; i < kvs->num_dicts; i++) {
+        if (kvs->dicts[i].didx == didx) {
+            total += kvs->dicts[i].num_keys;
+        }
+    }
+    return total;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+  int i;
+  unsigned long long count = 0;
+  for(i=0;i<kvs->num_dicts;i++)
+    count += kvs->dicts[i].num_keys;
+  return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{ 
+  unsigned long long count = 0;
+  for (int i = 0; i < kvs->num_dicts; i++) {
+    if (kvs->dicts[i].didx == didx) {
+      count += kvs->dicts[i].num_keys;
+    }
+  }
+  return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+	kvstore_t *kv = kvs->kvstore;
+	unsigned long long count = 0;
+	int i, j;
+	for (i = 0; i < kv->num_dicts; i++) {
+		for (j = 0; j < kv->dicts[i].num_keys; j++) {
+			if (kv->dicts[i].keys[j] == didx) {
+				count++;
+			}
+		}
+	}
+	return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+  int i;
+  unsigned long long total = 0;
+
+  if (kvs->num_dicts == 0)
+    return 0;
+
+  for (i = 0; i < kvs->num_dicts; i++)
+    total += kvs->dicts[i].num_keys;
+
+  return total;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{
+
+    if (kvs->num_dicts == 0) {
+        return 0;
+    }
+
+    unsigned long long total = 0;
+    for (int i = 0; i < kvs->num_dicts; ++i) {
+        total += kvs->dicts[i].num_keys;
+    }
+
+    return total;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{	unsigned long long count = 0;
+	int i;
+	for (i = 0; i < kvs->num_dicts; i++) {
+		if (kvs->dict_index[i] == didx) {
+			count += kvs->dict_size[i];
+		}
+	}
+	return count;
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{ 
+	int i;
+	unsigned long long count = 0;
+	for (i = 0; i < kvs->num_dicts; i++) {
+		if (kvs->dicts[i].didx == didx) 
+			count += kvs->dicts[i].num_keys;
+	}
+	return count; 
+}","static unsigned long long cumulativeKeyCountRead(kvstore *kvs, int didx) 
+{  
+    unsigned long long total = 0;
+    int i;
+
+    for(i=0; i<kvs->num_dicts; i++) 
+    {
+        if(kvs->dicts[i].didx == didx) 
+            total += kvs->dicts[i].num_keys;
+    }
+
+    return total;
+}"
+39,53097E4BA66791C4,int kvstoreGetFairRandomDictIndex(kvstore *kvs) ,int kvstoreGetFairRandomDictIndex(kvstore *kvs) ,int kvstoreGetFairRandomDictIndex(kvstore *kvs) ,int kvstoreGetFairRandomDictIndex(kvstore *kvs) ,"int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{ 
+  if (kvs->num_dicts == 0) 
+    return 0; 
+  else 
+    return (kvs->num_dicts - 1) / 2; 
+}",int kvstoreGetFairRandomDictIndex(kvstore *kvs) ,"int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+	int index = 0;
+	int num_dicts = kvs->num_dicts;
+	int num_elements = kvs->num_elements;
+	int i;
+	for (i = 0; i < num_dicts; i++) {
+		if (kvs->dicts[i].num_elements > 0) {
+			index = i;
+			break;
+		}
+	}
+	return index;
+}",int kvstoreGetFairRandomDictIndex(kvstore *kvs) ,"int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{
+  return kvs->num_dicts;
+}","int kvstoreGetFairRandomDictIndex(kvstore *kvs) 
+{ 
+    return kvstoreGetRandomDictIndex(kvs, 0); 
+}"
+40,4301A1FCF0E2E43E,"int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+	int i;
+	for (i = didx; i < kvs->nDict; i++)
+	{
+		if (kvs->dict[i].n!= 0)
+			return i;
+	}
+	return -1;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if (didx == -1)
+        return -1;
+    if (didx >= kvs->nDict)
+        return -1;
+    return didx + 1;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+  int i = didx;
+  while (i >= 0) {
+    if (kvs->dicts[i].size() > 0) {
+      return i;
+    }
+    i--;
+  }
+  return -1;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+	kvstoreDict *d;
+	int i, j;
+
+	d = kvs->d;
+	i = didx;
+	j = i+1;
+	while (j < d->n) {
+		if (d->d[j] == 0) {
+			i = j;
+			break;
+		}
+		j++;
+	}
+	return i;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+    if(kvs->kvstore_type == KVSTORE_TYPE_MEMORY)
+    {
+        return kvs->kvstore_mem->kvstore_getNextNonEmptyDictIndex(kvs, didx);
+    }
+    else if(kvs->kvstore_type == KVSTORE_TYPE_MEMORY_MULTI)
+    {
+        return kvs->kvstore_mem->kvstore_getNextNonEmptyDictIndex(kvs, didx);
+    }
+    else
+    {
+        return -1;
+    }
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{ 
+	if (didx == -1) 
+		return -1;
+	
+	int i = didx;
+	while (i >= 0) 
+	{ 
+		if (kvs->dict[i].size > 0) 
+			return i; 
+		i--; 
+	} 
+	return -1; 
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{	
+	int i = didx;
+	while (i >= 0) {
+		if (kvs->dicts[i].size() > 0) {
+			return i;
+		}
+		i--;
+	}
+	return -1;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{
+
+  // if we have a non-empty dict, return the index
+  if (kvs->dicts.size() > 0) {
+    return kvs->dicts[kvs->dicts.size()-1].index;
+  }
+
+  // if we have a non-empty dict, return the index
+  if (kvs->dicts.size() > 0) {
+    return kvs->dicts[0].index;
+  }
+
+  // if we have a non-empty dict, return -1
+  return -1;
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{ 
+  int i;
+  for (i = didx; i < kvs->n; i++) 
+    if (kvs->dict[i]!= NULL) 
+      return i; 
+  return -1; 
+}","int kvstoreGetNextNonEmptyDictIndex(kvstore *kvs, int didx) 
+{ 
+    if(kvs->kvstore_type == KVSTORE_TYPE_MEMORY) {
+        return kvstoreGetNextNonEmptyDictIndex_mem(kvs, didx);
+    } else {
+        return kvstoreGetNextNonEmptyDictIndex_mem(kvs, didx);
+    }
+}"
+41,BB017E58605FED92,"dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+	dict *dict;
+	dict = kvs_it->dict;
+	if (dict == NULL) {
+		return NULL;
+	}
+	kvs_it->dict = NULL;
+	return dict;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    if (kvs_it->kvs_it_state == kvstoreIteratorState_Done)
+        return NULL;
+    else
+        return kvs_it->kvs_it_dict;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+	return kvs_it->next;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+  dict *d = NULL;
+  if (kvs_it->kvs_it_next) {
+    d = kvs_it->kvs_it_next;
+    kvs_it->kvs_it_next = NULL;
+  }
+  return d;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+
+  if(!kvs_it) return NULL;
+
+  if(!kvs_it->kvs) return NULL;
+
+  if(!kvs_it->kvs->next) return NULL;
+
+  return kvs_it->kvs->next;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{ 
+  if (kvs_it->kvstore == NULL) { 
+    return NULL; 
+  } 
+  return kvs_it->dict; 
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{ 
+    dict *dict;
+    dict_iterator *d;
+    dict_iterator_t *d_it;
+    dict_iterator_t *d_end;
+    int i;
+    
+    d = (dict_iterator *)kvs_it->data;
+    d_it = (dict_iterator *)d->data;
+    d_end = (dict_iterator *)d_it->data;
+    dict = d->dict;
+    
+    if (d_it == d_end) {
+	return NULL;
+    }
+    
+    i = d_it->key;
+    d_it->key = d_it->key + 1;
+    
+    if (d_it->key >= d_end->key) {
+	d_it->key = d_end->key;
+	d_it->value = d_end->value;
+	d_it->next = d_end;
+	return dict;
+    }
+    
+    return NULL;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{
+    kvstoreIterator *kvs_it_tmp = kvs_it;
+    dict *dict = NULL;
+
+    if (kvs_it_tmp->kvs_it_next) {
+        dict = kvs_it_tmp->kvs_it_next;
+        kvs_it_tmp->kvs_it_next = NULL;
+    }
+    return dict;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{  
+  return kvs_it->next;
+}","dict *kvstoreIteratorNextDict(kvstoreIterator *kvs_it) 
+{	
+	dict *d = NULL;
+	
+	if (kvs_it->kvs_it_next) {
+		d = kvs_it->kvs_it_next->dict;
+		if (d) {
+			d->next = NULL;
+		}
+	}
+	return d;
+}"
+42,8AF415B62FB4C87E,"int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) 
+{
+    if (d == NULL)
+        return DICT_ERR;
+    if (d->size == 0) {
+        d->size = size;
+        d->data = (unsigned char *)malloc(size);
+        if (d->data == NULL)
+            return DICT_ERR;
+        d->size = size;
+    }
+    return DICT_OK;
+}","int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) ","int dictTryExpand(dict *d, unsigned long size) 
+{	
+	int ret = DICT_ERR;
+
+	if(d == NULL)
+		return DICT_ERR;
+
+	if(d->dict_size < size) {
+		ret = dictExpand(d);
+		if(ret == DICT_ERR) {
+			return ret;
+		}
+	}
+	return ret;
+}","int dictTryExpand(dict *d, unsigned long size) 
+{ 
+  if (d == NULL) {
+    return DICT_ERR;
+  }
+
+  if (d->dict_size == 0) {
+    d->dict_size = size;
+    return 0;
+  }
+
+  if (d->dict_size + size > d->dict_size) {
+    return DICT_ERR;
+  }
+
+  return 0;
+}"
+43,8146BBD51D425734,"int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+  struct sockaddr_in sin;
+  int ret;
+
+  sin.sin_family = AF_INET;
+  sin.sin_port = htons(0);
+  sin.sin_addr.s_addr = INADDR_ANY;
+
+  ret = setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, &sin, sizeof(sin));
+  if (ret < 0) {
+    if (err)
+      snprintf(err, errlen, ""setsockopt SO_KEEPALIVE failed: %s"",
+               strerror(errno));
+    return -1;
+  }
+
+  if (interval > 0) {
+    ret = setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, &sin, sizeof(sin));
+    if (ret < 0) {
+      if (err)
+        snprintf(err, errlen, ""setsockopt SO_KEEPALIVE failed: %s"",
+                 strerror(errno));
+      return -1;
+    }
+  }
+
+  return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+  return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+
+	if (fd < 0)
+		return(0);
+
+	if (interval < 0)
+		interval = 0;
+
+	if (interval > 0)
+		return(0);
+
+	if (interval == 0)
+		return(0);
+
+	if (interval > MAX_TCP_KEEP_ALIVE)
+		interval = MAX_TCP_KEEP_ALIVE;
+
+	if (interval > 0) {
+		if (setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, &interval, sizeof(interval)) < 0)
+			return(0);
+	}
+
+	return(1);
+}","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+
+
+	int ret;
+	struct sockaddr_in sin;
+	struct sockaddr_in6 sin6;
+	struct sockaddr *sap;
+	struct sockaddr_in6 *sap6;
+
+	sap = (struct sockaddr *) &sin;
+	sap6 = (struct sockaddr_in6 *) &sin6;
+
+	if (fd < 0) {
+		return -1;
+	}
+
+	ret = setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, (char *) &interval, sizeof(interval));
+	if (ret < 0) {
+		return -1;
+	}
+
+	ret = getsockname(fd, sap, sizeof(struct sockaddr_in));
+	if (ret < 0) {
+		return -1;
+	}
+
+	sap6->sin6_family = AF_INET6;
+	sap6->sin6_port = htons(0);
+	sap6->sin6_addr = *sap6;
+
+	ret = setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, (char *) &interval, sizeof(interval));
+	if (ret < 0) {
+		return -1;
+	}
+
+	ret = getsockname(fd, sap6, sizeof(struct sockaddr_in6));
+	if (ret < 0) {
+		return -1;
+	}
+
+	sap6->sin6_family = AF_INET6;
+	sap6->sin6_port = htons(0);
+	sap6->sin6_addr = *sap6;
+
+	return 0;
+}","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+    struct linger ling;
+    int ret;
+
+    if (interval < 0)
+        return 0;
+
+    ling.l_onoff = 1;
+    ling.l_linger = interval;
+    ret = setsockopt(fd, SOL_SOCKET, SO_LINGER, &ling, sizeof(ling));
+    if (ret < 0)
+        return 0;
+
+    return 1;
+}","int anetKeepAlive(char *err, int fd, int interval)
+","int anetKeepAlive(char *err, int fd, int interval)
+
+{
+
+	if(!anetTcpKeepAlive(fd, interval))
+		return 0;
+	return 1;
+}"
+44,0662CB892CF59881,"int raxFind(rax *rax, unsigned char *s, size_t len, void **value) ","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) ","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+  size_t i;
+  int ret = 0;
+
+  if (rax == NULL) {
+    return 0;
+  }
+
+  for (i = 0; i < rax->n; i++) {
+    if (rax->items[i].s == s) {
+      if (value!= NULL) {
+        *value = rax->items[i].value;
+      }
+      ret = 1;
+      break;
+    }
+  }
+
+  return ret;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) ","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+	unsigned char *p = s;
+	int i = 0;
+	int found = 0;
+
+	while (i < len) {
+		if (p[i] == '\0') {
+			found = 1;
+			break;
+		}
+		i++;
+	}
+	if (found) {
+		if (value) {
+			*value = p + i;
+		}
+		return 1;
+	} else {
+		return 0;
+	}
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{	raxItem *item = raxFind(rax, s, len);
+	if (item == NULL) return 0;
+	if (value!= NULL) *value = item->value;
+	return 1;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{ 
+  raxItem *item;
+  raxItem *next;
+  raxItem *item2;
+  int found = 0;
+  int i = 0;
+  int j = 0;
+  int k = 0;
+
+  if (rax == NULL) return 0;
+
+  if (s == NULL) return 0;
+
+  item = rax->items;
+  while (item!= NULL) {
+    if (item->key == s) {
+      found = 1;
+      break;
+    }
+    item = item->next;
+  }
+
+  if (found == 1) {
+    if (value!= NULL) {
+      *value = item->value;
+    }
+    return 1;
+  }
+
+  if (value!= NULL) {
+    *value = NULL;
+  }
+
+  return 0;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{ 
+    size_t i; 
+
+    if (rax == NULL) { 
+        return 0; 
+    } 
+
+    for (i = 0; i < rax->nitems; i++) { 
+        if (s[i] == '\0') { 
+            break; 
+        } 
+    } 
+
+    if (i == rax->nitems) { 
+        return 0; 
+    } 
+
+    if (value!= NULL) { 
+        *value = (void *)rax->items[i].value; 
+    } 
+
+    return 1; 
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+    raxItem *item = NULL;
+    raxItem *next = NULL;
+    raxItem *item2 = NULL;
+
+    if (rax == NULL) {
+        return 0;
+    }
+
+    item = rax->first;
+    while (item!= NULL) {
+        if (item->key == s) {
+            if (value!= NULL) {
+                *value = item->value;
+            }
+            return 1;
+        }
+        next = item->next;
+        item = next;
+    }
+
+    item2 = rax->first;
+    while (item2!= NULL) {
+        if (item2->key == s) {
+            if (value!= NULL) {
+                *value = item2->value;
+            }
+            return 1;
+        }
+        next = item2->next;
+        item2 = next;
+    }
+
+    return 0;
+}","int raxFind(rax *rax, unsigned char *s, size_t len, void **value) 
+{
+
+  if (rax == NULL) {
+    return 0;
+  }
+
+  if (s == NULL) {
+    return 0;
+  }
+
+  if (len == 0) {
+    return 0;
+  }
+
+  size_t i;
+  for (i = 0; i < rax->size; i++) {
+    if (rax->items[i].s == s) {
+      *value = &(rax->items[i].value);
+      return 1;
+    }
+  }
+
+  return 0;
+}"
+45,8BE29A91E9BFE43F,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,"static void sigKillChildHandler(int sig) 
+{
+
+    if(sig == SIGUSR1)
+    {
+        printf(""Child process has been killed\n"");
+    }
+
+    exit(0);
+}",static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) ,static void sigKillChildHandler(int sig) 
+46,4E9473BD7ADA756A,"void ACLInitCommandCategories(void) 
+{
+	int i;
+	
+	for (i = 0; i < MAX_ACLCATEGORIES; i++)
+	{
+		acl_categories[i] = NULL;
+	}
+	
+	acl_categories[ACL_CATEGORY_USER] = new ACLCategory(ACL_CATEGORY_USER, ACL_CATEGORY_USER);
+	acl_categories[ACL_CATEGORY_GROUP] = new ACLCategory(ACL_CATEGORY_GROUP, ACL_CATEGORY_GROUP);
+	acl_categories[ACL_CATEGORY_OTHER] = new ACLCategory(ACL_CATEGORY_OTHER, ACL_CATEGORY_OTHER);
+	
+	return;
+}","void ACLInitCommandCategories(void) 
+{
+  /*Initializes ACLCommandCategories with default ACL categories and allocates space for 
+new ACL categories.
+ */
+  ACLCommandCategories = (ACLCommandCategories_t *) malloc(sizeof(ACLCommandCategories_t));
+  if (ACLCommandCategories == NULL) 
+  {
+    fprintf(stderr, ""Error: malloc failed\n"");
+    exit(1);
+  }
+  memset(ACLCommandCategories, 0, sizeof(ACLCommandCategories_t));
+}",void ACLInitCommandCategories(void) ,"void ACLInitCommandCategories(void) 
+{ 
+  /*Initializes ACLCommandCategories with default ACL categories and allocates space for 
+new ACL categories.
+ */
+  ACLCommandCategories = (ACLCommandCategories_t *) malloc(sizeof(ACLCommandCategories_t));
+  if (ACLCommandCategories == NULL) 
+  { 
+    fprintf(stderr, ""Error: malloc failed\n""); 
+    exit(1); 
+  } 
+  memset(ACLCommandCategories, 0, sizeof(ACLCommandCategories_t)); 
+}","void ACLInitCommandCategories(void) 
+{
+    ACLCommandCategories = (ACLCommandCategories_t *) malloc(sizeof(ACLCommandCategories_t));
+    if (ACLCommandCategories == NULL) 
+    {
+        fprintf(stderr, ""Error: malloc failed\n"");
+        exit(1);
+    }
+    memset(ACLCommandCategories, 0, sizeof(ACLCommandCategories_t));
+}",void ACLInitCommandCategories(void) ,void ACLInitCommandCategories(void) ,"void ACLInitCommandCategories(void) 
+{
+    acl_command_categories_t *new_categories = (acl_command_categories_t *) malloc(sizeof(acl_command_categories_t));
+    if (new_categories == NULL) {
+        fprintf(stderr, ""Error: malloc failed\n"");
+        exit(1);
+    }
+    new_categories->next = NULL;
+    new_categories->category_count = 0;
+    new_categories->acl_command_categories = NULL;
+    new_categories->acl_command_categories = new_categories;
+}","void ACLInitCommandCategories(void) 
+{
+
+   if (ACLCommandCategories == NULL) 
+   {
+      ACLCommandCategories = new ACLCommandCategory[MAX_ACLCOMMANDS];
+      if (ACLCommandCategories == NULL) 
+      {
+         return;
+      }
+   }
+   else 
+   {
+      for (int i=0; i<MAX_ACLCOMMANDS; i++) 
+      {
+         ACLCommandCategories[i] = new ACLCommandCategory[MAX_ACLCOMMANDS];
+         if (ACLCommandCategories[i] == NULL) 
+         {
+            return;
+         }
+      }
+   }
+}","void ACLInitCommandCategories(void) 
+{ 
+	int i;
+	int j;
+	int k;
+	int l;
+	int m;
+
+	for (i = 0; i < MAX_CATEGORIES; i++) 
+	{
+		for (j = 0; j < MAX_CATEGORIES; j++) 
+		{
+			for (k = 0; k < MAX_CATEGORIES; k++) 
+			{
+				for (l = 0; l < MAX_CATEGORIES; l++) 
+				{
+					for (m = 0; m < MAX_CATEGORIES; m++) 
+					{
+						ACLCommandCategories[i][j][k][l][m] = 0;
+					}
+				}
+			}
+		}
+	}
+}"
+47,8A932B490A6BCD6E,"int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{ 
+    robj *key;
+    int j;
+
+    if (argc!= 2) goto bad;
+
+    key = argv[1];
+    for (j=0; j<result->numKeys; j++) {
+        if (strcasecmp(key->ptr, result->keys[j].key) == 0) {
+            result->keys[j].flags |= REDIS_SORT_INCOMPLETE_KEY;
+            break;
+        }
+    }
+    if (j == result->numKeys) {
+        result->numKeys++;
+        result->keys = zrealloc(result->keys, sizeof(result->keys[0])*result->numKeys);
+        result->keys[result->numKeys-1].flags |= REDIS_SORT_INCOMPLETE_KEY;
+    }
+    return REDIS_OK;
+bad:
+    result->numKeys = 0;
+    return REDIS_ERR;
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) ","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+    robj *key;
+    int j;
+
+    if (argc!= 2) goto bad;
+    if (getKeys(argv[1], result)!= REDIS_OK) return REDIS_ERR;
+
+    /* We have to sort the keys, so we need to get the keys from the
+     * sorted list. */
+    key = createStringObject(result->keys, result->keys_len);
+    for (j = 0; j < result->keys_len; j++) {
+        if (getKeys(argv[0], key)!= REDIS_OK) goto bad;
+        addReply(cmd, key);
+        addReply(cmd, key);
+    }
+    return REDIS_OK;
+
+bad:
+    addReplyError(cmd, ""Wrong number of arguments"");
+    return REDIS_ERR;
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) 
+{
+
+  if (argc!= 2) {
+    addReplyError(c, ""SORT requires two arguments"");
+    return -1;
+  }
+
+  char *key = NULL;
+  robj *keyobj = NULL;
+
+  if (getKeys(cmd, argv[1], &keyobj, &key)!= REDIS_OK) {
+    addReplyError(c, ""Error getting keys"");
+    return -1;
+  }
+
+  if (keyobj == NULL) {
+    addReply(c, shared.err);
+    return -1;
+  }
+
+  if (result!= NULL) {
+    result->keys = keyobj;
+    result->numkeys = 1;
+  }
+
+  return 0;
+}","int sortROGetKeys(struct redisCommand *cmd, robj **argv, int argc, getKeysResult *result) "
+48,BA9F49D506CE32B7,"void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+  *announced_tcp_port = 0;
+  *announced_tls_port = 0;
+  *announced_cport = 0;
+  
+  if (tcp_port!= 0) {
+    *announced_tcp_port = announced_tcp_port[0];
+    *announced_tls_port = announced_tls_port[0];
+    *announced_cport = announced_cport[0];
+  }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+   int *tcp_port = announced_tcp_port;
+   int *tls_port = announced_tls_port;
+   int *cport = announced_cport;
+   int i;
+   
+   for (i=0; i<MAX_ANNOUNCED_PORTS; i++) {
+      if (announced_tcp_port[i]!= 0) {
+         *tcp_port = announced_tcp_port[i];
+         *tls_port = announced_tls_port[i];
+         *cport = announced_cport[i];
+         break;
+      }
+   }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{ 
+  *announced_tcp_port = announced_tcp_port[0];
+  *announced_tls_port = announced_tls_port[0];
+  *announced_cport = announced_cport[0];
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+  *announced_tcp_port = announced_tcp_port[0];
+  *announced_tls_port = announced_tls_port[0];
+  *announced_cport = announced_cport[0];
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    int i;
+    for (i = 0; i < MAX_ANNOUNCED_PORTS; i++) {
+        if (announced_tcp_port[i]!= 0) {
+            announced_tcp_port[i] = announced_tcp_port[i] + 1;
+        }
+        if (announced_tls_port[i]!= 0) {
+            announced_tls_port[i] = announced_tls_port[i] + 1;
+        }
+        if (announced_cport[i]!= 0) {
+            announced_cport[i] = announced_cport[i] + 1;
+        }
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{ 
+    int i;
+    for (i = 0; i < MAX_ANNOUNCED_PORTS; i++) {
+        if (announced_tcp_port[i]!= 0) {
+            *announced_tcp_port = announced_tcp_port[i];
+        } else {
+            *announced_tcp_port = announced_tcp_port[i] = announced_tls_port[i] = 0;
+        }
+    }
+    for (i = 0; i < MAX_ANNOUNCED_PORTS; i++) {
+        if (announced_cport[i]!= 0) {
+            *announced_cport = announced_cport[i];
+        } else {
+            *announced_cport = announced_cport[i] = announced_tls_port[i] = 0;
+        }
+    }
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+
+  // Derives the port for the cluster bus.
+  *announced_tcp_port = getAnnouncedPort();
+  *announced_tls_port = getAnnouncedPort();
+  *announced_cport = getAnnouncedPort();
+
+  // Derives the port for the cluster bus.
+  *announced_tcp_port = getAnnouncedPort();
+  *announced_tls_port = getAnnouncedPort();
+  *announced_cport = getAnnouncedPort();
+
+  // Derives the port for the cluster bus.
+  *announced_tcp_port = getAnnouncedPort();
+  *announced_tls_port = getAnnouncedPort();
+  *announced_cport = getAnnouncedPort();
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+
+	if (announced_tcp_port)
+		*announced_tcp_port = 0;
+	if (announced_tls_port)
+		*announced_tls_port = 0;
+	if (announced_cport)
+		*announced_cport = 0;
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    /*
+     * The port we are going to advertise is the port we are going to
+     * listen on.
+     */
+    *announced_tcp_port = *announced_tls_port = *announced_cport = 0;
+
+    /*
+     * The port we are going to advertise is the port we are going to
+     * listen on.
+     */
+    *announced_tcp_port = *announced_tls_port = *announced_cport =
+        getPort();
+}","void deriveAnnouncedPorts(int *announced_tcp_port, int *announced_tls_port,
+                          int *announced_cport) 
+{
+    *announced_tcp_port = announced_tcp_port[0];
+    *announced_tls_port = announced_tls_port[0];
+    *announced_cport = announced_cport[0];
+}"
+49,D96D35EDDAADBECC,robj *createStringObjectFromLongLongForValue(long long value) ,"robj *createStringObjectFromLongLongForValue(long long value) 
+{
+	robj *o;
+	o = createObject(ZSET);
+	o->ptr = createStringObjectFromLongLong(value);
+	return o;
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    robj *obj = createObject(ZSET);
+    setObjectCached(obj,value);
+    return obj;
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{ 
+  return createStringObjectFromLongLong(value); 
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{ 
+	robj *o;
+	o = createObject(REDIS_STRING,0);
+	addReply(o,createStringObjectFromLongLong(value));
+	return o;
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+    robj *o;
+    if (value == 0) {
+        o = createStringObject("""");
+    } else {
+        o = createStringObject(long2string(value));
+    }
+    return o;
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+	return createStringObjectFromLongLongForValue(value,0);
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+	return createObject(createListType(1, &value));
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{ 
+    robj *obj = createObject(ZSET);
+    setObjectCached(obj,value);
+    return obj; 
+}","robj *createStringObjectFromLongLongForValue(long long value) 
+{
+
+  char *str;
+  long long *l;
+
+  if (value == 0) {
+    str = NULL;
+    l = NULL;
+  } else {
+    str = (char *)malloc(sizeof(char)*(sizeof(long)+sizeof(long)));
+    l = (long long *)str;
+    *l = value;
+    str = (char *)l;
+  }
+
+  return createStringObject(str,l);
+}"
+50,8B7D3882CF9CBFEC,"unsigned int LRU_CLOCK(void) 
+{
+	return (unsigned int)sysconf(_SC_CLK_TCK);
+}",unsigned int LRU_CLOCK(void) ,"unsigned int LRU_CLOCK(void) 
+{ 
+  return (unsigned int)sysconf(_SC_CLK_TCK); 
+}",unsigned int LRU_CLOCK(void) ,"unsigned int LRU_CLOCK(void) 
+{
+    if(!(LRU_CLOCK_FREQ_LIMIT)) 
+        return(LRU_CLOCK_FREQ);
+    else 
+        return(LRU_CLOCK_FREQ_LIMIT);
+}",unsigned int LRU_CLOCK(void) ,"unsigned int LRU_CLOCK(void) 
+{	unsigned int clock;
+	unsigned int lru;
+	unsigned int lru_clock;
+
+	lru = get_lru();
+	clock = get_clock();
+
+	if (lru < clock) {
+		lru_clock = clock;
+	} else {
+		lru_clock = lru;
+	}
+
+	return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{ 
+    unsigned int lru_clock;
+    unsigned int lru_clock_precomputed;
+
+    lru_clock = get_lru_clock();
+    lru_clock_precomputed = lru_clock;
+    return lru_clock_precomputed;
+}","unsigned int LRU_CLOCK(void) 
+{
+	int i;
+	unsigned int clock;
+	unsigned int lru_clock;
+
+	lru_clock = 0;
+
+	for (i=0; i<MAX_LRU; i++) {
+		if (LRU[i].clock) {
+			clock = LRU[i].clock;
+			lru_clock = clock;
+		}
+	}
+
+	return lru_clock;
+}","unsigned int LRU_CLOCK(void) 
+{
+  unsigned int lru_clock;
+  unsigned int lru_clock_precomputed;
+  unsigned int lru_clock_res;
+  unsigned int lru_clock_res_precomputed;
+
+  lru_clock_res = get_lru_clock_resolution();
+  lru_clock_res_precomputed = lru_clock_res;
+
+  if (lru_clock_res < lru_clock_res_precomputed)
+    {
+      lru_clock = get_lru_clock();
+      lru_clock_precomputed = lru_clock;
+    }
+  else
+    {
+      lru_clock = get_lru_clock();
+      lru_clock_precomputed = lru_clock;
+    }
+
+  return lru_clock;
+}"
+51,CA200194ACEB9F7D,"void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{ 
+  zsetType(zobj, size_hint); 
+  if (zobj->encoding == REDIS_ENCODING_ZIPLIST) {
+    zsetType(zobj, REDIS_ENCODING_ZSTD);
+  }
+}","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{
+	if (size_hint == 0)
+		return;
+
+	if (zsetType(zobj) == ZSET) {
+		zsetType(zobj) = ZSET_TYPE_MOVED;
+		zsetSize(zobj) = size_hint;
+	}
+}","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{ 
+	if (size_hint > 0) {
+		zsetTypeMaybeConvert(zobj, size_hint);
+		return;
+	}
+	if (zsetType(zobj) == ZSET) {
+		zsetTypeMaybeConvert(zobj, zsetSize(zobj));
+		return;
+	}
+	if (zsetType(zobj) == ZSET_BYTES) {
+		zsetTypeMaybeConvert(zobj, zsetSize(zobj));
+		return;
+	}
+	if (zsetType(zobj) == ZSET_BYTES_BYTES) {
+		zsetTypeMaybeConvert(zobj, zsetSize(zobj));
+		return;
+	}
+	if (zsetType(zobj) == ZSET_BYTES_BYTES_BYTES) {
+		zsetTypeMaybeConvert(zobj, zsetSize(zobj));
+		return;
+	}
+	if (zsetType(zobj) == ZSET_BYTES_BYTES_BYTES_BYTES) {
+		zsetTypeMaybeConvert(zobj, zsetSize(zobj));
+		return;
+	}
+	if (zsetType(zobj) == ZSET_BYTES_BYTES_BYTES_BYTES_BYTES) {
+		zsetTypeMaybeConvert(zobj, zsetSize(zobj));
+		return;
+	}
+	if (zsetType(zobj) == ZSET_BYTES_BYTES_BYTES_BYTES_BYTES_BYTES) {
+		zsetTypeMaybeConvert(zobj, zsetSize(zobj));
+		return;
+	}
+}","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{
+    size_t size = zobj->encoding->size;
+    if (size_hint == 0) {
+        if (size == 0) {
+            zobj->encoding = zsDefault;
+            return;
+        } else if (size == 1) {
+            zobj->encoding = zsInt8;
+            return;
+        } else if (size == 2) {
+            zobj->encoding = zsInt16;
+            return;
+        } else if (size == 4) {
+            zobj->encoding = zsInt32;
+            return;
+        } else if (size == 8) {
+            zobj->encoding = zsInt64;
+            return;
+        }
+    }
+    if (size == 0) {
+        zobj->encoding = zsDefault;
+        return;
+    }
+    if (size == 1) {
+        zobj->encoding = zsInt8;
+        return;
+    }
+    if (size == 2) {
+        zobj->encoding = zsInt16;
+        return;
+    }
+    if (size == 4) {
+        zobj->encoding = zsInt32;
+        return;
+    }
+    if (size == 8) {
+        zobj->encoding = zsInt64;
+        return;
+    }
+}","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) ","void zsetTypeMaybeConvert(robj *zobj, size_t size_hint) 
+{ 
+    if (size_hint < ZSET_MIN_SIZE) {
+        zsetTypeMaybeConvert(zobj, ZSET_MIN_SIZE);
+        return;
+    }
+    if (zsetType(zobj) == ZSET_EMPTY) {
+        zsetTypeMaybeConvert(zobj, size_hint);
+    }
+}"
+52,60BC84F411EBEAB3,"int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+  int rc;
+  if (kvs->kvstoreType == KVSTORE_TYPE_DICT) {
+    rc = dictExpand(kvs, newsize, try_expand, skip_cb);
+  } else {
+    rc = dictTryExpand(kvs, newsize, try_expand, skip_cb);
+  }
+  return rc;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{
+
+   /*
+   This function is used to expand a kvstore.
+   */
+
+   int rc = DICT_OK;
+
+   if (try_expand == 1) {
+      rc = dictExpand(kvs, newsize, skip_cb);
+   } else {
+      rc = dictTryExpand(kvs, newsize, skip_cb);
+   }
+
+   return rc;
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) 
+{ 
+    if (kvstoreExpandShouldSkipDictIndex(skip_cb)) {
+        return kvstoreExpandSkipDictIndex(kvs, newsize, try_expand);
+    } else {
+        return kvstoreExpand(kvs, newsize, try_expand);
+    }
+}","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) ","int kvstoreExpand(kvstore *kvs, uint64_t newsize, int try_expand, kvstoreExpandShouldSkipDictIndex *skip_cb) "
+53,6B610D8B9F68DAE1,"int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{
+    if (moreMem > HASHTABLE_MAX_LOAD_FACTOR)
+        return 0;
+    return 1;
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{
+  return (size_t) (moreMem * HASHTABLE_MAX_LOAD_FACTOR * usedRatio);
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{ 
+  if (moreMem > HASHTABLE_MAX_LOAD_FACTOR) 
+    return 0;
+  return 1; 
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{
+    if(!dict_resize_allowed) return 0;
+    if(moreMem > HASHTABLE_MAX_LOAD_FACTOR) return 0;
+    if(usedRatio > 1.0) return 0;
+    return 1;
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{ 
+    if(!dict_resize_allowed) return 0;
+    if(moreMem > HASHTABLE_MAX_LOAD_FACTOR) return 0;
+    return (int) (dict_resize_allowed * usedRatio);
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) ","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{ 
+	size_t maxMem = DICT_MAX_SIZE * HASHTABLE_MAX_LOAD_FACTOR;
+	size_t maxMemory = maxMem * HASHTABLE_MAX_LOAD_FACTOR;
+	size_t maxMemory2 = maxMemory * HASHTABLE_MAX_LOAD_FACTOR;
+	size_t maxMemory3 = maxMemory2 * HASHTABLE_MAX_LOAD_FACTOR;
+	size_t maxMemory4 = maxMemory3 * HASHTABLE_MAX_LOAD_FACTOR;
+	size_t maxMemory5 = maxMemory4 * HASHTABLE_MAX_LOAD_FACTOR;
+	size_t maxMemory6 = maxMemory5 * HASHTABLE_MAX_LOAD_FACTOR;
+	size_t maxMemory7 = maxMemory6 * HASHTABLE_MAX_LOAD_FACTOR;
+
+	if (moreMem > maxMemory)
+		return 1;
+
+	if (moreMem > maxMemory2)
+		return 1;
+
+	if (moreMem > maxMemory3)
+		return 1;
+
+	if (moreMem > maxMemory4)
+		return 1;
+
+	if (moreMem > maxMemory5)
+		return 1;
+
+	if (moreMem > maxMemory6)
+		return 1;
+
+	if (moreMem > maxMemory7)
+		return 1;
+
+	return 0;
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{
+	int ret = 0;
+	if (moreMem > HASHTABLE_MAX_LOAD_FACTOR) {
+		ret = 1;
+	} else {
+		if (moreMem > HASHTABLE_MAX_LOAD_FACTOR * HASHTABLE_MAX_LOAD_FACTOR) {
+			ret = 1;
+		}
+	}
+	return ret;
+}","int dictResizeAllowed(size_t moreMem, double usedRatio) 
+{	
+	return (int) (moreMem * HASHTABLE_MAX_LOAD_FACTOR * usedRatio); 
+}"
+54,8A27BFF462650406,"static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{ 
+    redisDbOverwrite(db,key,val,update_if_existing);
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    redisDbOverwrite(db,key,val,update_if_existing);
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+  robj *tmp;
+
+  if (update_if_existing) {
+    tmp = dbOverwrite(db,key,val);
+    if (tmp == NULL) {
+      return;
+    }
+  } else {
+    tmp = dbAdd(db,key,val);
+  }
+  if (tmp == NULL) {
+    return;
+  }
+  if (tmp!= key) {
+    decrRefCount(tmp);
+  }
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) ","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+
+  if (db->flags & REDIS_BLOCKED) {
+    fprintf(stderr,""ERROR: Database is blocked. Aborting.\n"");
+    exit(1);
+  }
+
+  if (update_if_existing) {
+    if (db->refcount[key] == 0) {
+      db->refcount[key] = 1;
+      db->refcount_incr++;
+      return;
+    } else {
+      db->refcount_incr--;
+    }
+  }
+
+  if (db->refcount[key] == 1) {
+    db->refcount_incr++;
+    return;
+  }
+
+  if (db->refcount[key] == 2) {
+    db->refcount_incr++;
+    return;
+  }
+
+  if (db->refcount[key] == 3) {
+    db->refcount_incr++;
+    return;
+  }
+
+  if (db->refcount[key] == 4) {
+    db->refcount_incr++;
+    return;
+  }
+
+  if (db->refcount[key] == 5) {
+    db->refcount_incr++;
+    return;
+  }
+
+  fprintf(stderr,""ERROR: Database has a reference to key %s. Aborting.\n"",
+          key->ptr);
+  exit(1);
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) 
+{
+    redisDb *db2;
+    robj *tmp;
+
+    if (db->type == REDIS_BLOCKED) {
+        redisLog(REDIS_WARNING,""DB is already blocked, cannot add key"");
+        return;
+    }
+    if (db->type == REDIS_HASH) {
+        if (db->dict.exists(key)) {
+            redisLog(REDIS_WARNING,""Key already exists in hash, cannot add key"");
+            return;
+        }
+    }
+
+    db2 = (redisDb*)db->ptr;
+    tmp = db2->dict.get(key);
+    if (tmp == NULL) {
+        if (update_if_existing) {
+            db2->dict.set(key, val);
+        } else {
+            redisLog(REDIS_WARNING,""Key does not exist, cannot add key"");
+        }
+    } else {
+        if (update_if_existing) {
+            tmp->setVal(val);
+        } else {
+            redisLog(REDIS_WARNING,""Key already exists, cannot add key"");
+        }
+    }
+}","static void dbAddInternal(redisDb *db, robj *key, robj *val, int update_if_existing) "
+55,051CCB38BF73BF65,"int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    int ret;
+    sds key_s = sdsnewlen(key, strlen(key));
+    sds val_s = sdsnewlen(val->ptr, val->len);
+    ret = dbAdd(db, key_s, val_s);
+    sdsfree(key_s);
+    sdsfree(val_s);
+    return ret;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) ","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    robj *obj = NULL;
+    int ret = 0;
+
+    if (db->type == REDIS_RDB) {
+        obj = rdbLoad(db, key);
+        if (obj == NULL) {
+            return 0;
+        }
+        if (val!= NULL) {
+            obj->ptr = val;
+        }
+        ret = 1;
+    } else {
+        obj = createObject(REDIS_STRING,key);
+        if (obj == NULL) {
+            return 0;
+        }
+        if (val!= NULL) {
+            obj->ptr = val;
+        }
+        ret = 1;
+    }
+    return ret;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{ 
+    int ret;
+    sds key_sds = sdsnewlen(key, strlen(key));
+    robj *key_obj = createObject(REDIS_STRING,key_sds);
+    robj *val_obj = createObject(REDIS_STRING,val);
+
+    if (db->type == REDIS_RDB) {
+        ret = db->add(db, key_obj, val_obj);
+    } else {
+        ret = db->add(db, val_obj, key_obj);
+    }
+
+    if (ret == REDIS_OK) {
+        sdsfree(key_sds);
+        sdsfree(val_obj->ptr);
+        sdsfree(val_obj);
+        return 1;
+    } else {
+        sdsfree(key_sds);
+        return 0;
+    }
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+    robj *o;
+    int retval;
+
+    if (db->type!= REDIS_RDB) return 0;
+    if (db->dict.exists(key)) return 0;
+
+    o = createObject(REDIS_STRING,key);
+    if (!o) return 0;
+    o->encoding = REDIS_ENCODING_INT;
+    o->ptr = (char*)key;
+    o->enc_type = REDIS_ENCODING_INT;
+    o->enc_len = REDIS_STRING_KEY_LEN;
+    o->refcount = 1;
+
+    if (val) {
+        o->ptr = (char*)val->ptr;
+        o->enc_len = val->enc_len;
+        o->encoding = val->encoding;
+        o->ptr = (char*)val->ptr;
+        o->enc_type = val->encoding;
+        o->refcount = val->refcount;
+    }
+
+    retval = dbAdd(db,o);
+    if (retval == REDIS_OK) {
+        addReply(c,shared.ok);
+        decrRefCount(o);
+    }
+    return retval;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+
+  if (db->ready) {
+    return 0;
+  }
+
+  if (db->ready_for_commands) {
+    return 0;
+  }
+
+  if (db->ready_for_commands == 0) {
+    return 0;
+  }
+
+  if (db->ready_for_commands == 1) {
+    db->ready_for_commands = 0;
+    return 0;
+  }
+
+  if (db->ready_for_commands == 2) {
+    db->ready_for_commands = 0;
+    return 0;
+  }
+
+  if (db->ready_for_commands == 3) {
+    db->ready_for_commands = 0;
+    return 0;
+  }
+
+  if (db->ready_for_commands == 4) {
+    db->ready_for_commands = 0;
+    return 0;
+  }
+
+  if (db->ready_for_commands == 5) {
+    db->ready_for_commands = 0;
+    return 0;
+  }
+
+  if (db->ready_for_commands == 6) {
+    db->ready_for_commands = 0;
+    return 0;
+  }
+
+  return 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{ 
+	int retval = 0;
+
+	if (db->ready) {
+		if (db->ready(db,key,val)) {
+			retval = 1;
+		} else {
+			retval = 0;
+		}
+	}
+	return retval;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{	sds key_sds = sdsnew(key);
+	robj *obj = dbAdd(db, key_sds, val);
+	sdsfree(key_sds);
+	return obj? 1 : 0;
+}","int dbAddRDBLoad(redisDb *db, sds key, robj *val) 
+{
+	int retval = 0;
+	sds skey;
+
+	if (db->type!= REDIS_RDB) return 0;
+
+	skey = sdsnewlen(key, sdslen(key));
+	if (val) {
+		if (val->type == REDIS_STRING) {
+			sdsfree(val->ptr.sds);
+			val->ptr.sds = sdsnewlen(val->ptr.sds, sdslen(val->ptr.sds));
+		} else {
+			sdsfree(val->ptr.sds);
+			val->ptr.sds = NULL;
+		}
+	}
+
+	if (db->rdb.load(db->rdb.mem, skey, val) == 0) {
+		retval = 1;
+	} else {
+		sdsfree(skey);
+	}
+
+	return retval;
+}"
+56,3676B55A0684B8C4,static void kvstoreDictRehashingStarted(dict *d) ,"static void kvstoreDictRehashingStarted(dict *d) 
+{
+  kvstoreDictRehashingBucketCount++;
+  if (kvstoreDictRehashingBucketCount == 1) {
+    kvstoreDictRehashingBucketCount = 0;
+    kvstoreDictRehashingBucketSize = 0;
+  }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+    if (d->bucket_count == 0) {
+        d->bucket_count = 1;
+        d->bucket_size = 1;
+    }
+    else {
+        d->bucket_count++;
+        d->bucket_size = d->bucket_count * d->bucket_size;
+    }
+}",static void kvstoreDictRehashingStarted(dict *d) ,"static void kvstoreDictRehashingStarted(dict *d) 
+{
+    if(!d)
+        return;
+    if(d->bucket_count == 0)
+    {
+        d->bucket_count = 1;
+        d->bucket_size = 1;
+        d->bucket_size_incr = 1;
+    }
+    else
+    {
+        d->bucket_count++;
+        d->bucket_size = d->bucket_size_incr;
+        d->bucket_size_incr *= d->bucket_count;
+    }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{
+
+	//If there's only one dict, bucket count can be retrieved directly from single dict bucket.
+	if (d->num_buckets == 1) {
+		kvstoreDictRehashingBucketCount(d);
+		return;
+	}
+
+	//If there are multiple dicts, bucket count can be retrieved directly from single dict bucket.
+	if (d->num_buckets > 1) {
+		kvstoreDictRehashingBucketCount(d);
+		return;
+	}
+
+	//If there are no dicts, bucket count can be retrieved directly from single dict bucket.
+	kvstoreDictRehashingBucketCount(d);
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{ 
+  if (d->bucket_count == 0) {
+    d->bucket_count = 1;
+    d->bucket_size = 1;
+  }
+  else {
+    d->bucket_count++;
+    d->bucket_size = d->bucket_count * d->bucket_size;
+  }
+}","static void kvstoreDictRehashingStarted(dict *d) 
+{ 
+    int bucket_count = 0;
+    if (d->buckets) {
+        bucket_count = d->buckets->count;
+    }
+    if (bucket_count == 0) {
+        bucket_count = 1;
+    }
+    if (bucket_count == 1) {
+        kvstoreDictRehashingStarted(d->buckets->data);
+    }
+}",static void kvstoreDictRehashingStarted(dict *d) ,"static void kvstoreDictRehashingStarted(dict *d) 
+{
+
+   /*
+   * If there are multiple dicts, bucket count can be retrieved directly from single dict bucket.
+   * If there's one dict, bucket count can be retrieved directly from single dict bucket. 
+   */
+   if (d->ht_size > 1)
+   {
+      kvstoreDictRehashingBucketCount(d);
+   }
+   else if (d->ht_size == 1)
+   {
+      kvstoreDictRehashingBucketCount(d);
+   }
+   else
+   {
+      kvstoreDictRehashingBucketCount(d);
+   }
+}"
+57,235340703317EEF1,"void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{ 
+  if (kvs_it) {
+    kvstoreIteratorRelease(kvs_it);
+  }
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+  if (kvs_it) {
+    kvstoreIteratorRelease(kvs_it);
+  }
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    kvstoreIteratorRelease(kvs_it);
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+	if(kvs_it->kvstore!= NULL) {
+		kvstoreRelease(kvs_it->kvstore);
+		kvs_it->kvstore = NULL;
+	}
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+  kvstoreIterator *kvs_it_tmp = kvs_it;
+  kvstoreIterator *kvs_it_tmp_tmp = kvs_it;
+  kvstoreIterator *kvs_it_tmp_tmp_tmp = kvs_it;
+  kvstoreIterator *kvs_it_tmp_tmp_tmp_tmp = kvs_it;
+  kvstoreIterator *kvs_it_tmp_tmp_tmp_tmp_tmp = kvs_it;
+  kvstoreIterator *kvs_it_tmp_tmp_tmp_tmp_tmp_tmp = kvs_it;
+
+  kvstoreIteratorRelease(kvs_it_tmp);
+  kvstoreIteratorRelease(kvs_it_tmp_tmp);
+  kvstoreIteratorRelease(kvs_it_tmp_tmp_tmp);
+  kvstoreIteratorRelease(kvs_it_tmp_tmp_tmp_tmp);
+  kvstoreIteratorRelease(kvs_it_tmp_tmp_tmp_tmp_tmp);
+  kvstoreIteratorRelease(kvs_it_tmp_tmp_tmp_tmp_tmp_tmp);
+  kvstoreIteratorRelease(kvs_it_tmp_tmp_tmp_tmp_tmp_tmp_tmp);
+
+  free(kvs_it);
+}",void kvstoreIteratorRelease(kvstoreIterator *kvs_it) ,"void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{ 
+    kvstoreIteratorRelease(kvs_it); 
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+    if (kvs_it!= NULL) {
+        kvstoreIteratorRelease(kvs_it);
+    }
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{ 
+  if(kvs_it->kvstore!= NULL) 
+    { 
+      kvstoreRelease(kvs_it->kvstore); 
+      kvs_it->kvstore = NULL; 
+    } 
+}","void kvstoreIteratorRelease(kvstoreIterator *kvs_it) 
+{
+
+   /* Free the kvstoreIterator */
+   if (kvs_it!= NULL) {
+      kvstoreIteratorFree(kvs_it);
+   }
+
+   /* Free the kvstoreIterator */
+   return;
+}"
+58,B9770C032ED2D79F,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,void scanDatabaseForReadyKeys(redisDb *db) ,"void scanDatabaseForReadyKeys(redisDb *db) 
+{ 
+    int i;
+    for (i = 0; i < db->keys.size(); i++) {
+        if (db->keys[i].type == REDIS_RDB_BLOCKED_CLIENT) {
+            if (db->keys[i].flags & REDIS_RDB_BLOCKED_CLIENT) {
+                if (db->keys[i].flags & REDIS_RDB_BLOCKED_CLIENT_READY) {
+                    db->keys[i].flags &= ~REDIS_RDB_BLOCKED_CLIENT_READY;
+                    db->keys[i].flags |= REDIS_RDB_BLOCKED_CLIENT_READY;
+                    signalKeysReady(db->keys[i].db, db->keys[i].db->keys.size());
+                }
+            }
+        }
+    }
+}","void scanDatabaseForReadyKeys(redisDb *db) 
+{
+    if (db->readyKeys.size() == 0) return;
+    for (std::list<redisDbKey *>::iterator it = db->readyKeys.begin();
+         it!= db->readyKeys.end(); it++) {
+        redisDbKey *key = *it;
+        if (key->type == REDIS_KEY_TYPE_BLOCKED) {
+            if (key->flags & REDIS_KEY_BLOCKED) {
+                key->flags &= ~REDIS_KEY_BLOCKED;
+                key->flags |= REDIS_KEY_READY;
+                key->ready = true;
+            }
+        }
+    }
+}",void scanDatabaseForReadyKeys(redisDb *db) ,"void scanDatabaseForReadyKeys(redisDb *db) 
+{
+
+  /* Scan the list of keys that have one or more blocked clients for B[LR]POP
+or other blocking commands and signal the keys as ready if they are of the
+right type. */
+  for (int i = 0; i < db->numKeys; i++) {
+    if (db->keys[i].type == REDIS_RDB_BLOCKED_CLIENT) {
+      if (db->keys[i].flags & REDIS_RDB_BLOCKED_CLIENT_READY) {
+        db->keys[i].flags &= ~REDIS_RDB_BLOCKED_CLIENT_READY;
+        signalKeysReady(db, i);
+      }
+    }
+  }
+}","void scanDatabaseForReadyKeys(redisDb *db) 
+{
+	int i;
+	for (i = 0; i < db->numKeys; i++) {
+		if (db->keys[i].ready) {
+			if (db->keys[i].type == REDIS_BLOCKED_POP) {
+				if (db->keys[i].type == REDIS_BLOCKED_POP) {
+					/*
+					 * We have a blocking POP.
+					 * We need to signal the client that it is ready.
+					 */
+					signalClient(db->keys[i].client, REDIS_OK);
+				}
+			} else if (db->keys[i].type == REDIS_BLOCKED_POP_LAST) {
+				/*
+				 * We have a blocking POP_LAST.
+				 * We need to signal the client that it is ready.
+				 */
+				signalClient(db->keys[i].client, REDIS_OK);
+			}
+		}
+	}
+}",void scanDatabaseForReadyKeys(redisDb *db) ,"void scanDatabaseForReadyKeys(redisDb *db) 
+{
+
+  for (int i = 0; i < db->numKeys; i++) {
+    if (db->keys[i].ready) {
+      if (db->keys[i].type == REDIS_RDB_BLOCKED) {
+        if (db->keys[i].type == REDIS_RDB_BLOCKED) {
+          if (db->keys[i].type == REDIS_RDB_BLOCKED) {
+            db->keys[i].ready = 0;
+          }
+        } else {
+          db->keys[i].ready = 0;
+        }
+      } else {
+        db->keys[i].ready = 0;
+      }
+    }
+  }
+}"
+59,D7B3A40224F9F596,"void unblockClientOnTimeout(client *c) 
+{
+	if (c->timeout) {
+		c->timeout(c, NULL);
+	}
+	else {
+		c->timeout = c->timeout_cb;
+	}
+	c->timeout_cb = NULL;
+}",void unblockClientOnTimeout(client *c) ,"void unblockClientOnTimeout(client *c) 
+{
+  if(!c->pending)
+  {
+    if(c->timeout)
+    {
+      c->timeout(c);
+    }
+    else
+    {
+      // we don't have a timeout callback, so we have to use the timeout callback
+      // to remove the pending flag
+      c->pending = true;
+      c->timeout = c->timeoutCallback;
+      c->timeoutCallback = NULL;
+    }
+  }
+}","void unblockClientOnTimeout(client *c) 
+{
+    if (c->blocked) {
+        c->blocked = false;
+        c->timeout = 0;
+        c->timeoutCallback(c);
+    }
+}","void unblockClientOnTimeout(client *c) 
+{
+	//if (c->timeout) {
+	//	c->timeout(c, NULL);
+	//}
+	if (c->timeout) {
+		c->timeout(c, c->timeout);
+	}
+	else {
+		c->timeout(c, NULL);
+	}
+}","void unblockClientOnTimeout(client *c) 
+{ 
+  if(!c->pending) {
+    if(c->timeout) {
+      c->timeout(c);
+    } else {
+      c->timeout = c->timeoutCallback;
+      c->timeoutCallback = NULL;
+    }
+  } 
+}","void unblockClientOnTimeout(client *c) 
+{ 
+	c->timeout = 0; 
+	if (c->pending) { 
+		if (c->timeoutCallback) { 
+			c->timeoutCallback(c->timeoutCallbackContext); 
+		} 
+		c->pending = 0; 
+	} 
+}","void unblockClientOnTimeout(client *c) 
+{	
+	//remove pending flag
+	c->pending = false;
+	//remove timeout callback if any
+	if(c->timeoutCallback)
+	{
+		c->timeoutCallback(c,c->timeout);
+	}
+	//remove timeout reply if any
+	if(c->timeoutReply)
+	{
+		c->timeoutReply(c,c->timeout);
+	}
+}","void unblockClientOnTimeout(client *c) 
+{
+
+	/* If the client is blocked on a command, we need to remove the pending flag */
+	if (c->pending) {
+		c->pending = false;
+		if (c->callback) {
+			c->callback(c, NULL, NULL);
+		}
+	}
+}","void unblockClientOnTimeout(client *c) 
+{
+
+  /*
+  if (c->timeout_cb) {
+    c->timeout_cb(c, c->timeout_cb_data);
+  }
+  */
+
+  if (c->timeout_cb) {
+    c->timeout_cb(c, c->timeout_cb_data);
+  }
+
+  if (c->timeout_cb_data) {
+    free(c->timeout_cb_data);
+  }
+
+  if (c->timeout_cb_data) {
+    free(c->timeout_cb_data);
+  }
+
+  c->timeout_cb = NULL;
+
+  c->timeout_cb_data = NULL;
+}"
+60,1D2EBFAEB02EB387,"void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) ","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) 
+{ 
+	if(!c->slowlog) return;
+	if(c->slowlog->length() >= c->slowlog->maxLength())
+	{
+		c->slowlog->truncate(0);
+		c->slowlog->append(c->slowlog->length(), '\0');
+	}
+	if(c->slowlog->length() >= c->slowlog->maxLength())
+	{
+		c->slowlog->truncate(0);
+		c->slowlog->append(c->slowlog->length(), '\0');
+	}
+	if(!c->slowlog->append(duration, '\0'))
+	{
+		fprintf(stderr, ""Error: slowlog overflow\n"");
+		exit(1);
+	}
+}","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) 
+{ 
+    if (slowlog.size() >= config.max_slowlog_size) {
+        /* If the slow log is full, we need to trim it. */
+        if (slowlog.size() > config.max_slowlog_size) {
+            /* Trim the slow log. */
+            slowlog.resize(config.max_slowlog_size);
+        }
+    }
+    slowlog.push_entry(c, argv, argc, duration);
+}","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) 
+{
+    slowlogPushEntryIfNeeded(c, argv, argc, duration, 0);
+}","void slowlogPushEntryIfNeeded(client *c, robj **argv, int argc, long long duration) 
+{
+
+   if (slowlog.size() >= config.max_log_size) {
+      /* If the slow log is full, we need to trim it. */
+      if (slowlog.size() > config.max_log_size) {
+         /* Trim the slow log. */
+         slowlog.resize(slowlog.size() - config.max_log_size);
+      }
+   }
+
+   /* Push the entry into the slow log. */
+   slowlog.push(*argv, duration);
+
+   /* If the slow log is full, we need to trim it. */
+   if (slowlog.size() >= config.max_log_size) {
+      /* Trim the slow log. */
+      slowlog.resize(slowlog.size() - config.max_log_size);
+   }
+}"
+61,34E0B83C2E59A0E6,void updateClientMemoryUsage(client *c) ,"void updateClientMemoryUsage(client *c) 
+{
+  if (c->type == CLIENT_TYPE_PUBSUB) {
+    c->clientMemUsage = c->clientMemUsage + c->clientMemUsageBucket;
+    c->clientMemUsageBucket = 0;
+  } else {
+    c->clientMemUsage = c->clientMemUsage + c->clientMemUsageBucket;
+    c->clientMemUsageBucket = 0;
+  }
+}","void updateClientMemoryUsage(client *c) 
+{
+    c->clientMemUsage = c->clientMemUsage + c->clientMemUsageBucket;
+    c->clientMemUsageBucket = 0;
+    c->clientMemUsageBucket = (c->clientMemUsageBucket + 1) % MAX_CLIENT_MEM_USAGE_BUCKETS;
+}","void updateClientMemoryUsage(client *c) 
+{
+	if(c->clientType == CLIENT_TYPE_NORMAL)
+	{
+		c->clientMemUsage = c->clientMemUsage + c->clientMemUsageBucket;
+		c->clientMemUsageBucket = 0;
+	}
+	else
+	{
+		c->clientMemUsage = c->clientMemUsage + c->clientMemUsageBucket;
+		c->clientMemUsageBucket = 0;
+	}
+}","void updateClientMemoryUsage(client *c) 
+{
+   c->memUsage = c->memUsage + c->memUsageBucket;
+   c->memUsageBucket = 0;
+}","void updateClientMemoryUsage(client *c) 
+{
+
+    // update client memory usage
+    c->clientMemUsage = c->clientMemUsage + c->clientMemUsageDelta;
+    c->clientMemUsageDelta = 0;
+
+    // update server stats
+    c->serverMemUsage = c->serverMemUsage + c->serverMemUsageDelta;
+    c->serverMemUsageDelta = 0;
+
+    // update client stats
+    c->clientMemUsageDelta = 0;
+    c->serverMemUsageDelta = 0;
+
+    // update client stats
+    c->clientMemUsageDelta = 0;
+    c->serverMemUsageDelta = 0;
+}",void updateClientMemoryUsage(client *c) ,"void updateClientMemoryUsage(client *c) 
+{ 
+  if (c->type!= CLIENT_TYPE_PUBSUB) {
+    c->clientMemUsage = c->clientMemUsage + c->clientMemUsageBucket;
+    c->clientMemUsageBucket = 0;
+  } else {
+    c->clientMemUsageBucket++;
+  }
+}","void updateClientMemoryUsage(client *c) 
+{ 
+    c->clientMemUsage = c->clientMemUsage + c->clientMemUsageBucket;
+    c->clientMemUsageBucket = 0; 
+}","void updateClientMemoryUsage(client *c) 
+{
+
+  /*
+   * Update the client memory usage.
+   */
+
+  c->clientMemUsage = c->clientMemUsage + c->clientMemUsageDelta;
+  c->clientMemUsageDelta = 0;
+
+  /*
+   * Update the server stats.
+   */
+
+  c->serverMemUsage = c->serverMemUsage + c->serverMemUsageDelta;
+  c->serverMemUsageDelta = 0;
+
+  /*
+   * Update the client stats.
+   */
+
+  c->clientMemUsage = c->clientMemUsage + c->clientMemUsageDelta;
+  c->clientMemUsageDelta = 0;
+}"
+62,6F0C31DFFEC181FB,"streamCG *streamLookupCG(stream *s, sds groupname) ","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+	streamCG *cg;
+	cg = s->cg;
+	if (cg == NULL) return NULL;
+	if (cg->cg_name == NULL) return NULL;
+	if (strcmp(cg->cg_name, groupname) == 0) return cg;
+	return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) ","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    sds name = sdsdup(groupname);
+    streamCG *cg = sds2streamCG(name);
+    sdsfree(name);
+    return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+	int j;
+	streamCG *streamCG;
+	if (s->consumer == NULL) return NULL;
+	streamCG = s->consumer->lookup(s, groupname);
+	if (streamCG == NULL) return NULL;
+	for (j = 0; j < s->consumer->nstreams; j++)
+		if (s->consumer->streams[j] == streamCG) return s->consumer->streams[j];
+	return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+
+  if (s->consumer == NULL) return NULL;
+
+  return s->consumer->lookup(groupname);
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+	char *p;
+	streamCG *cg;
+
+	if (s->type!= STREAM_CONS)
+		return NULL;
+
+	p = sdsEncodedKey(groupname);
+	cg = sdsGetHashValue(p, s->hash);
+	sdsfree(p);
+
+	return cg;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{ 
+    streamCG *streamCG = NULL;
+    streamCG *streamCG_tmp = NULL;
+    int j;
+
+    if (groupname == NULL)
+        return NULL;
+
+    for (j = 0; j < s->nstreams; j++)
+    {
+        streamCG = s->streams[j];
+        if (strcasecmp(groupname, streamCG->group) == 0)
+        {
+            streamCG_tmp = streamCG;
+            break;
+        }
+    }
+
+    return streamCG_tmp;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{ 
+	streamCG *cg;
+	cg = s->cg;
+	if (cg == NULL) return NULL;
+	if (cg->cg_type == STREAM_CG_TYPE_GROUP) {
+		if (groupname == NULL) return NULL;
+		if (strcasecmp(groupname, cg->cg_name) == 0) return cg;
+	}
+	return NULL;
+}","streamCG *streamLookupCG(stream *s, sds groupname) 
+{
+    streamCG *cg;
+    sds name = sdsdup(groupname);
+    cg = sdsincr(name);
+    sdsfree(name);
+    return cg;
+}"
+63,561120EE41B27B2E,"int dictRehashMicroseconds(dict *d, uint64_t us) ","int dictRehashMicroseconds(dict *d, uint64_t us) ","int dictRehashMicroseconds(dict *d, uint64_t us) ","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+  uint64_t delta = us - d->rehash_start;
+  if (delta > 0) {
+    d->rehash_start = us;
+    d->rehash_end = us + delta;
+    return 0;
+  } else {
+    return -1;
+  }
+}","int dictRehashMicroseconds(dict *d, uint64_t us) ","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+  if (d == NULL) return 0;
+  if (us == 0) return 0;
+  if (us > 1000) return 0;
+  if (us < 100) return 0;
+  return dictRehash(d,us/1000);
+}","int dictRehashMicroseconds(dict *d, uint64_t us) ","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{ 
+  uint64_t delta = us - d->rehash_start;
+  if (delta > 0) {
+    d->rehash_start = us;
+    d->rehash_end = us + delta;
+    return 0;
+  } else {
+    return -1;
+  }
+}","int dictRehashMicroseconds(dict *d, uint64_t us) 
+{
+	int ret = 0;
+	uint64_t delta = us - d->rehash_start_us;
+	if (delta > 0) {
+		ret = dictRehash(d, delta);
+		if (ret == DICT_OK) {
+			d->rehash_start_us = us;
+		}
+	}
+	return ret;
+}","int dictRehashMicroseconds(dict *d, uint64_t us) "
+64,1E86D002109F35F0,"streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{	streamCG *cg;
+	cg = (streamCG *)malloc(sizeof(streamCG));
+	if (cg == NULL) {
+		return NULL;
+	}
+	cg->name = (char *)malloc(namelen+1);
+	if (cg->name == NULL) {
+		free(cg);
+		return NULL;
+	}
+	strncpy(cg->name, name, namelen);
+	cg->name[namelen] = '\0';
+	cg->last_server = id;
+	cg->entries_read = entries_read;
+	cg->next = NULL;
+	cg->prev = NULL;
+	if (s->cg == NULL) {
+		s->cg = cg;
+	} else {
+		streamCG *cg_next = s->cg;
+		while (cg_next->next!= NULL) {
+			cg_next = cg_next->next;
+		}
+		cg_next->next = cg;
+	}
+	return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) ","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+  char *name_copy = (char *)malloc(namelen+1);
+  memcpy(name_copy, name, namelen);
+  name_copy[namelen] = 0;
+  streamCG *cg = (streamCG *)malloc(sizeof(streamCG));
+  cg->name = name_copy;
+  cg->last_server = id;
+  cg->entries_read = entries_read;
+  cg->next = NULL;
+  cg->prev = NULL;
+  cg->next_read = 0;
+  cg->prev_read = 0;
+  cg->next_write = 0;
+  cg->prev_write = 0;
+  cg->next_write_time = 0;
+  cg->prev_write_time = 0;
+  return cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) 
+{
+
+	if(!s) {
+		return NULL;
+	}
+
+	if(!s->stream_cg) {
+		s->stream_cg = (streamCG *)malloc(sizeof(streamCG));
+		if(!s->stream_cg) {
+			return NULL;
+		}
+	}
+
+	if(!s->stream_cg->name) {
+		s->stream_cg->name = (char *)malloc(namelen);
+		if(!s->stream_cg->name) {
+			return NULL;
+		}
+	}
+
+	s->stream_cg->name[namelen-1] = '\0';
+
+	s->stream_cg->last_server_id = id? *id : 0;
+
+	s->stream_cg->entries_read = entries_read;
+
+	s->stream_cg->cg = (streamCG *)malloc(sizeof(streamCG));
+	if(!s->stream_cg->cg) {
+		return NULL;
+	}
+
+	s->stream_cg->cg->name = (char *)malloc(namelen);
+	if(!s->stream_cg->cg->name) {
+		return NULL;
+	}
+
+	s->stream_cg->cg->name[namelen-1] = '\0';
+
+	s->stream_cg->cg->last_server_id = id? *id : 0;
+
+	s->stream_cg->cg->entries_read = entries_read;
+
+	s->stream_cg->cg->next = NULL;
+
+	return s->stream_cg;
+}","streamCG *streamCreateCG(stream *s, char *name, size_t namelen, streamID *id, long long entries_read) "
